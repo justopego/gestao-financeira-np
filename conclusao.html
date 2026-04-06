@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Principais dores — Gestão financeira</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-radial-inner: #051e41;
+      --bg-radial-mid: #070f2d;
+      --bg-radial-outer: #090019;
+      --primary-interactive: #0059d5;
+      --accent-blue: #60a5fa;
+      --text-muted: #8fa8c8;
+      --text-card-muted: #6b83a8;
+      --header-pill-bg: rgba(0, 89, 213, 0.2);
+      --white: #fff;
+      --pain-header-bg: rgba(116, 0, 2, 0.2);
+      --pain-header-border: rgba(247, 122, 124, 0.2);
+      --pain-title: #f77a7c;
+      --pain-card-bg: rgba(107, 131, 168, 0.1);
+      --pain-card-text: rgba(138, 162, 198, 1);
+      --pain-outer-border: #f77a7c;
+      --media-placeholder: #d9d9d9;
+    }
+
+    * { box-sizing: border-box; }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--white);
+      background: radial-gradient(
+        ellipse 120% 100% at 50% 50%,
+        var(--bg-radial-inner) 0%,
+        var(--bg-radial-mid) 50%,
+        var(--bg-radial-outer) 100%
+      );
+      background-attachment: fixed;
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px 96px;
+    }
+
+    @media (min-width: 1100px) {
+      .page { padding-left: 96px; padding-right: 96px; }
+    }
+
+    .app-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      padding: 32px 0;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    @media (min-width: 1100px) {
+      .app-header { padding-left: 96px; padding-right: 96px; }
+    }
+
+    .header-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 31px;
+      padding: 8px;
+      background: var(--header-pill-bg);
+      border: 1px solid var(--primary-interactive);
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--accent-blue);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .header-pill:hover {
+      background: rgba(0, 89, 213, 0.28);
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      padding-top: 24px;
+    }
+
+    @media (min-width: 1100px) {
+      .main { padding-top: 56px; }
+    }
+
+    .hero-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      align-items: flex-start;
+    }
+
+    .title-hero {
+      font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.25rem, 6vw, 56px);
+      line-height: 1.4;
+      margin: 0;
+      max-width: 849px;
+      background: linear-gradient(
+        174.75deg,
+        rgb(96, 165, 250) 0%,
+        rgb(59, 130, 246) 50%,
+        rgb(0, 80, 195) 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Destaque — layout alinhado a Figma (node 20546:4944) */
+    .destaque-section {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      max-width: 1089px;
+      width: 100%;
+    }
+
+    /* Espaço extra após o gap do .main até o bloco Principais desafios */
+    .main > .destaque-section + .destaque-section {
+      margin-top: 64px;
+    }
+
+    .dados-por-local-section {
+      margin-top: 96px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 1089px;
+      width: 100%;
+    }
+
+    .dados-por-local-section__heading-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px 24px;
+      width: 100%;
+    }
+
+    .dados-por-local-section__heading-row .destaque-section__title {
+      flex: 1 1 280px;
+      min-width: 0;
+      max-width: none;
+    }
+
+    /* Igual às telas de detalhe da tarefa (.dados-necessarios-download) */
+    .dados-necessarios-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-shrink: 0;
+      margin: 0;
+      padding: 6px 8px;
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 16px;
+      color: #0a0a0a;
+      background: #f6f6f6;
+      border: 1px solid #b0b0b0;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      box-sizing: border-box;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .dados-necessarios-download:hover {
+      background: #ececec;
+      border-color: #999;
+    }
+
+    .dados-necessarios-download:focus-visible {
+      outline: 2px solid var(--primary-interactive);
+      outline-offset: 2px;
+    }
+
+    .dados-necessarios-download__icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: #0a0a0a;
+    }
+
+    .dados-por-local-wrap {
+      overflow-x: auto;
+      margin: 0 -8px;
+      padding: 0 8px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .dados-por-local-table-block {
+      width: 100%;
+    }
+
+    .dados-por-local-table-block + .dados-por-local-table-block {
+      margin-top: 48px;
+    }
+
+    .dados-por-local-table-block__title {
+      margin: 0 0 14px;
+      font-family: "Inter", system-ui, sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 1.3;
+      color: var(--white);
+    }
+
+    .dados-por-local-table {
+      width: 100%;
+      min-width: 700px;
+      border-collapse: collapse;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    /*
+      Ocultar linhas só relevantes para DRE/DFC: «-» nas quatro colunas de origem
+      (sem citação em Nuvem Pago, exportáveis nem API).
+    */
+    .dados-por-local-wrap .dados-por-local-table tbody tr:has(> td:nth-child(2).dados-por-local-table__dash):has(> td:nth-child(3).dados-por-local-table__dash):has(> td:nth-child(4).dados-por-local-table__dash):has(> td:nth-child(5).dados-por-local-table__dash) {
+      display: none;
+    }
+
+    .dados-por-local-table caption {
+      text-align: left;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+
+    .dados-por-local-table th,
+    .dados-por-local-table td {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+
+    .dados-por-local-table thead th {
+      background: rgba(0, 89, 213, 0.18);
+      font-weight: 600;
+      font-size: 12px;
+      text-align: center;
+      color: var(--accent-blue);
+    }
+
+    .dados-por-local-table thead th:first-child {
+      text-align: left;
+      min-width: 220px;
+    }
+
+    .dados-por-local-table tbody th {
+      font-weight: 400;
+      text-align: left;
+      color: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .dados-por-local-table .dados-por-local-table__mark {
+      text-align: center;
+      font-weight: 600;
+      color: rgba(122, 247, 199, 0.95);
+      width: 1%;
+      white-space: nowrap;
+    }
+
+    .dados-por-local-table .dados-por-local-table__dash {
+      text-align: center;
+      color: rgba(107, 131, 168, 0.65);
+      width: 1%;
+      white-space: nowrap;
+    }
+
+    .destaque-section__title {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      font-weight: 600;
+      font-size: 32px;
+      line-height: 1.2;
+      color: var(--white);
+      max-width: 1081px;
+    }
+
+    .destaque-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .destaque-item__num {
+      flex-shrink: 0;
+      width: 74px;
+      text-align: center;
+      font-family: "Inter", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: clamp(56px, 12vw, 100px);
+      line-height: 1;
+      color: rgba(107, 131, 168, 0.2);
+    }
+
+    .destaque-item__body {
+      flex: 1;
+      min-width: 0;
+      font-size: 16px;
+      line-height: 1.4;
+      font-weight: 300;
+      color: var(--white);
+    }
+
+    .destaque-item__headline {
+      display: block;
+      font-weight: 600;
+      margin: 0 0 0.35em;
+    }
+
+    .destaque-item__text {
+      margin: 0;
+      font-weight: 100;
+      color: rgba(138, 162, 198, 1);
+    }
+
+    .destaque-item__text + .destaque-item__text {
+      margin-top: 1em;
+    }
+
+    @media (max-width: 520px) {
+      .destaque-item {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .destaque-item__num {
+        width: auto;
+        text-align: left;
+      }
+    }
+
+    .pain-figma-outer {
+      max-width: 1089px;
+      border: none;
+      border-image: none;
+      border-radius: 4px;
+      padding: 0;
+      font-size: 42px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    button.pain-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 16px;
+      margin: 0;
+      background: var(--pain-header-bg);
+      border: 1px solid var(--pain-header-border);
+      border-radius: 4px;
+      text-align: left;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    button.pain-header:focus-visible {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 2px;
+    }
+
+    .pain-header .icon--alert {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--pain-title);
+    }
+
+    .pain-header h2 {
+      flex: 1;
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 24px;
+      color: var(--pain-title);
+    }
+
+    .pain-header__chevron {
+      margin-left: auto;
+      flex-shrink: 0;
+      color: var(--pain-title);
+      transition: transform 0.2s ease;
+      transform-origin: center;
+    }
+
+    button.pain-header[aria-expanded="false"] .pain-header__chevron {
+      transform: rotate(180deg);
+    }
+
+    .pain-intro {
+      margin: 24px 0;
+      font-weight: 100;
+      font-size: 18px;
+      line-height: 1.4;
+      color: rgba(138, 162, 198, 1);
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    @media (min-width: 900px) {
+      .evidence-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .evidence-card--span-full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .evidence-media-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      flex: 0 0 auto;
+      width: fit-content;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    @media (min-width: 640px) {
+      .evidence-media-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .evidence-card--span-full .evidence-media-row {
+        margin-left: auto;
+        align-self: flex-start;
+      }
+    }
+
+    .evidence-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px;
+      margin-bottom: 56px;
+      background: var(--pain-card-bg);
+      border-style: none;
+      border-width: 0;
+      border-color: rgba(0, 0, 0, 0);
+      border-image: none;
+      border-radius: 8px;
+      min-height: 0;
+    }
+
+    @media (min-width: 640px) {
+      .evidence-card {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 32px;
+        min-height: 195px;
+      }
+
+      .evidence-card:not(:has(.evidence-media)) {
+        min-height: 0;
+      }
+    }
+
+    #pain-panel-transparencia .evidence-card {
+      margin-bottom: 0;
+    }
+
+    #pain-panel-erp-api .evidence-grid > .evidence-card:first-child {
+      margin-bottom: 0;
+    }
+
+    .evidence-card__text {
+      flex: 1;
+      margin: 0;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.4;
+      color: var(--pain-card-text);
+      min-width: 0;
+    }
+
+    .evidence-media {
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 238px;
+      height: 156px;
+      margin: 0 auto;
+      background: var(--media-placeholder);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .evidence-media video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+
+    @media (min-width: 640px) {
+      .evidence-media {
+        margin: 0;
+      }
+    }
+
+    .pain-panel[hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 720px) {
+      .app-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .header-actions { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a class="header-pill header-pill--voltar" href="gestao-financeira-nuvempago-2026.html" aria-label="Voltar à página anterior">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="16" height="16">
+        <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Voltar
+    </a>
+    <div class="header-actions">
+      <a class="header-pill" href="gestao-financeira-nuvempago-2026.html">Início</a>
+      <a class="header-pill" href="evolucao-extrato-2026.html">Evolução</a>
+      <a class="header-pill" href="sobre-a-pesquisa.html">Sobre a pesquisa</a>
+    </div>
+  </header>
+
+  <div class="page">
+    <main class="main">
+      <div class="hero-block">
+        <h1 class="title-hero">Conclusão</h1>
+      </div>
+
+      <section class="destaque-section">
+        <article class="destaque-item">
+          <span class="destaque-item__num" aria-hidden="true">1</span>
+          <div class="destaque-item__body">
+            <strong class="destaque-item__headline">Visão de produto inacabado</strong>
+            <p class="destaque-item__text">
+              A plataforma entrega a funcionalidade de capturar a venda, mas falha em fornecer as ferramentas de visibilidade e controle necessárias para que o empresário entenda a rentabilidade real do negócio, realize fechamentos de caixa seguros e cresça a sua operação sem inchar a equipe com trabalhos manuais no Excel.
+            </p>
+          </div>
+        </article>
+
+        <article class="destaque-item">
+          <span class="destaque-item__num" aria-hidden="true">2</span>
+          <div class="destaque-item__body">
+            <strong class="destaque-item__headline">Forma de fazer a gestão financeira não é padronizada</strong>
+            <p class="destaque-item__text">
+              Os objetivos finais são similares mas a execução prática (ferramentas, frequência e processos) varia de loja para loja, e assim como o método, há uma variação de dados utilizados para executar cada tarefa, dependendo da pergunta que querem responder com a tarefa e do tamanho da operação e da maturidade do lojista.
+            </p>
+          </div>
+        </article>
+
+        <article class="destaque-item">
+          <span class="destaque-item__num" aria-hidden="true">3</span>
+          <div class="destaque-item__body">
+            <strong class="destaque-item__headline">Relatório e extrato não resolvem tudo</strong>
+            <p class="destaque-item__text">
+              Estamos avançando no que se refere a relatórios, mas a API deve acompanhar os avanços senão continuaremos gerando trabalho manual para o lojista. O relatório resolve a dor da visibilidade (o lojista finalmente consegue ver e entender o que foi cobrado), mas não resolve totalmente a dor da automação. O lojista ainda vai ter que inserir os dados do relatório nos ERPs, sendo que se viesse direto da API, a baixa poderia ser automática e sem risco de duplicar venda do CSV com o que já vem da API para o ERP. Precisamos aprofundar mais no tema.
+            </p>
+          </div>
+        </article>
+
+        <article class="destaque-item">
+          <span class="destaque-item__num" aria-hidden="true">4</span>
+          <div class="destaque-item__body">
+            <strong class="destaque-item__headline">Desconhecimento sobre o comportamento do produto impacta na análise</strong>
+            <p class="destaque-item__text">
+              Vimos que o não entendimento/ falta de visibilidade sobre o comportamento de casos de uso como estorno e contestando e até a transferência, fazem o lojista ou o responsável pelas tarefas financeiras pensarem que há erros nos registros enviados através dos relatórios, principalmente nas tarefas diárias, como fechamento de caixa e conciliação financeira.
+            </p>
+            <p class="destaque-item__text">
+              Ex: Financeiro desconhecia variação no comportamento de liquidando entre Pix, cartão liquidado e não liquidado, além das regras de devolução de custos em caso de chargeback, e por fim, também não sabia que transferências custam R$&nbsp;0,99. Isso tudo fazia com que os saldos e liquidações estimados não batessem com as informações enviadas por relatório.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="destaque-section" aria-labelledby="principais-dores-heading">
+        <h2 id="principais-dores-heading" class="destaque-section__title">Principais desafios enfrentados</h2>
+        <div id="principais-dores">
+          <div class="pain-figma-outer">
+          <section aria-labelledby="pain-transparencia-title">
+            <button
+              type="button"
+              class="pain-header"
+              id="acc-pain-transparencia"
+              aria-expanded="false"
+              aria-controls="pain-panel-transparencia"
+            >
+              <svg class="icon--alert" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2" />
+                <path d="M8 4.5v4M8 11h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              <h2 id="pain-transparencia-title">Falta de transparência</h2>
+              <svg class="pain-header__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div
+              id="pain-panel-transparencia"
+              class="pain-panel"
+              role="region"
+              aria-labelledby="pain-transparencia-title"
+              hidden
+            >
+              <p class="pain-intro">
+                A falta de transparência faz com que o produto pareça “inacabado” na percepção do lojista, não atendendo o mínimo quando se trata de gestão financeira.
+              </p>
+              <p class="pain-intro">
+                Outro efeito colateral negativo é que a falta de transparência aumenta muito a carga de trabalho manual, por ter que buscar alternativas para chegar na informação que precisa. Por fim, causa insegurança sobre os valores repassados pelo Nuvem Pago, impactando diretamente a percepção de valor que eles têm sobre o nosso produto.
+              </p>
+
+              <div class="evidence-grid">
+                <div class="evidence-card evidence-card--span-full">
+                  <p class="evidence-card__text">
+                    Extrato que não oferece informação suficiente para identificar a movimentação (ex.: ID da venda, ID do link, beneficiário da transferência).
+                  </p>
+                  <div class="evidence-media-row">
+                    <div class="evidence-media">
+                      <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        aria-label="Evidência em vídeo: extrato sem informação suficiente para identificar a movimentação"
+                      >
+                        <source src="media/principais-dores/extrato-info-insuficiente-movimentacao.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    <div class="evidence-media">
+                      <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        aria-label="Evidência em vídeo: relatório sem informação suficiente para identificar a movimentação"
+                      >
+                        <source src="media/principais-dores/relatorio-info-insuficiente-movimentacao.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                </div>
+                <div class="evidence-card">
+                  <p class="evidence-card__text">
+                    Falta de acesso à visão de saldo inicial e final da conta para fazer fechamento de caixa.
+                  </p>
+                  <div class="evidence-media">
+                    <video
+                      controls
+                      playsinline
+                      preload="metadata"
+                      aria-label="Evidência em vídeo: saldo inicial e final da conta para fechamento de caixa"
+                    >
+                      <source src="media/principais-dores/saldo-inicial-final-fechamento-caixa.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+                <div class="evidence-card">
+                  <p class="evidence-card__text">
+                    Falta de dados sobre contestação das vendas, para fazer fechamento de caixa, conciliação e a DRE
+                  </p>
+                  <div class="evidence-media">
+                    <video
+                      controls
+                      playsinline
+                      preload="metadata"
+                      aria-label="Evidência em vídeo: falta de gestão de chargeback e contestação"
+                    >
+                      <source src="media/principais-dores/falta-gestao-chargeback.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+                <div class="evidence-card">
+                  <p class="evidence-card__text">
+                    Falta de visão por competência para viabilizar a construção da DRE.
+                  </p>
+                  <div class="evidence-media">
+                    <video
+                      controls
+                      playsinline
+                      preload="metadata"
+                      aria-label="Evidência em vídeo: falta de visão por competência para construir a DRE"
+                    >
+                      <source src="media/principais-dores/falta-visao-competencia-dre.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+                <div class="evidence-card">
+                  <p class="evidence-card__text">
+                    Não enviamos a projeção de recebíveis completa necessária para entender o regime de caixa para a DFC.
+                  </p>
+                  <div class="evidence-media">
+                    <video
+                      controls
+                      playsinline
+                      preload="metadata"
+                      aria-label="Evidência em vídeo: falta de projeção completa dos lançamentos futuros e regime de caixa (DFC)"
+                    >
+                      <source src="media/principais-dores/falta-projecao-lancamentos-futuros.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section aria-labelledby="pain-autonomia-title">
+            <button
+              type="button"
+              class="pain-header"
+              id="acc-pain-autonomia"
+              aria-expanded="false"
+              aria-controls="pain-panel-autonomia"
+            >
+              <svg class="icon--alert" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2" />
+                <path d="M8 4.5v4M8 11h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              <h2 id="pain-autonomia-title">Falta de autonomia</h2>
+              <svg class="pain-header__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div
+              id="pain-panel-autonomia"
+              class="pain-panel"
+              role="region"
+              aria-labelledby="pain-autonomia-title"
+              hidden
+            >
+              <p class="pain-intro">
+                Os lojistas e responsáveis pelo financeiro não conseguem visualizar, extrair ou consolidar seus dados diários de recebimentos, taxas e fluxo de caixa de forma independente ou dentro do próprio painel da plataforma. Como os relatórios nativos são incompletos ou inexistentes, os usuários tornam-se reféns de planilhas e dependem do suporte ou dos gerentes de conta, mas esses envios costumam ocorrer somente semanalmente ou mensalmente, enquanto a base da análise financeira (fechamento de caixa, conciliação financeira e bancária) é feita diariamente. Isso transforma a rotina de gestão em um processo moroso e dificulta a tomada rápida de decisão.
+              </p>
+              <div class="evidence-grid">
+                <div class="evidence-card">
+                  <p class="evidence-card__text">
+                    Dependência do suporte para ter acesso aos relatórios cruciais para fazer as tarefas de gestão financeira.
+                  </p>
+                  <div class="evidence-media">
+                    <video
+                      controls
+                      playsinline
+                      preload="metadata"
+                      aria-label="Evidência em vídeo: dependência do suporte para aceder aos relatórios de gestão financeira"
+                    >
+                      <source src="media/principais-dores/falta-de-autonomia-suporte-relatorios.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+                <div class="evidence-card">
+                  <p class="evidence-card__text">
+                    Falta de dashboards nativos para ver as informações em tempo real.
+                  </p>
+                  <div class="evidence-media">
+                    <video
+                      controls
+                      playsinline
+                      preload="metadata"
+                      aria-label="Evidência em vídeo: falta de dashboards nativos e informação em tempo real no produto"
+                    >
+                      <source src="media/principais-dores/falta-de-autonomia-dashboards-nativos.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section aria-labelledby="pain-erp-api-title">
+            <button
+              type="button"
+              class="pain-header"
+              id="acc-pain-erp-api"
+              aria-expanded="false"
+              aria-controls="pain-panel-erp-api"
+            >
+              <svg class="icon--alert" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2" />
+                <path d="M8 4.5v4M8 11h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              <h2 id="pain-erp-api-title">Falta de dados na API de integração com a ERP</h2>
+              <svg class="pain-header__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div
+              id="pain-panel-erp-api"
+              class="pain-panel"
+              role="region"
+              aria-labelledby="pain-erp-api-title"
+              hidden
+            >
+              <p class="pain-intro">
+                Falta de envio automático dos dados estruturados de recebíveis e das taxas cobradas pelo Nuvem Pago. Sem isso, os lojistas são obrigados a registrar as tarifas manualmente como “contas a pagar” e liquidar manualmente, gerando trabalho desnecessário e risco de lançamentos duplicados.
+              </p>
+              <div class="evidence-grid">
+                <div class="evidence-card evidence-card--span-full">
+                  <p class="evidence-card__text">
+                    API não envia a taxa, gerando retrabalho para o lojista.
+                  </p>
+                  <div class="evidence-media-row">
+                    <div class="evidence-media">
+                      <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        aria-label="Evidência em vídeo: integração API–ERP e envio de taxas"
+                      >
+                        <source src="media/principais-dores/api-erp-taxas.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    <div class="evidence-media">
+                      <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        aria-label="Evidência em vídeo: gestão financeira Les Cloches — gravação sobre integração"
+                      >
+                        <source src="media/principais-dores/api-erp-les-cloches-recording.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                </div>
+                <div class="evidence-card evidence-card--span-full">
+                  <p class="evidence-card__text">
+                    Perda de tempo dando baixa manual dentro do ERP por falta de uma integração via API adequada.
+                  </p>
+                  <div class="evidence-media">
+                    <video
+                      controls
+                      playsinline
+                      preload="metadata"
+                      aria-label="Evidência em vídeo: baixa manual na integração API–ERP"
+                    >
+                      <source src="media/principais-dores/api-erp-baixa-manual.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      </section>
+
+      <section class="dados-por-local-section" aria-labelledby="dados-por-local-heading">
+        <div class="dados-por-local-section__heading-row">
+          <h2 id="dados-por-local-heading" class="destaque-section__title">
+            Resumo dos dados necessários por local
+          </h2>
+          <button
+            type="button"
+            class="dados-necessarios-download"
+            id="dados-por-local-csv-btn"
+            aria-label="Baixar Excel: folha 1 dados consolidados, folha 2 linha de movimentação"
+          >
+            Baixar
+            <svg class="dados-necessarios-download__icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M8 10.67V2m0 8.67L5 7.33m3 3.34l3-3.34" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M2.67 12.67h10.66" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+        <div class="dados-por-local-wrap">
+          <div class="dados-por-local-table-block">
+            <h3 class="dados-por-local-table-block__title" id="dados-por-local-consolidados-heading">Dados consolidados</h3>
+            <table class="dados-por-local-table" id="dados-por-local-table-consolidados" aria-labelledby="dados-por-local-consolidados-heading">
+              <caption class="visually-hidden">
+                Dados necessários por origem — dados consolidados
+              </caption>
+            <thead>
+              <tr>
+                <th scope="col">Dado</th>
+                <th scope="col">Nuvem Pago<br />(produto)</th>
+                <th scope="col">Exportável<br />Nuvem Pago</th>
+                <th scope="col">Exportável<br />Orders</th>
+                <th scope="col">API</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Classificação DFC (Operacional, Investimento, Financiamento)</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+              </tr>
+              <tr>
+                <th scope="row">CMV (Custo da mercadoria)</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+              </tr>
+              <tr>
+                <th scope="row">Custos fixos e variáveis do mês</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+              </tr>
+              <tr>
+                <th scope="row">Despesas variáveis</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+              </tr>
+              <tr>
+                <th scope="row">EBITDA</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+              </tr>
+              <tr>
+                <th scope="row">Margem de contribuição</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+              </tr>
+              <tr>
+                <th scope="row">Natureza da Conta: Identificar se é Ativo, Passivo, Patrimônio Líquido ou Resultado (DRE)</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+              </tr>
+              <tr>
+                <th scope="row">Nome da Conta: Ex: Clientes, Estoques, Fornecedores, Lucro Acumulado.</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+              </tr>
+              <tr>
+                <th scope="row">Obrigações do período: fornecedores, impostos, folha (jornada do relatório estruturado)</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+              </tr>
+              <tr>
+                <th scope="row">Receita bruta</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+              </tr>
+              <tr>
+                <th scope="row">Total faturado (pago pelo cliente)</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total recebido (bruto)</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total disponível para saque</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total a receber (Lançamentos futuros)</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Saldo inicial</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Saldo final</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total recebido (líquido)</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total de entrada (líquido)</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total de saída (líquido)</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Projeção de recebíveis (todos os lançamentos futuros os dias e meses)</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total de frete</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total de cupom</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total de desconto</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total de custos (MDR+juros)</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total de MDR</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total de juros</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total de devolução de custos</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Total por categoria (chargeback / contestação / estorno / transferência / venda / link)</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="dados-por-local-table-block">
+            <h3 class="dados-por-local-table-block__title" id="dados-por-local-movimentacao-heading">Linha de movimentação</h3>
+            <table class="dados-por-local-table" id="dados-por-local-table-movimentacao" aria-labelledby="dados-por-local-movimentacao-heading">
+              <caption class="visually-hidden">
+                Dados necessários por origem — linha de movimentação
+              </caption>
+            <thead>
+              <tr>
+                <th scope="col">Dado</th>
+                <th scope="col">Nuvem Pago<br />(produto)</th>
+                <th scope="col">Exportável<br />Nuvem Pago</th>
+                <th scope="col">Exportável<br />Orders</th>
+                <th scope="col">API</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">ID da movimentação</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Tipo de movimentação (Entrada/Saída)</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Categoria da movimentação (Ex: Venda site/transferência/estorno)</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Data que a movimentação foi realizada</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Data de pagamento</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Data de liquidação</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Data de mudança de status (estornado, contestado)</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Nome do cliente</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Produtos vendidos</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Desconto</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Cupom</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Forma de pagamento</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Frete bruto</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Frete líquido</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Taxa (MDR+juros)</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Juros</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">MDR</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Valor bruto</th>
+                <td class="dados-por-local-table__dash">-</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+              <tr>
+                <th scope="row">Valor líquido</th>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+                <td class="dados-por-local-table__mark">X</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    (function () {
+      var root = document.getElementById("principais-dores");
+      if (!root) return;
+      root.querySelectorAll("button.pain-header").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var panelId = btn.getAttribute("aria-controls");
+          if (!panelId) return;
+          var panel = document.getElementById(panelId);
+          if (!panel) return;
+          var open = btn.getAttribute("aria-expanded") === "true";
+          var next = !open;
+          btn.setAttribute("aria-expanded", next ? "true" : "false");
+          if (next) {
+            panel.removeAttribute("hidden");
+          } else {
+            panel.setAttribute("hidden", "");
+          }
+        });
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var back = document.querySelector("a.header-pill--voltar");
+      if (!back) return;
+      back.addEventListener("click", function (e) {
+        if (window.history.length > 1) {
+          e.preventDefault();
+          window.history.back();
+        }
+      });
+    })();
+  </script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"
+    integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    (function () {
+      var btn = document.getElementById("dados-por-local-csv-btn");
+      var tCons = document.getElementById("dados-por-local-table-consolidados");
+      var tMov = document.getElementById("dados-por-local-table-movimentacao");
+      if (!btn || !tCons || !tMov) return;
+
+      btn.addEventListener("click", function () {
+        if (typeof XLSX === "undefined") {
+          return;
+        }
+        var wb = XLSX.utils.book_new();
+        var ws1 = XLSX.utils.table_to_sheet(tCons);
+        var ws2 = XLSX.utils.table_to_sheet(tMov);
+        XLSX.utils.book_append_sheet(wb, ws1, "Dados consolidados");
+        XLSX.utils.book_append_sheet(wb, ws2, "Linha de movimentação");
+        XLSX.writeFile(wb, "dados-necessarios-por-local.xlsx");
+      });
+    })();
+  </script>
+</body>
+</html>

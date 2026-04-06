@@ -1,0 +1,12 @@
+{
+  "githubIssues.queries": [
+    {
+      "label": "TiendaNube/Problems (abertas)",
+      "query": "repo:TiendaNube/Problems is:issue is:open sort:updated-desc"
+    },
+    {
+      "label": "TiendaNube/issues (abertas)",
+      "query": "repo:TiendaNube/issues is:issue is:open sort:updated-desc"
+    }
+  ]
+}

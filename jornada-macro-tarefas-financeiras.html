@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jornada macro — Fluxo de caixa, conciliação financeira, DRE/DFC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0f14;
+      --surface: #141a22;
+      --border: rgba(232, 220, 198, 0.12);
+      --text: #e8dcc6;
+      --muted: #9a8f7c;
+      --accent: #c4a574;
+      --accent-dim: rgba(196, 165, 116, 0.15);
+      --pain: #b85c5c;
+      --pain-bg: rgba(184, 92, 92, 0.1);
+      --font-body: "DM Sans", system-ui, sans-serif;
+      --font-display: "Fraunces", Georgia, serif;
+      --radius: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      background-image:
+        radial-gradient(ellipse 100% 80% at 50% -20%, rgba(196, 165, 116, 0.08), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 50%, rgba(80, 100, 120, 0.06), transparent);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .kicker {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 4vw, 2.35rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 38rem;
+    }
+    .source-note {
+      margin-top: 1.25rem;
+      padding: 1rem 1.15rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .source-note strong { color: var(--text); }
+    nav.toc {
+      margin: 2rem 0 2.5rem;
+      padding: 1.25rem 1.25rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    nav.toc h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    nav.toc ol {
+      margin: 0;
+      padding-left: 1.25rem;
+      color: var(--accent);
+    }
+    nav.toc a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    nav.toc a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    section.journey {
+      margin-bottom: 3rem;
+      scroll-margin-top: 1.5rem;
+    }
+    section.journey > h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      color: var(--text);
+    }
+    .journey-meta {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+    .step {
+      margin-bottom: 1.35rem;
+      padding: 1.15rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      border-left: 3px solid var(--accent);
+    }
+    .step-num {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+    .step h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .step p.body {
+      color: var(--muted);
+      font-size: 0.9375rem;
+      line-height: 1.58;
+    }
+    .dores {
+      margin-top: 0.85rem;
+      padding: 0.75rem 0.9rem;
+      background: var(--pain-bg);
+      border-radius: 10px;
+      border: 1px solid rgba(184, 92, 92, 0.2);
+    }
+    .dores-title {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pain);
+      margin-bottom: 0.4rem;
+    }
+    .dores ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.875rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .dores li { margin: 0.3rem 0; }
+    .dores .empty {
+      font-size: 0.875rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .sub-block {
+      margin-top: 1.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed var(--border);
+    }
+    .sub-block h4 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="kicker">Gestão financeira · síntese qualitativa</p>
+      <h1>Jornada macro: fluxo de caixa, conciliação financeira e DRE/DFC</h1>
+      <p class="lead">
+        Passo a passo operacional e dores citadas nas entrevistas do projeto Gestão financeira (consolidação FAQ e apresentação Q2-2026). Onde não há dor explícita ligada ao passo, indica-se.
+      </p>
+      <div class="source-note" role="note">
+        <strong>Sobre o Google Drive:</strong> o link da pasta (<a href="https://drive.google.com/drive/folders/1MPHJtIp-Yj8LVWVq-qQGQlgB-gkWFcgP?usp=sharing" rel="noopener noreferrer">pasta partilhada</a>) não foi consultável daqui por exigir autenticação. Este HTML usa apenas o material já neste repositório (<code>faq-gestao-financeira.html</code>, <code>apresentacao-gestao-financeira-q2-2026.html</code>, síntese Dovetail e trechos da entrevista Ana BPO). Se existir conteúdo extra só no Drive, convém exportar ou copiar ficheiros para a pasta do projeto para alinhar a jornada.
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Índice">
+      <h2>Nesta página</h2>
+      <ol>
+        <li><a href="#fluxo-caixa">Fluxo de caixa</a></li>
+        <li><a href="#conciliacao">Conciliação financeira</a></li>
+        <li><a href="#dre-dfc">DRE e DFC</a></li>
+      </ol>
+    </nav>
+
+    <!-- 1 -->
+    <section class="journey" id="fluxo-caixa">
+      <h2>1 — Fluxo de caixa</h2>
+      <p class="journey-meta">Objetivo citado na síntese: acompanhar caixa real, fechar movimentos do período e apoiar decisões de pagar contas, antecipar, estoque e dívidas. Frequências citadas: fechamento diário (ex.: Wishin, Flor de Cacto); visão DFC também diária, mensal e anual (Ana BPO).</p>
+
+      <article class="step">
+        <p class="step-num">Passo 1</p>
+        <h3>Após a venda: liquidação e disponibilidade</h3>
+        <p class="body">O pagamento aprovado nem sempre está imediatamente utilizável: há período até ficar disponível para saque ou transferência (em alguns casos PIX é exceção, citado na conversa com Wishin).</p>
+        <div class="dores">
+          <p class="dores-title">Dores neste passo (entrevistas)</p>
+          <ul>
+            <li>Valor não disponível na hora dificulta planeamento imediato de caixa.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="step">
+        <p class="step-num">Passo 2</p>
+        <h3>Movimentação para a conta de operação</h3>
+        <p class="body">Padrão recorrente: transferência do saldo Nuvem Pago para conta bancária de operação (Wishin, Lustres Gênesis). Em alguns modelos a conta de destino já é a da fábrica ou fornecedor (Lustres Gênesis).</p>
+        <div class="dores">
+          <p class="dores-title">Dores neste passo (entrevistas)</p>
+          <ul>
+            <li>Histórico de saques e transferências difícil de encontrar para conciliar com o banco (visibilidade do saldo).</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="step">
+        <p class="step-num">Passo 3</p>
+        <h3>Fechamento do período na carteira (saldo do dia)</h3>
+        <p class="body">Modelo Wishin: entradas do dia menos taxas e estornos devem fechar com o saldo final do dia. Em paralelo, quem opera a loja costuma conferir sequência e volume de pedidos no painel antes de cruzar com recebimentos (Flor de Cacto).</p>
+        <div class="dores">
+          <p class="dores-title">Dores neste passo (entrevistas)</p>
+          <ul>
+            <li>Não saber quais vendas ou parcelas compõem o “saldo disponível”.</li>
+            <li>Horários e cortes: vendas após certo horário “mudam de dia” no recebimento; final de semana; antecipação D+2 com liberação noturna ou na madrugada — complica o fechamento diário (Flor de Cacto).</li>
+            <li>Regras PIX versus cartão D+2 exigem atenção ao cruzar com recebimentos.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="step">
+        <p class="step-num">Passo 4</p>
+        <h3>Uso operacional do dinheiro na conta</h3>
+        <p class="body">Pagamentos de contas, fornecedores e gestão de fluxo de caixa; em cenários com excesso de caixa, aplicações (mencionado na Wishin — depende do fluxo da empresa).</p>
+        <div class="dores">
+          <p class="dores-title">Dores neste passo (entrevistas)</p>
+          <p class="empty">Nenhuma dor foi mapeada de forma específica só a este passo na síntese; desafios de projeção aparecem no passo seguinte.</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <p class="step-num">Passo 5</p>
+        <h3>Projeção de caixa e recebíveis futuros</h3>
+        <p class="body">Para DFC/projeção, a síntese pede quanto será liberado por dia ou mês, parcela a parcela até o fim do parcelamento; saldo futuro total, sem decomposição temporal, não basta (Ana BPO, Mulher Elástica, Wishin — necessidade de relatório de contas a receber futuro).</p>
+        <div class="dores">
+          <p class="dores-title">Dores neste passo (entrevistas)</p>
+          <ul>
+            <li>Projetar caixa além de poucos meses; relatórios que param em determinado mês enquanto ainda há parcelas a receber (Mulher Elástica).</li>
+            <li>Projeção limitada sem dados futuros detalhados (tabela de tarefas / BPO).</li>
+            <li>Lacuna citada na matriz de dados: recebíveis futuros por dia/mês e por parcela.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- 2 -->
+    <section class="journey" id="conciliacao">
+      <h2>2 — Conciliação financeira</h2>
+      <p class="journey-meta">Na síntese há vários “tipos” com ritmos diferentes: vendas × ERP (muitas vezes diária em operações exigentes); conciliação bancária com OFX; conciliação fiscal NF × vendas e devoluções (mensal, Thales); conciliação de taxas versus contrato (souvent mensal, com desejo de ritmo maior).</p>
+
+      <article class="step">
+        <p class="step-num">Passo A.1</p>
+        <h3>Conciliação financeira — meio de pagamento e ERP</h3>
+        <p class="body">Cruzar o meio de pagamento (vendas, entradas, taxas, estornos, saldos) com o ERP (pedidos, parcelas, baixa da parcela liberada) e conferir taxa esperada versus extrato, ajustando divergências.</p>
+        <div class="dores">
+          <p class="dores-title">Dores neste passo (entrevistas)</p>
+          <ul>
+            <li>Pedido na Nuvem sem taxas → lançamento manual ou divergência; risco de duplicação na importação (Gabriel, Ana BPO).</li>
+            <li>Baixa parcela a parcela no Tiny ou Bling sem API automática (Gabriel, Ana BPO).</li>
+            <li>Trabalho manual: planilhas, filtros, várias planilhas para PIX, cartão e boleto; várias empresas, canais e ERPs (Mulher Elástica).</li>
+            <li>Taxa contratada versus descontada; medo de aumento sem aviso; conciliação de taxa trabalhosa (Mulher Elástica, Thales, Ana BPO).</li>
+            <li>Cliente sem conciliação adequada não percebe aumento de taxas ou cobrança incorreta (Ana BPO).</li>
+            <li>Cadastro de taxas errado no ERP pode mascarar problema até gerar estorno manual (Ana BPO).</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="step">
+        <p class="step-num">Passo A.2</p>
+        <h3>Conciliação bancária (OFX)</h3>
+        <p class="body">Importar OFX do banco e cruzar com contas a pagar e a receber no ERP para identificar duplicidade, falta de baixa, PIX “do dono”, erro de agendamento (Ana BPO). Rotina citada: dados do dia anterior.</p>
+        <div class="dores">
+          <p class="dores-title">Dores neste passo (entrevistas)</p>
+          <ul>
+            <li>ERP que não conciliava recebimentos automaticamente gerou descontrole e pedidos de estorno (Ana BPO).</li>
+            <li>Parcelas/baixas exigem entrar no ERP e trabalho manual; planilha Excel/OFX em alguns fluxos (Ana BPO).</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="step">
+        <p class="step-num">Passo B</p>
+        <h3>Conciliação fiscal — NF × vendas e devoluções</h3>
+        <p class="body">No fechamento do mês: notas emitidas versus vendas no meio de pagamento (valor bruto) e acompanhamento de devoluções (métricas e notas) — relato Thales, frequência mensal.</p>
+        <div class="dores">
+          <p class="dores-title">Dores neste passo (entrevistas)</p>
+          <p class="empty">A síntese descreve o objetivo (imposto correto; devoluções com nota) sem listar dores ad hoc só deste subfluxo além dos desafios gerais de taxa e manualidade.</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <p class="step-num">Passo C</p>
+        <h3>Conciliação de taxas (foco no contrato)</h3>
+        <p class="body">Confirmar se o líquido e as taxas batem com o contratado — foco nos descontos do meio de pagamento, distinto da NF (tabela de tarefas FAQ).</p>
+        <div class="dores">
+          <p class="dores-title">Dores neste passo (entrevistas)</p>
+          <ul>
+            <li>Frequência hoje muitas vezes mensal (Thales) com desejo de semanal ou diário.</li>
+            <li>Mulher Elástica: cobranças indevidas reportadas todo mês.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- 3 -->
+    <section class="journey" id="dre-dfc">
+      <h2>3 — DRE e DFC</h2>
+      <p class="journey-meta">Na síntese, DRE é regime de competência (fechamento mensal citado para gerencial/BPO). DFC organiza caixa e recebimentos; o BPO descreve encadeamento DRE (competência), DFC/caixa e conciliação bancária com OFX. Visão “só de caixa” não substitui competência para a DRE (Ana BPO).</p>
+
+      <div class="sub-block">
+        <h4>3.1 — DRE (Demonstração de Resultado)</h4>
+
+        <article class="step">
+          <p class="step-num">Passo 1</p>
+          <h3>Definir o período em regime de competência</h3>
+          <p class="body">Fechamento mensal citado no relato BPO para demonstração de resultado gerencial.</p>
+          <div class="dores">
+            <p class="dores-title">Dores neste passo (entrevistas)</p>
+            <ul>
+              <li>Para DRE é preciso taxa e faturamento por competência; para conciliação/corrente bancária vale o que caiu na conta — lógicas diferentes; relatório “só de caixa” não substitui o de competência (Ana BPO).</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="step">
+          <p class="step-num">Passo 2</p>
+          <h3>Reunir linhas de receita, desconto, custo e tarifa alinhados à competência</h3>
+          <p class="body">Descontos (cupom e desconto na peça), frete (pago pelo cliente versus absorvido), devoluções por competência, tarifas por competência (não só as do mês no caixa), CMV ou custo, comissões de plataforma quando houver (Ana BPO). Orientação ao cliente inclui margem de contribuição, CMV, descontos, frete e tráfego como leitura de saúde.</p>
+          <div class="dores">
+            <p class="dores-title">Dores neste passo (entrevistas)</p>
+            <ul>
+              <li>Falta de taxas e faturamento alinhados à competência nas exportações.</li>
+              <li>Necessidade de duas leituras de taxa: por competência (DRE) e o que saiu no caixa no mês (FAQ — dados consolidados).</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="step">
+          <p class="step-num">Passo 3</p>
+          <h3>Fechar a demonstração de resultado / margem</h3>
+          <p class="body">Objetivo citado: lucro, descontos “escondidos”, frete, CMV (tabela tarefas FAQ).</p>
+          <div class="dores">
+            <p class="dores-title">Dores neste passo (entrevistas)</p>
+            <p class="empty">Dores específicas do “fecho” em si não aparecem separadas na síntese além da dependência de dados de competência (passo 2).</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="sub-block">
+        <h4>3.2 — DFC (Demonstração dos Fluxos de Caixa / fluxo de caixa gerencial)</h4>
+
+        <article class="step">
+          <p class="step-num">Passo 1</p>
+          <h3>Organizar recebimentos e pagamentos em visão de caixa</h3>
+          <p class="body">Objetivo citado: pagar contas, antecipar, estoque, dívidas; caixa real e projeção (FAQ). Na prática BPO: na DFC conciliar todos os recebimentos — a conciliação financeira mostra se valores batem com vendas e se há cobrança indevida (Ana BPO).</p>
+          <div class="dores">
+            <p class="dores-title">Dores neste passo (entrevistas)</p>
+            <ul>
+              <li>Sobreposição com dores de conciliação (taxas, manualidade, ERP) quando o fecho de caixa depende desses cruzamentos.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="step">
+          <p class="step-num">Passo 2</p>
+          <h3>Detalhar liberações futuras no tempo</h3>
+          <p class="body">Quanto será liberado por dia ou mês; parcela a parcela; saldo futuro agregado insuficiente sem decomposição (Ana BPO, Mulher Elástica, Wishin).</p>
+          <div class="dores">
+            <p class="dores-title">Dores neste passo (entrevistas)</p>
+            <ul>
+              <li>Projeção limitada sem dados futuros detalhados.</li>
+              <li>Lacuna: futuro detalhado por mês, dia e parcela; total por dia de “a receber” versus lista só por pedido (Mulher Elástica, FAQ Parte 2).</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="step">
+          <p class="step-num">Passo 3</p>
+          <h3>Manter ritmo diário, mensal e anual conforme o negócio</h3>
+          <p class="body">Frequências citadas para DFC/fluxo de caixa no relato BPO: diário, mensal e anual.</p>
+          <div class="dores">
+            <p class="dores-title">Dores neste passo (entrevistas)</p>
+            <p class="empty">Sem dor explícita atribuída só à “cadência” na síntese; esforço e fricção concentram-se nos dados (passos anteriores).</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <p>Metodologia: consolidação qualitativa; frequências e exemplos refletem o dito nas sessões, não estatística de base. Documentos locais: <code>faq-gestao-financeira.html</code>, <code>apresentacao-gestao-financeira-q2-2026.html</code>, <code>transcricoes-entrevistas-html/bpo-ana.html</code>.</p>
+    </footer>
+  </div>
+</body>
+</html>

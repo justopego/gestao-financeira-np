@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sobre a pesquisa — Gestão financeira &amp; resumo (Nuvem Pago)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-radial-inner: #051e41;
+      --bg-radial-mid: #070f2d;
+      --bg-radial-outer: #090019;
+      --primary-interactive: #0059d5;
+      --primary-surface: #eef5ff;
+      --accent-blue: #60a5fa;
+      --text-muted: #8fa8c8;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --header-pill-bg: rgba(0, 89, 213, 0.2);
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --white: #fff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--white);
+      background: radial-gradient(
+        ellipse 120% 100% at 50% 50%,
+        var(--bg-radial-inner) 0%,
+        var(--bg-radial-mid) 50%,
+        var(--bg-radial-outer) 100%
+      );
+      background-attachment: fixed;
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px 96px;
+    }
+
+    @media (min-width: 1100px) {
+      .page { padding-left: 96px; padding-right: 96px; }
+    }
+
+    .app-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      padding: 32px 0;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    @media (min-width: 1100px) {
+      .app-header { padding-left: 96px; padding-right: 96px; }
+    }
+
+    .header-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 31px;
+      padding: 8px;
+      background: var(--header-pill-bg);
+      border: 1px solid var(--primary-interactive);
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--accent-blue);
+      text-decoration: none;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .header-pill:hover {
+      background: rgba(0, 89, 213, 0.28);
+    }
+
+    .header-pill svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      padding-top: 24px;
+    }
+
+    @media (min-width: 900px) {
+      .main { padding-top: 40px; gap: 56px; }
+    }
+
+    .title-hero {
+      font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 56px);
+      line-height: 1.35;
+      margin: 0;
+      max-width: 920px;
+      background: linear-gradient(
+        175deg,
+        rgb(96, 165, 250) 0%,
+        rgb(59, 130, 246) 50%,
+        rgb(0, 80, 195) 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .planning-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px 28px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 1090px;
+    }
+
+    .planning-cta__label {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+    }
+
+    .planning-cta__text {
+      margin: 0;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .planning-cta__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      align-self: flex-start;
+      padding: 10px 18px;
+      background: rgba(0, 89, 213, 0.25);
+      border: 1px solid var(--primary-interactive);
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary-surface);
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+
+    .planning-cta__link:hover {
+      background: rgba(0, 89, 213, 0.38);
+    }
+
+    .planning-cta__link svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1090px;
+    }
+
+    @media (max-width: 900px) {
+      .info-grid { grid-template-columns: 1fr; }
+    }
+
+    .info-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 0;
+      padding: 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .info-card:hover {
+      border-color: rgba(96, 165, 250, 0.35);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .info-card__title {
+      margin: 0;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: rgba(255, 255, 255, 0.94);
+    }
+
+    .info-card__body {
+      margin: 0;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.62);
+    }
+
+    .info-card__body strong,
+    .info-card ul strong {
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .info-card ul:not(.hero-step-cards) {
+      margin: 0.35rem 0 0;
+      padding-left: 1.25rem;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.62);
+    }
+
+    .info-card li:not(.hero-step-card) {
+      margin: 0.45rem 0;
+    }
+
+    .info-card__sub {
+      margin: 0.75rem 0 0;
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.52);
+    }
+
+    .info-card--span-full {
+      grid-column: 1 / -1;
+    }
+
+    .info-card--after-cta {
+      width: 100%;
+      max-width: 1090px;
+    }
+
+    .hero-step-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    @media (max-width: 720px) {
+      .hero-step-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-step-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 0;
+      padding: 20px;
+      background: transparent;
+      border: 2px solid #60a5fa;
+      border-radius: 12px;
+    }
+
+    .hero-step-card:hover {
+      background: transparent;
+      border-color: #60a5fa;
+    }
+
+    .hero-step-card__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background: rgba(0, 89, 213, 0.22);
+      border: 1px solid rgba(96, 165, 250, 0.25);
+      color: var(--accent-blue);
+    }
+
+    .hero-step-card__icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .hero-step-card__title {
+      margin: 0;
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: rgba(255, 255, 255, 0.94);
+    }
+
+    .hero-step-card__text {
+      margin: 0;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.52);
+    }
+
+    .hero-step-card__quote {
+      margin: 0;
+      font-size: 13px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.42);
+    }
+
+    .hero-step-card__label {
+      margin: 4px 0 0;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+    }
+
+    .hero-step-card__list {
+      margin: 0;
+      padding-left: 1.15rem;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.52);
+    }
+
+    .hero-step-card__list li {
+      margin: 0.35rem 0;
+    }
+
+    @media (max-width: 720px) {
+      .app-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .header-actions {
+        margin-left: 0;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="app-header">
+    <a class="header-pill header-pill--voltar" href="gestao-financeira-nuvempago-2026.html" aria-label="Voltar ao resumo financeiro">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="16" height="16">
+        <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Voltar
+    </a>
+    <div class="header-actions">
+      <a class="header-pill" href="gestao-financeira-nuvempago-2026.html">Início</a>
+      <a class="header-pill" href="conclusao.html">Conclusão</a>
+      <a class="header-pill" href="evolucao-extrato-2026.html">Evolução</a>
+    </div>
+  </header>
+
+  <div class="page">
+    <main class="main">
+      <div class="hero-block">
+        <h1 class="title-hero">Sobre a pesquisa</h1>
+      </div>
+
+      <section class="planning-cta" aria-labelledby="planning-heading">
+        <p id="planning-heading" class="planning-cta__label">Planejamento completo</p>
+        <p class="planning-cta__text">
+          Aceda ao documento de planejamento para contexto, perguntas de pesquisa na íntegra, roteiro das entrevistas e notas de recrutamento.
+        </p>
+        <a
+          class="planning-cta__link"
+          href="https://docs.google.com/document/d/1bXmjtk8kArKLskAnVcmiCrLGrSta_Nq-nkK1L6Uglv4/edit?tab=t.0"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M14 3h7v7M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Abrir planejamento no Google Docs
+        </a>
+      </section>
+
+      <article class="info-card info-card--after-cta">
+        <h2 class="info-card__title">Objetivo da pesquisa</h2>
+        <p class="info-card__body">
+          Ter base para inserir na plataforma meios para os lojistas consultarem os dados necessários para executar as suas atividades de gestão financeira. Para isso, ao final das entrevistas, precisamos saber:
+        </p>
+        <ul>
+          <li>Quais <strong>dados</strong> devem estar presentes no resumo financeiro;</li>
+          <li>Se o resumo deve ser organizado em <strong>níveis de consulta</strong> distintos;</li>
+          <li>Se a consulta deve viver <strong>no produto</strong>, em <strong>relatório/exportação</strong>, ou em ambos.</li>
+        </ul>
+      </article>
+
+      <div class="info-grid" role="list">
+        <article class="info-card info-card--span-full" role="listitem">
+          <h2 class="info-card__title">Impacto nos objetivos da Fintech</h2>
+          <p class="info-card__body">
+            Para a Fintech contribuir para os objetivos da Nuvemshop no Brasil, foram definidas prioridades estratégicas. <strong>Entre elas, há duas em que o extrato é uma alavanca importante</strong> e habilitadora de outras iniciativas — conforme o item <strong>1. Contexto e justificativa</strong> do planejamento de pesquisa.
+          </p>
+          <ul class="hero-step-cards" role="list">
+            <li class="hero-step-card">
+              <div class="hero-step-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="7" rx="1" />
+                  <rect x="14" y="3" width="7" height="7" rx="1" />
+                  <rect x="3" y="14" width="7" height="7" rx="1" />
+                  <path d="M14 17.5h7M17.5 14v7" />
+                </svg>
+              </div>
+              <p class="hero-step-card__title">Hub</p>
+              <p class="hero-step-card__quote">Build the best financial Hub for Nuvemshop merchants, greatly monetizing</p>
+              <p class="hero-step-card__text">
+                Construir o melhor hub financeiro para os lojistas da Nuvemshop, monetizando muito.
+              </p>
+              <p class="hero-step-card__label">KPIs</p>
+              <ul class="hero-step-card__list">
+                <li>Adoption de 67%</li>
+                <li>2,2% (pre-servers)</li>
+              </ul>
+              <p class="hero-step-card__label">Por quê</p>
+              <p class="hero-step-card__text">
+                O extrato e relatórios são habilitadores para a <strong>conta bancária Nuvem Pago</strong>, que amplia e melhora o hub financeiro, e é necessário para concluir o <strong>rollout de Apollo</strong>, com grande impacto positivo em monetização (NOTR). Com o MVP lançado, ainda falta informar <strong>dados consolidados</strong> ligados a esse extrato para o lojista validar se os <strong>saldos estão corretos</strong>.
+              </p>
+            </li>
+            <li class="hero-step-card">
+              <div class="hero-step-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3z" />
+                  <path d="M5 19l1-2M19 19l-1-2" />
+                </svg>
+              </div>
+              <p class="hero-step-card__title">UX</p>
+              <p class="hero-step-card__quote">Enhance Nuvemshop&apos;s value proposition with amazing merchant experiences and holistic offerings</p>
+              <p class="hero-step-card__text">
+                Aprimorar a proposta de valor da Nuvemshop com experiências incríveis para os lojistas e ofertas holísticas.
+              </p>
+              <p class="hero-step-card__label">KPIs do MVP</p>
+              <ul class="hero-step-card__list">
+                <li>Melhorar significativamente a gestão e a facilidade de uso do Nuvem Pago</li>
+                <li>Jornadas simbióticas</li>
+                <li>Contribuir para a oferta holística da Nuvemshop (NS)</li>
+              </ul>
+              <p class="hero-step-card__label">Por quê</p>
+              <p class="hero-step-card__text">
+                O extrato, somado ao <strong>resumo financeiro</strong>, ajuda o lojista a executar tarefas de gestão financeira com <strong>autonomia</strong>. Hoje a loja depende do <strong>suporte</strong> para obter os dados necessários para executar parte das atividades financeiras — como <strong>fechamento de caixa</strong>, <strong>conciliação</strong> e <strong>balanço financeiro</strong>.
+              </p>
+            </li>
+          </ul>
+        </article>
+
+        <article class="info-card" role="listitem">
+          <h2 class="info-card__title">Equipe</h2>
+          <p class="info-card__body">
+            <strong>Equipe de pesquisa:</strong> grupo multidisciplinar na <strong>coleta, análise, síntese e apresentação</strong> dos aprendizados.
+          </p>
+          <p class="info-card__body">
+            <strong>Stakeholders:</strong> áreas da empresa com interesse ou impacto pelos resultados (produto, operações, estratégia, entre outras conforme o plano).
+          </p>
+          <ul>
+            <li><strong>Design / condução:</strong> Ana Clara Justo Pego</li>
+            <li><strong>Apoio:</strong> Hayssa Gazaneo, Ana Luiza Cadorin, Ayla Braga, Raissa Lisboa, Letícia Oliveira</li>
+          </ul>
+        </article>
+
+        <article class="info-card" role="listitem">
+          <h2 class="info-card__title">Método</h2>
+          <p class="info-card__body">
+            <strong>Entrevistas em profundidade</strong> com <strong>8 lojistas</strong>, pela complexidade típica da gestão e maior maturidade para articular rotinas e necessidades de dados.
+          </p>
+          <p class="info-card__body">
+            <strong>Recrutamento:</strong> seleção pelo time de Customer Success, com contacto aos participantes por <strong>WhatsApp</strong>, conforme definido no planejamento.
+          </p>
+        </article>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

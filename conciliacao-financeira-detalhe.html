@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conciliação financeira — Detalhe da tarefa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-radial-inner: #051e41;
+      --bg-radial-mid: #070f2d;
+      --bg-radial-outer: #090019;
+      --primary-interactive: #0059d5;
+      --primary-surface: #eef5ff;
+      --accent-blue: #60a5fa;
+      --text-muted: #8fa8c8;
+      --text-card-muted: #6b83a8;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --header-bg: rgba(255, 255, 255, 0.05);
+      --card-bg-diagram: rgba(255, 255, 255, 0.08);
+      --header-pill-bg: rgba(0, 89, 213, 0.2);
+      --white: #fff;
+      --success-bg: rgba(0, 116, 71, 0.1);
+      --success-border: rgba(0, 116, 71, 0.2);
+      --success-text: rgba(122, 247, 199, 1); /* #7AF7C7 */
+      --neutral-pill-bg: rgba(209, 209, 209, 0.18);
+      --neutral-pill-border: rgba(107, 131, 168, 0.2);
+      --pain-header-bg: rgba(116, 0, 2, 0.2);
+      --pain-header-border: rgba(247, 122, 124, 0.2);
+      --pain-title: #f77a7c;
+      --pain-card-bg: rgba(107, 131, 168, 0.1);
+      --pain-card-text: #8aa2c6;
+      --segment-bg: rgba(246, 246, 246, 0.1);
+      --segment-active-bg: rgba(0, 89, 213, 0.2);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--white);
+      background: radial-gradient(
+        ellipse 120% 100% at 50% 50%,
+        var(--bg-radial-inner) 0%,
+        var(--bg-radial-mid) 50%,
+        var(--bg-radial-outer) 100%
+      );
+      background-attachment: fixed;
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px 96px;
+    }
+
+    @media (min-width: 1100px) {
+      .page { padding-left: 96px; padding-right: 96px; }
+    }
+
+    .app-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      padding: 32px 0;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    @media (min-width: 1100px) {
+      .app-header { padding-left: 96px; padding-right: 96px; }
+    }
+
+    .header-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 31px;
+      padding: 8px;
+      background: var(--header-pill-bg);
+      border: 1px solid var(--primary-interactive);
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--accent-blue);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .header-pill:hover {
+      background: rgba(0, 89, 213, 0.28);
+    }
+
+    .header-context {
+      flex: 1 1 120px;
+      margin: 0;
+      text-align: center;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 1.76px;
+      text-transform: uppercase;
+      color: var(--text-card-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 100px;
+      padding-top: 56px;
+    }
+
+    .eyebrow {
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 1.76px;
+      text-transform: uppercase;
+      color: var(--text-card-muted);
+      margin: 0 0 8px;
+    }
+
+    .title-hero {
+      font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 56px);
+      line-height: 1.4;
+      margin: 0;
+      max-width: 849px;
+      background: linear-gradient(175deg, rgb(96, 165, 250) 0%, rgb(59, 130, 246) 50%, rgb(0, 80, 195) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-block {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      max-width: 1089px;
+    }
+
+    .section-title {
+      font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+      font-weight: 600;
+      font-size: 24px;
+      color: var(--white);
+      margin: 0;
+    }
+
+    .section-title .light {
+      font-weight: 400;
+    }
+
+    .dados-necessarios-heading {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      width: 100%;
+      max-width: 1089px;
+    }
+
+    .dados-necessarios-heading .section-title {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .dados-necessarios-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-shrink: 0;
+      margin: 0;
+      padding: 6px 8px;
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 16px;
+      color: #0a0a0a;
+      background: #f6f6f6;
+      border: 1px solid #b0b0b0;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      box-sizing: border-box;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .dados-necessarios-download:hover {
+      background: #ececec;
+      border-color: #999;
+    }
+
+    .dados-necessarios-download:focus-visible {
+      outline: 2px solid var(--primary-interactive);
+      outline-offset: 2px;
+    }
+
+    .dados-necessarios-download__icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: #0a0a0a;
+    }
+
+    @media (max-width: 600px) {
+      .dados-necessarios-heading {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+    }
+
+    .section-body {
+      font-weight: 300;
+      font-size: 20px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.2px;
+      margin: 0;
+    }
+
+    .data-table {
+      width: 100%;
+      max-width: 1089px;
+      border-collapse: collapse;
+      font-size: 14.08px;
+    }
+
+    .data-table th,
+    .data-table td {
+      border: 1px solid var(--border-subtle);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .data-table th {
+      background: var(--header-bg);
+      font-weight: 600;
+      color: var(--white);
+      height: 36px;
+    }
+
+    .data-table td {
+      color: var(--text-muted);
+      font-weight: 400;
+      height: 35px;
+    }
+
+    .segmented {
+      display: inline-flex;
+      align-items: center;
+      background: var(--segment-bg);
+      border-radius: 8px;
+      flex-wrap: wrap;
+    }
+
+    .segmented button {
+      font-family: "Inter", system-ui, sans-serif;
+      border: none;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--white);
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+    }
+
+    .segmented button.active {
+      background: var(--segment-active-bg);
+      border: 2px solid var(--primary-interactive);
+      color: var(--primary-surface);
+      font-size: 20px;
+      line-height: 24px;
+      font-weight: 600;
+    }
+
+    .subsection-title {
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--white);
+      margin: 0 0 20px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .pill-row + .pill-row {
+      margin-top: 16px;
+    }
+
+    .dados-necessarios-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 16px;
+    }
+
+    /* Author .pill { display: inline-flex } beats UA [hidden]; force hide when attribute set */
+    .pill[hidden],
+    #dados-consolidados-block[hidden],
+    #dados-consolidados-block.dados-consolidados-block--hidden,
+    .pain-panel[hidden] {
+      display: none !important;
+    }
+
+    .pill--success {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: var(--success-text);
+    }
+
+    .pill--neutral {
+      background: var(--neutral-pill-bg);
+      border: 1px solid var(--neutral-pill-border);
+      color: var(--text-card-muted);
+    }
+
+    .dados-pills-legenda {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 14px;
+      margin: 12px 0 18px;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 1.45;
+      color: var(--text-card-muted);
+    }
+
+    .dados-pills-legenda__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .dados-pills-legenda__item:has(.dados-pills-legenda__swatch--success) {
+      color: var(--success-text);
+    }
+
+    .dados-pills-legenda__swatch {
+      width: 13px;
+      height: 13px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    .dados-pills-legenda__swatch--success {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+    }
+
+    .dados-pills-legenda__swatch--neutral {
+      background: var(--neutral-pill-bg);
+      border: 1px solid var(--neutral-pill-border);
+    }
+
+    .dados-pills-legenda__sep {
+      opacity: 0.45;
+      user-select: none;
+    }
+
+    .journey {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: 10px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .journey-arrow {
+      width: 19px;
+      height: 12px;
+      flex-shrink: 0;
+      align-self: center;
+      color: var(--accent-blue);
+    }
+
+    .journey-card {
+      flex: 1 1 0;
+      min-width: 0;
+      min-height: 119px;
+      background: var(--card-bg-diagram);
+      border: 1px solid var(--primary-interactive);
+      border-radius: 16px;
+      padding: 12px;
+      text-align: left;
+    }
+
+    .journey-card__step {
+      font-weight: 700;
+      font-size: 9px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      margin: 0 0 4px;
+    }
+
+    .journey-card__title {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 1.25;
+      color: var(--white);
+      margin: 0 0 4px;
+    }
+
+    .journey-card__desc {
+      font-weight: 400;
+      font-size: 10.5px;
+      line-height: 1.35;
+      color: rgba(107, 131, 168, 1);
+      margin: 0;
+    }
+
+    @media (max-width: 720px) {
+      .journey {
+        flex-wrap: wrap;
+      }
+
+      .journey-card {
+        flex: 1 1 calc(50% - 8px);
+        min-width: min(100%, 160px);
+      }
+    }
+
+    button.pain-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 16px;
+      margin: 0;
+      background: var(--pain-header-bg);
+      border: 1px solid var(--pain-header-border);
+      border-radius: 4px;
+      text-align: left;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    button.pain-header:focus-visible {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 2px;
+    }
+
+    .pain-header svg.icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--pain-title);
+    }
+
+    .pain-header h3 {
+      flex: 1;
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 24px;
+      color: var(--pain-title);
+    }
+
+    .pain-header__chevron {
+      margin-left: auto;
+      flex-shrink: 0;
+      color: var(--pain-title);
+      transition: transform 0.2s ease;
+      transform-origin: center;
+    }
+
+    button.pain-header[aria-expanded="false"] .pain-header__chevron {
+      transform: rotate(180deg);
+    }
+
+    .pain-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .pain-card {
+      flex: 1 1 280px;
+      min-width: 0;
+      padding: 16px;
+      background: var(--pain-card-bg);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pain-card p {
+      margin: 0;
+      font-weight: 300;
+      line-height: 1.4;
+      color: var(--pain-card-text);
+      font-size: 14px;
+    }
+
+    .pain-card p.small {
+      font-size: 12px;
+    }
+
+    .pain-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .video-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--white);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .video-link svg {
+      width: 16px;
+      height: 16px;
+      color: var(--white);
+    }
+
+    @media (max-width: 720px) {
+      .app-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .header-context { order: -1; text-align: left; }
+      .header-actions { margin-left: 0; }
+      .journey-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a class="header-pill header-pill--voltar" href="gestao-financeira-nuvempago-2026.html" aria-label="Voltar à página anterior">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="16" height="16">
+        <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Voltar
+    </a>
+    <p class="header-context">Detalhe da tarefa</p>
+    <div class="header-actions">
+      <a class="header-pill" href="conclusao.html">Conclusão</a>
+      <a class="header-pill" href="evolucao-extrato-2026.html">Evolução</a>
+      <a class="header-pill" href="sobre-a-pesquisa.html">Sobre a pesquisa</a>
+    </div>
+  </header>
+
+  <div class="page">
+    <main class="main">
+      <div>
+        <p class="eyebrow">Nível operacional</p>
+        <h1 class="title-hero">Conciliação financeira</h1>
+      </div>
+
+      <div class="section-block">
+        <div>
+          <h2 class="section-title"><span class="light">O </span>que é?</h2>
+          <p class="section-body" style="margin-top: 16px">
+            É uma <strong>auditoria</strong> que cruza o que o site vendeu com o que o meio de pagamento registra como pago ou a receber. O objetivo principal é <strong>identificar</strong> se o meio de pagamento repassou corretamente as taxas das vendas e, em paralelo, ajudar a encontrar a <strong>causa raiz</strong> de inconsistências entre a plataforma de venda, o ERP e o meio de pagamento.
+          </p>
+          <p class="section-body" style="margin-top: 16px">
+            Para realizar a conciliação financeira com precisão, lojistas e gestores financeiros precisam de <strong>detalhamento minucioso</strong> das transações — em geral conferido <strong>pedido a pedido</strong> ou <strong>linha a linha</strong>.
+          </p>
+        </div>
+
+        <div style="overflow-x: auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Atividade</th>
+                <th scope="col">O que responde?</th>
+                <th scope="col">Foco principal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Conciliação financeira</td>
+                <td>O Nuvem Pago me pagou certo?</td>
+                <td>Taxas e antecipações</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div
+        class="section-block"
+        id="dados-necessarios-section"
+        data-export-basename="conciliacao-financeira"
+        data-export-per-locale-sim="true"
+        data-export-title="Conciliação financeira — dados necessários (específicos desta tarefa, por origem)"
+      >
+        <div class="dados-necessarios-heading">
+          <h2 class="section-title" id="dados-necessarios-heading">Dados necessários</h2>
+          <a
+            class="dados-necessarios-download"
+            href="#"
+            aria-label="Baixar Excel da conciliação financeira: uma aba por origem (Nuvem Pago, Exportável Orders, Exportável Nuvem Pago, API), com Sim ou Não conforme exibimos o dado nessa origem"
+          >
+            Baixar
+            <svg class="dados-necessarios-download__icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M8 10.67V2m0 8.67L5 7.33m3 3.34l3-3.34" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M2.67 12.67h10.66" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
+            </svg>
+          </a>
+        </div>
+        <p class="section-body" style="font-size: 16px; margin-top: -8px">
+          Conforme a visão do produto Nuvem Pago. Os separadores filtram a origem típica dos dados (produto, exportações ou API).
+        </p>
+        <div class="segmented" role="tablist" aria-label="Origem dos dados">
+          <button type="button" class="active" role="tab" aria-selected="true" data-tab="todos">Todos</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="produto">Nuvem Pago (Produto)</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="exp-orders">Exportável Orders</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="exp-np">Exportável Nuvem Pago</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="api">API</button>
+        </div>
+        <p class="dados-pills-legenda" role="note">
+          <span class="dados-pills-legenda__item"><span class="dados-pills-legenda__swatch dados-pills-legenda__swatch--success" aria-hidden="true"></span> Dados que exibimos</span>
+          <span class="dados-pills-legenda__sep" aria-hidden="true">·</span>
+          <span class="dados-pills-legenda__item"><span class="dados-pills-legenda__swatch dados-pills-legenda__swatch--neutral" aria-hidden="true"></span> Dados que não exibimos</span>
+        </p>
+
+        <div class="dados-necessarios-wrap">
+          <div id="dados-consolidados-block">
+            <h3 class="subsection-title">Consolidados</h3>
+            <div class="pill-row">
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api exp-orders">Total recebido</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="api exp-orders">Total faturado (pago pelo cliente)</span>
+              <span class="pill pill--success js-dados-pill" data-tabs="produto exp-np api">Total disponível para saque</span>
+              <span class="pill pill--success js-dados-pill" data-tabs="produto exp-np api">Total a receber (Lançamentos futuros)</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Saldo final</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Saldo inicial</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de entrada (líquido)</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de saída (líquido)</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de transferências</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto api exp-orders">Total por movimentação (venda, link, estorno, etc.)</span>
+            </div>
+          </div>
+
+          <div id="bloco-detalhe-venda">
+            <h3 class="subsection-title">Detalhes individual da venda</h3>
+            <div class="pill-row">
+              <span id="pill-tipo-movimentacao" class="pill pill--success js-dados-pill" data-tabs="produto exp-np api">Tipo de movimentação (Entrada/Saída)</span>
+              <span id="pill-id-movimentacao" class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">ID da movimentação</span>
+              <span id="pill-descricao-movimentacao" class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Descrição da movimentação</span>
+              <span id="pill-nome-cliente" class="pill pill--neutral js-dados-pill" data-tabs="produto exp-orders exp-np api">Nome do cliente</span>
+              <span id="pill-data-movimentacao-realizada" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Data que a movimentação foi realizada</span>
+              <span id="pill-data-mudanca-status" class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Data de mudança de status (recebido, estornado, contestado)</span>
+              <span id="pill-data-liquidacao" class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Data de liquidação</span>
+              <span id="pill-valor-bruto" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Valor bruto</span>
+              <span id="pill-valor-liquido" class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Valor líquido</span>
+              <span id="pill-frete" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Frete</span>
+              <span id="pill-desconto" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Desconto</span>
+              <span id="pill-cupom" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Cupom</span>
+              <span id="pill-mdr" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">MDR</span>
+              <span id="pill-juros" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Juros</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block" id="jornada-macro">
+        <h2 class="section-title">Jornada macro</h2>
+        <div class="journey" role="list">
+          <article class="journey-card" role="listitem">
+            <p class="journey-card__step">Passo 1</p>
+            <p class="journey-card__title">Vendas e pedidos</p>
+            <p class="journey-card__desc">Registros no site e nos canais de venda formam a base para cruzar com pagamentos e ERP.</p>
+          </article>
+          <svg class="journey-arrow" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M1 6h12M10 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <article class="journey-card" role="listitem">
+            <p class="journey-card__step">Passo 2</p>
+            <p class="journey-card__title">Meio de pagamento</p>
+            <p class="journey-card__desc">Nuvem Pago consolida o que foi pago, a receber, taxas e status por movimentação.</p>
+          </article>
+          <svg class="journey-arrow" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M1 6h12M10 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <article class="journey-card" role="listitem">
+            <p class="journey-card__step">Passo 3</p>
+            <p class="journey-card__title">Conferência detalhada</p>
+            <p class="journey-card__desc">Análise pedido a pedido ou linha a linha entre plataforma, ERP e meio de pagamento.</p>
+          </article>
+          <svg class="journey-arrow" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M1 6h12M10 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <article class="journey-card" role="listitem">
+            <p class="journey-card__step">Passo 4</p>
+            <p class="journey-card__title">Auditoria de repasses</p>
+            <p class="journey-card__desc">Confirmar se taxas, antecipações e valores líquidos batem com o contratado e com o esperado.</p>
+          </article>
+        </div>
+      </div>
+
+    </main>
+  </div>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"
+    integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="js/dados-necessarios-export.js"></script>
+  <script>
+    (function () {
+      var dadosSection = document.getElementById("dados-necessarios-section");
+      if (!dadosSection) return;
+      var tablist = dadosSection.querySelector('.segmented[role="tablist"]');
+      if (!tablist) return;
+      var tabs = tablist.querySelectorAll('[role="tab"]');
+      var pills = dadosSection.querySelectorAll(".js-dados-pill");
+      var consolidadosBlock = dadosSection.querySelector("#dados-consolidados-block");
+      var pillsNeutralOnApiOnly = [
+        document.getElementById("pill-valor-liquido"),
+        document.getElementById("pill-data-mudanca-status")
+      ].filter(Boolean);
+      var pillsNeutralOnApiOrExpNp = [
+        document.getElementById("pill-juros"),
+        document.getElementById("pill-mdr")
+      ].filter(Boolean);
+      var pillNomeCliente = document.getElementById("pill-nome-cliente");
+      var blocoDetalheVenda = dadosSection.querySelector("#bloco-detalhe-venda");
+      var EXP_ORDERS_DETALHE_VENDA_IDS = {
+        "pill-nome-cliente": true,
+        "pill-data-movimentacao-realizada": true,
+        "pill-data-mudanca-status": true,
+        "pill-data-liquidacao": true,
+        "pill-valor-bruto": true,
+        "pill-valor-liquido": true,
+        "pill-frete": true,
+        "pill-desconto": true,
+        "pill-cupom": true,
+        "pill-mdr": true,
+        "pill-juros": true,
+        "pill-id-movimentacao": true,
+        "pill-descricao-movimentacao": true
+      };
+
+      function setPillSuccess(el, success) {
+        if (success) {
+          el.classList.remove("pill--neutral");
+          el.classList.add("pill--success");
+        } else {
+          el.classList.remove("pill--success");
+          el.classList.add("pill--neutral");
+        }
+      }
+
+      function syncPillsNeutralOnApi(mode) {
+        var apiOnlyNeutral = mode === "api";
+        pillsNeutralOnApiOnly.forEach(function (el) {
+          setPillSuccess(el, !apiOnlyNeutral);
+        });
+        var jurosMdrNeutral = mode === "api" || mode === "exp-np";
+        pillsNeutralOnApiOrExpNp.forEach(function (el) {
+          setPillSuccess(el, !jurosMdrNeutral);
+        });
+        if (pillNomeCliente) {
+          setPillSuccess(pillNomeCliente, mode === "todos" || mode === "exp-orders");
+        }
+      }
+
+      function applyDadosFilters(mode) {
+        mode = (mode || "todos").trim();
+        pills.forEach(function (p) {
+          var raw = (p.getAttribute("data-tabs") || "").trim();
+          var allowed = raw.split(/\s+/).filter(Boolean);
+          if (mode === "todos") {
+            p.removeAttribute("hidden");
+          } else if (allowed.indexOf(mode) !== -1) {
+            p.removeAttribute("hidden");
+          } else {
+            p.setAttribute("hidden", "");
+          }
+        });
+        if (consolidadosBlock) {
+          if (mode === "exp-orders") {
+            consolidadosBlock.setAttribute("hidden", "");
+            consolidadosBlock.classList.add("dados-consolidados-block--hidden");
+            consolidadosBlock.setAttribute("aria-hidden", "true");
+          } else {
+            consolidadosBlock.removeAttribute("hidden");
+            consolidadosBlock.classList.remove("dados-consolidados-block--hidden");
+            consolidadosBlock.setAttribute("aria-hidden", "false");
+          }
+        }
+        if (mode === "exp-orders" && blocoDetalheVenda) {
+          blocoDetalheVenda.querySelectorAll(".js-dados-pill").forEach(function (p) {
+            var pid = p.id || "";
+            if (EXP_ORDERS_DETALHE_VENDA_IDS[pid]) {
+              p.removeAttribute("hidden");
+            } else {
+              p.setAttribute("hidden", "");
+            }
+          });
+        } else if (blocoDetalheVenda) {
+          blocoDetalheVenda.querySelectorAll(".js-dados-pill").forEach(function (p) {
+            var raw = (p.getAttribute("data-tabs") || "").trim();
+            var allowed = raw.split(/\s+/).filter(Boolean);
+            if (mode === "todos") {
+              p.removeAttribute("hidden");
+            } else if (allowed.indexOf(mode) !== -1) {
+              p.removeAttribute("hidden");
+            } else {
+              p.setAttribute("hidden", "");
+            }
+          });
+        }
+        syncPillsNeutralOnApi(mode);
+      }
+
+      function setActiveTab(activeBtn) {
+        var mode = (activeBtn.getAttribute("data-tab") || "todos").trim();
+        tabs.forEach(function (t) {
+          var on = t === activeBtn;
+          t.classList.toggle("active", on);
+          t.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        applyDadosFilters(mode);
+      }
+
+      tabs.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          setActiveTab(btn);
+        });
+      });
+
+      var initialTab = tablist.querySelector('[role="tab"].active');
+      applyDadosFilters(
+        initialTab ? (initialTab.getAttribute("data-tab") || "todos").trim() : "todos"
+      );
+    })();
+  </script>
+  <script>
+    (function () {
+      var back = document.querySelector("a.header-pill--voltar");
+      if (!back) return;
+      back.addEventListener("click", function (e) {
+        if (window.history.length > 1) {
+          e.preventDefault();
+          window.history.back();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

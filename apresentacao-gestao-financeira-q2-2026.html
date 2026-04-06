@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dados para gestão financeira — Q2-2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #000B19;
+      --bg-glass: rgba(255, 255, 255, 0.04);
+      --border-glass: rgba(255, 255, 255, 0.08);
+      --blue-300: #60A5FA;
+      --blue-400: #3B82F6;
+      --blue-500: #0050C3;
+      --gradient: linear-gradient(135deg, #60A5FA, #3B82F6, #0050C3);
+      --text-1: #FFFFFF;
+      --text-2: #8FA8C8;
+      --text-3: #6B83A8;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text-1);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0, 80, 195, 0.18), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 80% 20%, rgba(0, 41, 143, 0.14), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(4, 23, 115, 0.12), transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deck-ui {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      background: linear-gradient(to bottom, rgba(0, 11, 25, 0.92), transparent);
+      pointer-events: none;
+    }
+    .deck-ui span, .deck-ui a { pointer-events: auto; }
+    .counter {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--text-3);
+    }
+    .counter strong { color: var(--blue-300); }
+    .progress-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: var(--gradient);
+      z-index: 101;
+      transition: width 0.2s var(--ease);
+      box-shadow: 0 0 12px rgba(0, 80, 195, 0.6);
+    }
+    .hint {
+      font-size: 0.6875rem;
+      color: var(--text-3);
+    }
+    .download-pptx {
+      font-size: 0.75rem;
+      color: var(--blue-300);
+      text-decoration: none;
+      border: 1px solid var(--border-glass);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: var(--bg-glass);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .download-pptx:hover, .download-pptx:focus {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(96, 165, 250, 0.35);
+      outline: none;
+    }
+    #slides {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+    }
+    .slide {
+      display: none;
+      height: 100%;
+      padding: 4.5rem 8vw 3rem;
+      overflow-y: auto;
+      animation: inSlide 0.45s var(--ease);
+    }
+    .slide.is-active { display: flex; flex-direction: column; justify-content: center; }
+    @keyframes inSlide {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide--cover { text-align: center; justify-content: center !important; }
+    .kicker {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1rem;
+    }
+    .slide h1 {
+      font-size: clamp(1.85rem, 5vw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    .slide h1 .gradient {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .slide h2 {
+      font-size: clamp(1.35rem, 3.5vw, 2rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-1);
+    }
+    .slide h3 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-400);
+      margin: 1.25rem 0 0.5rem;
+    }
+    .lead {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-2);
+      max-width: 40rem;
+      line-height: 1.55;
+    }
+    .slide--cover .lead { margin: 0 auto; }
+    ul {
+      margin: 0.5rem 0 0 1.1rem;
+      color: var(--text-2);
+      max-width: 48rem;
+    }
+    li { margin: 0.4rem 0; line-height: 1.5; }
+    .card {
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      border-left: 3px solid var(--blue-500);
+      max-width: 48rem;
+    }
+    .card p { color: var(--text-2); font-size: 0.9rem; line-height: 1.55; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      max-width: 52rem;
+      margin-top: 1rem;
+    }
+    .mini {
+      padding: 1rem;
+      background: var(--bg-glass);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+    }
+    .mini strong { color: var(--text-1); display: block; margin-bottom: 0.35rem; font-size: 0.9rem; }
+    .mini span { color: var(--text-2); font-size: 0.82rem; line-height: 1.45; }
+    table.matrix {
+      width: 100%;
+      max-width: 100%;
+      border-collapse: collapse;
+      font-size: 0.72rem;
+      margin-top: 0.75rem;
+      background: rgba(0, 6, 16, 0.5);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-glass);
+    }
+    table.matrix th, table.matrix td {
+      padding: 0.55rem 0.65rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-glass);
+      vertical-align: top;
+    }
+    table.matrix th {
+      background: rgba(0, 80, 195, 0.2);
+      color: var(--blue-300);
+      font-weight: 600;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    table.matrix tr:last-child td { border-bottom: none; }
+    .tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 6px;
+      background: rgba(96, 165, 250, 0.15);
+      color: var(--blue-300);
+      margin-top: 0.2rem;
+    }
+    .slide--wide .slide-inner { max-width: 100%; }
+    a.link { color: var(--blue-300); word-break: break-all; }
+    /* Fluxos por tarefa (base: síntese / jornadas consolidadas) */
+    .task-flow {
+      margin: 0.75rem 0 1.25rem;
+      max-width: 52rem;
+    }
+    .task-flow-caption {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.4rem;
+    }
+    .task-flow-track {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      gap: 0.35rem 0.25rem;
+      margin-bottom: 0.65rem;
+    }
+    .task-flow-track:last-child { margin-bottom: 0; }
+    .flow-step {
+      flex: 1 1 auto;
+      min-width: 4.5rem;
+      max-width: 12rem;
+      padding: 0.45rem 0.55rem;
+      font-size: 0.68rem;
+      line-height: 1.35;
+      color: var(--text-2);
+      background: var(--bg-glass);
+      border: 1px solid var(--border-glass);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .flow-step strong { display: block; color: var(--text-1); font-size: 0.72rem; font-weight: 600; margin-bottom: 0.15rem; }
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      color: var(--blue-400);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0 0.15rem;
+      flex-shrink: 0;
+    }
+    .task-flow-note {
+      font-size: 0.65rem;
+      color: var(--text-3);
+      margin-top: 0.5rem;
+      max-width: 48rem;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-ui">
+    <span class="counter" id="counter" aria-live="polite"><strong>01</strong> / 12</span>
+    <span class="hint">← → ou espaço · início / fim</span>
+    <a class="download-pptx" href="./gestao-financeira-q2-2026.pptx" download>Baixar PPTX</a>
+  </div>
+  <div class="progress-bar" id="progress" style="width: 0%"></div>
+
+  <div id="slides" role="region" aria-label="Apresentação">
+    <!-- 1 -->
+    <section class="slide slide--cover is-active" data-slide="1" tabindex="-1">
+      <p class="kicker">Payments NP · Q2-2026</p>
+      <h1><span class="gradient">Dados para gestão financeira</span></h1>
+      <p class="lead">Contexto, tarefas e formatos para lojistas operarem com clareza no Nuvem Pago e ecossistema.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide" data-slide="2" tabindex="-1">
+      <p class="kicker">Objetivo desta apresentação</p>
+      <h2>Informação no contexto certo</h2>
+      <ul>
+        <li>Entregar aos lojistas <strong>o que precisam saber</strong> para gestão financeira do dia a dia.</li>
+        <li>Mostrar <strong>dados por tarefa</strong>, com <strong>formato adequado</strong> (painel, CSV, API) quando aplicável.</li>
+        <li>Base: entrevistas consolidadas no projeto <strong>Gestão financeira</strong> (ver síntese e referências).</li>
+      </ul>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide" data-slide="3" tabindex="-1">
+      <p class="kicker">Introdução · Pesquisa</p>
+      <h2>Equipe e base do estudo</h2>
+      <ul>
+        <li><strong>Squad (apresentação):</strong> Payments NP.</li>
+        <li><strong>Projeto:</strong> Gestão financeira (Dovetail).</li>
+        <li><strong>Entrevistas (transcrições em Dados):</strong> Ana (BPO financeiro), Denis (Wishin), Dayse (Flor de Cacto), Gabriel (Lustres Gênesis), Thales (Loja Reforma), Maria Laura (Mais Mu), Nayara/Fabrício (Mulher Elástica).</li>
+        <li><strong>Metodologia:</strong> consolidação qualitativa; frequências refletem o dito nas sessões, não estatística de base.</li>
+      </ul>
+      <div class="card">
+        <p><strong>Planejamento oficial:</strong> complementar com bullets do documento de planejamento quando disponíveis — <a class="link" href="https://docs.google.com/document/d/1bXmjtk8kArKLskAnVcmiCrLGrSta_Nq-nkK1L6Uglv4/edit?tab=t.0">Google Doc (planejamento)</a>. Arquivo local: <code>PLANEAMENTO-PESQUISA-REFERENCIA.md</code>.</p>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide" data-slide="4" tabindex="-1">
+      <p class="kicker">JTBD · Tarefas financeiras</p>
+      <h2>O que cada tarefa precisa responder</h2>
+      <div class="grid-2">
+        <div class="mini">
+          <strong>Fechamento e acompanhamento de caixa</strong>
+          <span>O que entrou e saiu na carteira no período? O saldo fecha com entradas, taxas, estornos e saques?</span>
+        </div>
+        <div class="mini">
+          <strong>Conciliação financeira e bancária</strong>
+          <span>Vendas e meios de pagamento batem com ERP e com o extrato bancário (OFX)? Há duplicidades ou furos?</span>
+        </div>
+        <div class="mini">
+          <strong>DRE (Demonstração de Resultado)</strong>
+          <span>Qual o resultado por competência: receitas, descontos, taxas, frete, CMV, devoluções e margem?</span>
+        </div>
+        <div class="mini">
+          <strong>Monitorar estatísticas do negócio</strong>
+          <span>Como estão meios de pagamento, parcelamento, aprovação/antifraude e disputas em relação ao negócio?</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide" data-slide="5" tabindex="-1">
+      <p class="kicker">Tarefa</p>
+      <h2>Fechamento e acompanhamento de caixa</h2>
+      <div class="task-flow" role="img" aria-label="Fluxo: dois relatos na síntese (Wishin e Flor de Cacto), sem ordem entre eles">
+        <p class="task-flow-caption">Fluxo — fechamento de caixa (síntese)</p>
+        <p class="task-flow-caption" style="margin-bottom:0.25rem;font-size:0.6rem;letter-spacing:0.08em">Saldo na carteira — Wishin</p>
+        <div class="task-flow-track">
+          <div class="flow-step"><strong>Entradas do dia</strong></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Abater taxas</strong></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Abater estornos</strong></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Saldo final do dia</strong></div>
+        </div>
+        <p class="task-flow-caption" style="margin-bottom:0.25rem;font-size:0.6rem;letter-spacing:0.08em">Painel do dia — Flor de Cacto</p>
+        <div class="task-flow-track">
+          <div class="flow-step"><strong>Sequência e volume de pedidos</strong> no painel</div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Cruzar com recebimentos</strong></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Cortes PIX vs cartão D+2</strong> e horários</div>
+        </div>
+        <p class="task-flow-note">Dois relatos distintos na síntese; frequência diária citada nos dois casos.</p>
+      </div>
+      <h3>Dados necessários</h3>
+      <ul>
+        <li>Entradas do dia, <strong>taxas</strong>, <strong>estornos</strong>, <strong>saldo inicial e final</strong>, <strong>saques/transferências</strong>; composição do saldo disponível (o que entrou no período).</li>
+        <li>Em paralelo, quem opera a loja costuma <strong>conferir sequência e volume de pedidos</strong> no painel antes de cruzar com os recebimentos.</li>
+      </ul>
+      <h3>Frequência</h3>
+      <ul><li><strong>Diária</strong> citada para fechamento de saldo na carteira e conferência do dia (ex.: Wishin, Flor de Cacto).</li></ul>
+      <h3>Ferramentas hoje</h3>
+      <ul>
+        <li>Nuvemshop / Nuvem Pago: painel de vendas, saldo disponível, lançamentos futuros, exportação de relatório de vendas.</li>
+        <li>Planilhas quando o detalhe ou o vínculo não estão no produto.</li>
+      </ul>
+      <h3>Principais desafios</h3>
+      <ul>
+        <li>Ver <strong>quais vendas/parcelas</strong> compõem o saldo; histórico de saques/transferências difícil para bater com banco.</li>
+        <li><strong>Horários e cortes</strong> (PIX vs cartão D+2, antecipação, madrugada) atrapalham o “fechamento do dia”.</li>
+      </ul>
+      <h3>Onde querem acessar</h3>
+      <ul>
+        <li><strong>Painel</strong> para leitura rápida; <strong>CSV / export</strong> para conferência e ERP; <strong>API</strong> desejável para automatizar com Bling/Tiny — referido na síntese como necessidade de integração.</li>
+      </ul>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide" data-slide="6" tabindex="-1">
+      <p class="kicker">Tarefa</p>
+      <h2>Conciliação financeira e/ou bancária</h2>
+      <div class="task-flow" role="img" aria-label="Fluxos de conciliação: financeira A, financeira B Thales, bancária OFX">
+        <p class="task-flow-caption">Fluxo — conciliação (síntese)</p>
+        <p class="task-flow-caption" style="margin-bottom:0.25rem;font-size:0.6rem;letter-spacing:0.08em">A · Financeira — vendas × ERP</p>
+        <div class="task-flow-track">
+          <div class="flow-step"><strong>Meio de pagamento</strong> vendas, entradas, taxas, estornos, saldos</div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>ERP</strong> pedidos, parcelas, baixa liberada</div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Conferir</strong> taxa esperada vs extrato; ajustar divergências</div>
+        </div>
+        <p class="task-flow-caption" style="margin-bottom:0.25rem;font-size:0.6rem;letter-spacing:0.08em">B · Financeira — fiscal e devoluções (Thales, mensal)</p>
+        <div class="task-flow-track">
+          <div class="flow-step"><strong>Fechamento do mês</strong></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>NF × vendas</strong> valor bruto no meio de pagamento</div>
+        </div>
+        <div class="task-flow-track">
+          <div class="flow-step"><strong>Fechamento do mês</strong></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Devoluções</strong> métricas e notas</div>
+        </div>
+        <p class="task-flow-caption" style="margin-bottom:0.25rem;font-size:0.6rem;letter-spacing:0.08em">C · Bancária — OFX (Ana BPO)</p>
+        <div class="task-flow-track">
+          <div class="flow-step"><strong>OFX</strong> do banco</div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>ERP</strong> contas a pagar / receber</div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Identificar</strong> duplicidade, furos, baixas</div>
+        </div>
+        <p class="task-flow-note">A e C com ritmos diários citados; B é fechamento mensal. Conciliação de taxas vs contrato é linha à parte na síntese.</p>
+      </div>
+      <h3>Dados necessários</h3>
+      <ul>
+        <li><strong>Meio de pagamento:</strong> vendas do dia (número, sequência, meio), entradas, taxas, estornos, saldos, saques.</li>
+        <li><strong>ERP:</strong> pedidos importados, parcelas com datas, baixa de parcela liberada; taxa esperada vs extrato.</li>
+        <li><strong>Banco:</strong> <strong>OFX</strong> e contas a pagar/receber no ERP para conciliação bancária.</li>
+      </ul>
+      <h3>Frequência</h3>
+      <ul>
+        <li>Conciliação vendas × ERP: <strong>diária</strong> em operações exigentes; muitos lojistas <strong>não fazem</strong> (BPO).</li>
+        <li>Conciliação bancária (OFX): <strong>diária</strong> (ex.: “ontem”) no relato BPO.</li>
+        <li>Conciliação de <strong>taxas</strong>: muitas vezes <strong>mensal</strong>; desejo de ritmo maior.</li>
+      </ul>
+      <h3>Ferramentas hoje</h3>
+      <ul>
+        <li>Nuvem Pago + ERP (Bling, Tiny); importação OFX no banco/ERP; planilhas para multi-canal.</li>
+      </ul>
+      <h3>Principais desafios</h3>
+      <ul>
+        <li>Pedido na Nuvem <strong>sem taxas</strong> → lançamento manual ou divergência; risco de duplicação na importação.</li>
+        <li>Trabalho manual e várias planilhas quando há <strong>várias empresas/canais/ERPs</strong>.</li>
+        <li>Taxa contratada vs taxa descontada; medo de alteração sem aviso.</li>
+      </ul>
+      <h3>Onde querem acessar</h3>
+      <ul>
+        <li><strong>Extrato</strong> detalhado exportável; <strong>relatório de vendas</strong>; <strong>Excel</strong> compatível com rotina contábil; <strong>API</strong> para encaixar no ERP.</li>
+      </ul>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide" data-slide="7" tabindex="-1">
+      <p class="kicker">Tarefa</p>
+      <h2>DRE (Demonstração de Resultado do Exercício)</h2>
+      <div class="task-flow" role="img" aria-label="Fluxo DRE por competência, fechamento mensal">
+        <p class="task-flow-caption">Fluxo — DRE (síntese)</p>
+        <div class="task-flow-track">
+          <div class="flow-step"><strong>Período</strong> regime de competência · mensal (BPO)</div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Reunir</strong> descontos, frete, devoluções, tarifas por competência, CMV, comissões</div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Fechar</strong> demonstração de resultado / margem</div>
+        </div>
+        <p class="task-flow-note">Visão só de caixa não substitui competência para a DRE (síntese). Cenário BPO: ver também encadeamento DRE → DFC → OFX em <code>jornadas-gestao-financeira.html</code>.</p>
+      </div>
+      <h3>Dados necessários</h3>
+      <ul>
+        <li>Descontos (<strong>cupom</strong> e <strong>desconto na peça</strong>), frete (pago pelo cliente vs absorvido), devoluções por <strong>competência</strong>.</li>
+        <li><strong>Tarifas por competência</strong> (não só o que saiu no caixa no mês).</li>
+        <li>CMV/custo, comissões de plataforma quando existirem.</li>
+      </ul>
+      <h3>Frequência</h3>
+      <ul><li><strong>Mensal</strong> para fechamento gerencial / DRE no relato BPO.</li></ul>
+      <h3>Ferramentas hoje</h3>
+      <ul>
+        <li>ERP + exportações; orientação contábil (competência vs caixa); planilhas para fechar o que o e-commerce não oferece nativamente.</li>
+      </ul>
+      <h3>Principais desafios</h3>
+      <ul>
+        <li>Relatório “só de <strong>caixa</strong>” <strong>não substitui</strong> visão de competência para DRE.</li>
+        <li>Falta de <strong>taxas e faturamento alinhados à competência</strong> na exportação.</li>
+      </ul>
+      <h3>Onde querem acessar</h3>
+      <ul>
+        <li>Export rico (CSV) ou <strong>API</strong> com campos de competência; integração direta ao ERP é o uso típico.</li>
+      </ul>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide" data-slide="8" tabindex="-1">
+      <p class="kicker">Tarefa</p>
+      <h2>Monitorar estatísticas do negócio</h2>
+      <div class="task-flow" role="img" aria-label="Fluxo resumido: métricas no produto ou export, análise gerencial, disputas quando ocorrem">
+        <p class="task-flow-caption">Fluxo — estatísticas e disputas (síntese)</p>
+        <div class="task-flow-track">
+          <div class="flow-step"><strong>Consumir dados</strong> admin / relatórios / export (ex.: receita por meio)</div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Analisar</strong> mix de meios, parcelas, taxas, aprovação, antifraude</div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step"><strong>Disputas</strong> chargeback e estorno quando ocorre — status, valores, motivo</div>
+        </div>
+        <p class="task-flow-note">A síntese não detalha ordem fixa entre análise gerencial e disputas; fluxo linear é esquemático. Ritmo gerencial variável; chargeback/estorno eventual.</p>
+      </div>
+      <h3>Dados necessários</h3>
+      <ul>
+        <li><strong>% PIX, cartão, parcelas, bandeiras</strong>; comparação de taxas para negociação com adquirentes.</li>
+        <li><strong>Taxa de aprovação</strong>, antifraude, eventual whitelist.</li>
+        <li>Chargeback/estorno: <strong>status</strong>, valor devolvido, taxa devolvida, motivo; lista exportável.</li>
+      </ul>
+      <h3>Frequência</h3>
+      <ul>
+        <li>Análise gerencial: ritmo variável; chargeback/estorno <strong>quando ocorre</strong>.</li>
+      </ul>
+      <h3>Ferramentas hoje</h3>
+      <ul>
+        <li>Estatísticas no admin (ex. receita por meio de pagamento); relatórios exportáveis; planilhas internas / Tableau em alguns casos.</li>
+      </ul>
+      <h3>Principais desafios</h3>
+      <ul>
+        <li>Perda de visibilidade em chargeback após mudança de fluxo (e-mail/forms vs painel).</li>
+        <li>Cruzar estatísticas com <strong>decisões comerciais</strong> sem export estável.</li>
+      </ul>
+      <h3>Perguntas que querem responder (exemplos das entrevistas)</h3>
+      <ul>
+        <li>Como está o mix de meios e parcelas? A taxa efetiva bate com o contratado?</li>
+        <li>Há queda de aprovação ou bloqueios de antifraude que expliquem queda de conversão?</li>
+        <li>Onde estão disputas e estornos e qual o impacto em caixa?</li>
+      </ul>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide" data-slide="9" tabindex="-1">
+      <p class="kicker">Parte 6 · Legenda</p>
+      <h2>Matriz dado × tarefa × formato</h2>
+      <div class="card">
+        <p><strong>1. Dado</strong> — O que o usuário quer consumir (ex.: total de taxas, parcela 2 de 6).</p>
+        <p style="margin-top:0.5rem"><strong>2. Tarefa</strong> — Para que trabalho serve (fechamento de caixa, conciliação, DRE, estatísticas). Um dado pode servir várias tarefas.</p>
+        <p style="margin-top:0.5rem"><strong>3. Formato</strong> — Forma ideal levando em conta o destino (ex.: CSV para ERP, API para integração, painel para leitura rápida).</p>
+        <p style="margin-top:0.5rem"><strong>4. Temos o dado hoje?</strong> — Sim / Parcial / Não / A validar (conforme síntese e evolução do produto).</p>
+      </div>
+      <h3>Onde o produto costuma expor dados hoje</h3>
+      <ul>
+        <li><strong>Admin / Extrato</strong> Nuvem Pago</li>
+        <li><strong>Relatório de vendas</strong> — <a class="link" href="https://drive.google.com/file/d/13Q3CEPNrVBO9tBABvQorF5gi3xfixKZE/view?usp=sharing">referência (Drive)</a></li>
+        <li><strong>Extrato exportável</strong> — template Nuvem Pago (“Extrato exportável”)</li>
+        <li><strong>Estatísticas</strong> — <a class="link" href="https://flordecactoconcept.lojavirtualnuvem.com.br/admin/stats/v2/sales">exemplo admin stats (loja conceito)</a></li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide slide--wide" data-slide="10" tabindex="-1">
+      <div class="slide-inner">
+        <p class="kicker">Parte 6 · Tabela</p>
+        <h2>Dado · Tarefa · Formato · Temos hoje?</h2>
+        <table class="matrix" aria-label="Matriz de dados">
+          <thead>
+            <tr>
+              <th>Dado</th>
+              <th>Tarefa(s)</th>
+              <th>Formato ideal</th>
+              <th>Temos hoje?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Movimentos do dia (entradas, taxas, estornos) + saldo inicial/final</td>
+              <td>Fechamento caixa; Conciliação meio de pagamento</td>
+              <td>Painel + extrato detalhado; CSV; API → ERP</td>
+              <td><span class="tag">Parcial</span> lacunas em vínculo venda→saldo (síntese)</td>
+            </tr>
+            <tr>
+              <td>Vendas do dia (número, sequência, meio)</td>
+              <td>Fechamento; Conciliação</td>
+              <td>Painel; Relatório de vendas</td>
+              <td><span class="tag">Parcial</span></td>
+            </tr>
+            <tr>
+              <td>Saques e transferências (histórico claro)</td>
+              <td>Fechamento; Conciliação</td>
+              <td>Extrato exportável; API</td>
+              <td><span class="tag">Parcial</span> histórico difícil vs banco</td>
+            </tr>
+            <tr>
+              <td>Parcelas com datas e baixa no ERP</td>
+              <td>Conciliação ERP; Projeção de caixa</td>
+              <td>CSV; API Bling/Tiny</td>
+              <td><span class="tag">Parcial</span> integração sem taxas nativas</td>
+            </tr>
+            <tr>
+              <td>Conciliação bancária (OFX vs ERP)</td>
+              <td>Conciliação bancária</td>
+              <td>OFX no banco/ERP (fora do NP)</td>
+              <td><span class="tag">Não</span> no NP (fluxo ERP)</td>
+            </tr>
+            <tr>
+              <td>Taxas por competência vs taxas no caixa</td>
+              <td>DRE; Conciliação de taxas</td>
+              <td>Export mensal + extrato; API</td>
+              <td><span class="tag">Parcial</span></td>
+            </tr>
+            <tr>
+              <td>Descontos (cupom + peça), frete líquido, devoluções por competência</td>
+              <td>DRE</td>
+              <td>CSV enriquecido; API</td>
+              <td><span class="tag">A validar</span></td>
+            </tr>
+            <tr>
+              <td>CMV, comissões de plataforma</td>
+              <td>DRE</td>
+              <td>ERP + export complementar</td>
+              <td><span class="tag">A validar</span></td>
+            </tr>
+            <tr>
+              <td>Recebíveis futuros por dia/mês e por parcela</td>
+              <td>Fechamento/projeção; DFC</td>
+              <td>Relatório granular; API</td>
+              <td><span class="tag">Não</span> lacuna citada na síntese</td>
+            </tr>
+            <tr>
+              <td>Vínculo explícito venda/parcela → saldo ou saque</td>
+              <td>Conciliação</td>
+              <td>Linha de extrato com referência de pedido</td>
+              <td><span class="tag">Não</span> lacuna citada</td>
+            </tr>
+            <tr>
+              <td>% meios, parcelas, bandeiras; taxa aprovação/antifraude</td>
+              <td>Estatísticas</td>
+              <td>Estatísticas admin; export</td>
+              <td><span class="tag">Parcial</span></td>
+            </tr>
+            <tr>
+              <td>Chargeback/estorno (status, valores, motivo) exportável</td>
+              <td>Estatísticas; Conciliação</td>
+              <td>Lista CSV; painel</td>
+              <td><span class="tag">Parcial</span> dor de visibilidade citada</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide" data-slide="11" tabindex="-1">
+      <p class="kicker">Fontes</p>
+      <h2>Referência rápida</h2>
+      <ul>
+        <li>Síntese: <code>Insights-Gestao-financeira-sintese-entrevistas.md</code> (esta pasta).</li>
+        <li>IDs Dovetail (Dados): Ana <code>1q6irf90zrivOAATfVu7tx</code>, Denis <code>anIGioNw4MjsrFzJAGngN</code>, Dayse <code>6rXQo1KwXYz0iuYwzKi8hw</code>, Gabriel <code>7jUMRf6M2U4mq6vek04VAl</code>, Thales <code>1iq4PmBvTXQvvJzA7uqxHB</code>, Maria Laura <code>3Gav10MPA948accI2Kwioy</code>, Mulher Elástica <code>5kwSgJxj5PjYFmS7jjp2Bb</code>.</li>
+      </ul>
+      <div class="card">
+        <p>Para gerar de novo o PowerPoint: na pasta deste arquivo, execute <code>python3 build_pptx.py</code> (requer <code>python-pptx</code>). O arquivo <code>gestao-financeira-q2-2026.pptx</code> precisa estar na mesma pasta do HTML para o botão de download funcionar.</p>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide slide--cover" data-slide="12" tabindex="-1">
+      <p class="kicker">Payments NP</p>
+      <h1><span class="gradient">Obrigado</span></h1>
+      <p class="lead">Dados no contexto da tarefa · Q2-2026</p>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+      var total = slides.length;
+      var idx = 0;
+      var counter = document.getElementById("counter");
+      var progress = document.getElementById("progress");
+
+      function updateUI() {
+        counter.innerHTML = "<strong>" + String(idx + 1).padStart(2, "0") + "</strong> / " + String(total).padStart(2, "0");
+        progress.style.width = ((idx + 1) / total * 100) + "%";
+        slides.forEach(function (s, i) {
+          s.classList.toggle("is-active", i === idx);
+        });
+        slides[idx].focus({ preventScroll: true });
+      }
+
+      function go(delta) {
+        idx = Math.max(0, Math.min(total - 1, idx + delta));
+        updateUI();
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+          e.preventDefault();
+          go(1);
+        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault();
+          go(-1);
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          idx = 0;
+          updateUI();
+        } else if (e.key === "End") {
+          e.preventDefault();
+          idx = total - 1;
+          updateUI();
+        }
+      });
+
+      updateUI();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+---
+description: Pesquisa exaustiva no Dovetail por tema — usar MCP Dovetail, paginação e aprofundamento por ID.
+alwaysApply: false
+---
+
+# Pesquisa de tema no Dovetail
+
+Quando o utilizador pedir tudo o que existe no Dovetail sobre um **tema**, **tópico**, **produto** ou **pergunta de investigação**:
+
+## Antes de buscar
+
+- Se o tema for vago, pedir em uma frase: termo principal, sinónimos e variantes (PT/EN), nomes de produto/feature.
+- Planear **2–4 variações de `query`** para `search_workspace` (a busca é textual).
+
+## Busca global (obrigatório)
+
+1. Chamar **`search_workspace`** do servidor Dovetail MCP com:
+   - `query`: texto do tema (ou variação).
+   - `limit`: **100** (máximo permitido).
+   - `offset`: **0**, depois **100**, **200**, … até a última página.
+2. **Não filtrar tipos** por defeito (omitir `types`) para incluir: `CHANNEL`, `HIGHLIGHT`, `INSIGHT`, `NOTE`, `TAG`, `THEME`.
+3. **Parar** quando uma página devolver **0 resultados** ou **menos de 100** itens (última página).
+4. Repetir para **cada variação de query** relevante e **fundir** resultados no relatório (deduplicar por ID quando existir).
+
+## Aprofundar
+
+- Para trechos ou metadados insuficientes, usar **`get_data_content`**, **`get_insight_content`**, **`get_project_insight`** ou **`get_project_data`** conforme os IDs/tipos devolvidos pela busca.
+- Se o utilizador limitar a **um projeto**, usar também **`list_project_data`** e **`list_project_insights`** com paginação (`start_cursor` / `next_cursor`) além de `search_workspace`.
+
+## Entrega
+
+- Resumo por **tipo de conteúdo** e, se disponível, **projeto**.
+- **Citações** ou excertos relevantes; referências a itens do Dovetail tal como vêm na API (títulos, IDs, links se existirem).
+- Nota sobre **lacunas** (ex.: só houve N resultados; sugerir mais keywords).
+
+## Ferramentas MCP
+
+- `search_workspace`, `get_dovetail_projects`, `list_project_data`, `get_data_content`, `list_project_insights`, `get_insight_content`, `get_project_data`, `get_project_insight`, `get_project_highlights` — usar só as necessárias ao fluxo acima.

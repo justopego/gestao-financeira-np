@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glossário</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #000B19;
+      --bg-glass: rgba(255, 255, 255, 0.04);
+      --border-glass: rgba(255, 255, 255, 0.08);
+      --blue-300: #60A5FA;
+      --blue-400: #3B82F6;
+      --blue-500: #0050C3;
+      --gradient: linear-gradient(135deg, #60A5FA, #3B82F6, #0050C3);
+      --text-1: #FFFFFF;
+      --text-2: #8FA8C8;
+      --text-3: #6B83A8;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text-1);
+      min-height: 100%;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0, 80, 195, 0.18), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 80% 20%, rgba(0, 41, 143, 0.14), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(4, 23, 115, 0.12), transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 0 1rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to bottom, rgba(0, 11, 25, 0.95) 60%, transparent);
+      flex-wrap: wrap;
+    }
+    .nav-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .top-bar a {
+      font-size: 0.75rem;
+      color: var(--blue-300);
+      text-decoration: none;
+      border: 1px solid var(--border-glass);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: var(--bg-glass);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .top-bar a:hover, .top-bar a:focus {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(96, 165, 250, 0.35);
+      outline: none;
+    }
+    .top-bar a[aria-current="page"] {
+      border-color: rgba(96, 165, 250, 0.5);
+      background: rgba(0, 80, 195, 0.22);
+    }
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+    .kicker {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2.35rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    h1 .gradient {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 32px;
+    }
+    .lead {
+      font-size: 0.95rem;
+      color: var(--text-2);
+      line-height: 1.55;
+      max-width: 42rem;
+      margin-bottom: 0.5rem;
+    }
+    .src {
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      margin: 0.35rem 0;
+      line-height: 1.45;
+    }
+    .src code {
+      font-size: 0.78em;
+      word-break: break-all;
+    }
+    main section.block {
+      margin-top: 1.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-glass);
+    }
+    main > section.block:first-of-type {
+      border-top: none;
+      padding-top: 0.35rem;
+      margin-top: 1rem;
+    }
+    body.page-glossary header h1 {
+      margin-bottom: 1.5rem;
+    }
+    body.page-glossary main > section.block:first-of-type {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 3rem;
+    }
+    .correlation-block > h2 {
+      margin-bottom: 4.25rem;
+    }
+    .correlation-block h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-1);
+      margin: 1.35rem 0 0.65rem;
+      letter-spacing: -0.02em;
+    }
+    .correlation-block h3:first-of-type { margin-top: 0; }
+    .correlation-block h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--blue-300);
+      margin: 1rem 0 0.4rem;
+    }
+    .correlation-block p.corr-body {
+      color: var(--text-2);
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0 0 0.75rem;
+      max-width: 48rem;
+    }
+    .correlation-block ul.corr-list {
+      margin: 0 0 1rem;
+      padding-left: 1.2rem;
+      color: var(--text-2);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      max-width: 48rem;
+    }
+    .correlation-block ul.corr-list li { margin: 0.4rem 0; }
+    .correlation-block .corr-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+      gap: 0.85rem;
+      margin: 0 0 1rem;
+      padding: 0;
+      list-style: none;
+      max-width: none;
+    }
+    .correlation-block a.corr-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      min-height: 7rem;
+      padding: 1rem 1.15rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      border-left: 3px solid var(--blue-500);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s, border-color 0.2s var(--ease);
+    }
+    .correlation-block a.corr-card:hover,
+    .correlation-block a.corr-card:focus {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(96, 165, 250, 0.38);
+      outline: none;
+    }
+    .correlation-block a.corr-card--full {
+      grid-column: 1 / -1;
+    }
+    .correlation-block a.corr-card[id] {
+      scroll-margin-top: 5.5rem;
+    }
+    .correlation-block .corr-card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--blue-300);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+    .correlation-block .corr-card-text {
+      font-family: "SF Compact Display", sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text-2);
+      margin: 0;
+    }
+    .correlation-block .corr-card ul.corr-card-bullets {
+      margin: 0.5rem 0 0;
+      padding-left: 1.1rem;
+      color: var(--text-2);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      list-style: disc;
+    }
+    .correlation-block .corr-card ul.corr-card-bullets li { margin: 0.35rem 0; }
+    .correlation-block ol.corr-ol {
+      margin: 0 0 1rem;
+      padding-left: 1.2rem;
+      color: var(--text-2);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      max-width: 48rem;
+    }
+    .correlation-block ol.corr-ol li { margin: 0.45rem 0; }
+    /* Organograma — hierarquia base → meio → topo */
+    .correlation-block .corr-hierarchy {
+      margin: 1rem 0 1.35rem;
+      max-width: 42rem;
+    }
+    .correlation-block .corr-hierarchy__caption {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      margin: 0 0 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .correlation-block .corr-h-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .correlation-block .corr-h-tier {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      gap: 0.65rem;
+      width: 100%;
+    }
+    .correlation-block .corr-h-tier--top {
+      max-width: 22rem;
+    }
+    .correlation-block .corr-h-tier--mid {
+      max-width: 20rem;
+    }
+    .correlation-block .corr-h-tier--base {
+      max-width: 100%;
+    }
+    .correlation-block .corr-h-vline {
+      width: 2px;
+      height: 1.1rem;
+      background: linear-gradient(180deg, var(--blue-500), rgba(0, 80, 195, 0.25));
+      border-radius: 1px;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(0, 80, 195, 0.35);
+    }
+    .correlation-block .corr-h-node {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease);
+      flex: 1 1 auto;
+      min-width: min(100%, 9.5rem);
+      text-align: center;
+    }
+    .correlation-block a.corr-h-node:hover,
+    .correlation-block a.corr-h-node:focus {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(96, 165, 250, 0.4);
+      outline: none;
+      transform: translateY(-1px);
+    }
+    .correlation-block .corr-h-node--top {
+      box-shadow: inset 0 3px 0 0 var(--blue-400);
+      padding-top: 0.85rem;
+    }
+    .correlation-block .corr-h-node--mid {
+      border-left: 3px solid var(--blue-400);
+    }
+    .correlation-block .corr-h-node--base {
+      border-bottom: 3px solid rgba(0, 80, 195, 0.45);
+    }
+    .correlation-block .corr-h-label {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue-300);
+    }
+    .correlation-block .corr-h-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-1);
+      line-height: 1.25;
+    }
+    .correlation-block .corr-h-note {
+      font-size: 0.72rem;
+      line-height: 1.4;
+      color: var(--text-3);
+    }
+    .correlation-block .corr-h-pair {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      width: 100%;
+    }
+    .correlation-block .corr-h-pair .corr-h-node {
+      min-width: min(100%, 8.5rem);
+      flex: 1 1 calc(50% - 0.5rem);
+      max-width: 11rem;
+    }
+    @media (min-width: 36rem) {
+      .correlation-block .corr-h-tier--base .corr-h-node {
+        flex: 1 1 0;
+        min-width: 7.5rem;
+        max-width: 12rem;
+      }
+    }
+    .correlation-block .corr-divider {
+      height: 1px;
+      background: var(--border-glass);
+      margin: 3.75rem 0;
+      max-width: 48rem;
+    }
+    .correlation-block table.corr-table {
+      width: 100%;
+      max-width: 48rem;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 0.75rem;
+    }
+    .correlation-block table.corr-table th,
+    .correlation-block table.corr-table td {
+      border: 1px solid var(--border-glass);
+      padding: 0.55rem 0.65rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .correlation-block table.corr-table th {
+      background: rgba(255,255,255,0.05);
+      color: var(--text-1);
+      font-weight: 600;
+    }
+    .correlation-block table.corr-table td { color: var(--text-2); }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    main h2 {
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+      color: var(--text-1);
+    }
+    main h2 .num {
+      color: var(--blue-400);
+      font-weight: 700;
+      margin-right: 0.35rem;
+    }
+    ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      color: var(--text-2);
+      max-width: 48rem;
+    }
+    li { margin: 0.45rem 0; line-height: 1.55; font-family: "SF Compact Display", sans-serif; }
+    .task-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(10.75rem, 1fr));
+      gap: 0.85rem;
+      margin: 0.35rem 0 0;
+      padding: 0;
+      max-width: none;
+    }
+    a.task-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 4.25rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      border-left: 3px solid var(--blue-500);
+      text-decoration: none;
+      color: var(--text-1);
+      font-weight: 600;
+      font-size: 0.88rem;
+      line-height: 1.35;
+      text-align: center;
+      transition: background 0.2s, border-color 0.2s var(--ease);
+    }
+    a.task-card:hover, a.task-card:focus {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(96, 165, 250, 0.38);
+      outline: none;
+    }
+    a.task-card .task-card-label {
+      letter-spacing: -0.02em;
+    }
+    a.task-card .task-card-label.acronym {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .card {
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      border-left: 3px solid var(--blue-500);
+    }
+    .card p { color: var(--text-2); font-size: 0.9rem; line-height: 1.55; }
+    .source-dovetail .src a {
+      color: var(--blue-300);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+    .source-dovetail .src a:hover, .source-dovetail .src a:focus {
+      color: var(--blue-400);
+      outline: none;
+    }
+    .source-dovetail .src + .src { margin-top: 0.5rem; }
+    code {
+      font-family: ui-monospace, monospace;
+      font-size: 0.82em;
+      background: rgba(255,255,255,0.06);
+      padding: 0.12em 0.4em;
+      border-radius: 6px;
+      color: var(--blue-300);
+    }
+    .progress-foot {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--blue-500), var(--blue-300));
+      opacity: 0.85;
+      z-index: 100;
+      pointer-events: none;
+      box-shadow: 0 0 12px rgba(0, 80, 195, 0.45);
+    }
+    .index-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.25rem 0 0;
+      max-width: none;
+    }
+    .index-list li {
+      margin: 0;
+      border-bottom: 1px solid var(--border-glass);
+    }
+    .index-list a {
+      display: block;
+      padding: 0.85rem 0;
+      color: var(--text-1);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s, padding-left 0.2s var(--ease);
+    }
+    .index-list a:hover {
+      color: var(--blue-300);
+      padding-left: 0.35rem;
+    }
+    .index-list li span.sub {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--text-3);
+      margin-top: 0.2rem;
+    }
+  </style>
+
+</head>
+<body class="page-glossary">
+  <div class="progress-foot" aria-hidden="true"></div>
+  <div class="wrap">
+    <header>
+      <div class="top-bar">
+        <div class="nav-group">
+          <a href="index.html">← Índice</a>
+        </div>
+        <a href="glossario.html" aria-current="page">Glossário</a>
+      </div>
+      <p class="kicker">Gestão financeira</p>
+      <h1><span class="gradient">Glossário</span></h1>
+    </header>
+    <main>
+      <section class="block correlation-block">
+        <h2>Correlação entre as tarefas</h2>
+
+        <h3>1. O nível operacional (as subtarefas de verificação)</h3>
+        <p class="corr-body">Este é o &quot;chão de fábrica&quot;. Essas atividades servem para garantir que a informação é real.</p>
+        <div class="corr-cards" role="list">
+          <a id="fechamento-de-caixa" class="corr-card" role="listitem" href="glossario.html#fechamento-de-caixa">
+            <span class="corr-card-title">Fechamento de caixa</span>
+            <span class="corr-card-text">O fechamento de caixa é a conferência diária de que as vendas feitas no site possuem um pagamento correspondente.</span>
+          </a>
+          <a id="conciliacao-financeira" class="corr-card" role="listitem" href="glossario.html#conciliacao-financeira">
+            <span class="corr-card-title">Conciliação financeira</span>
+            <span class="corr-card-text">É a subtarefa vital do e-commerce. Ela cruza o que o site vendeu vs. o que o meio de pagamento/marketplace diz que vai pagar. Ela identifica se a taxa do cartão foi cobrada a mais ou se um chargeback ocorreu.</span>
+          </a>
+          <a id="conciliacao-bancaria" class="corr-card" role="listitem" href="glossario.html#conciliacao-bancaria">
+            <span class="corr-card-title">Conciliação bancária</span>
+            <span class="corr-card-text">Confronta o que está no seu sistema financeiro com o seu extrato do banco. Serve para garantir que o dinheiro que o meio de pagamento disse que depositou realmente caiu na sua conta corrente.</span>
+          </a>
+        </div>
+        <div class="corr-divider" aria-hidden="true"></div>
+
+        <h3>2. O nível de registro (fluxo de caixa)</h3>
+        <p class="corr-body">Aqui é onde o dia a dia é consolidado.</p>
+        <div class="corr-cards" role="list">
+          <a id="fluxo-de-caixa" class="corr-card corr-card--full" role="listitem" href="glossario.html#fluxo-de-caixa">
+            <span class="corr-card-title">Fluxo de caixa</span>
+            <span class="corr-card-text">É o registro cronológico de todas as entradas e saídas. Ele bebe diretamente das conciliações.</span>
+            <ul class="corr-card-bullets">
+              <li><strong>Relação:</strong> Sem conciliação bancária, seu saldo de fluxo de caixa nunca bate com o banco.</li>
+            </ul>
+          </a>
+        </div>
+        <div class="corr-divider" aria-hidden="true"></div>
+
+        <h3>3. O nível estratégico (demonstrativos)</h3>
+        <p class="corr-body">Aqui é onde você analisa se o negócio está saudável ou se vai quebrar nos próximos meses.</p>
+        <div class="corr-cards" role="list">
+          <a id="dre" class="corr-card corr-card--full" role="listitem" href="glossario.html#dre">
+            <span class="corr-card-title">DRE (Demonstração do Resultado do Exercício)</span>
+            <ul class="corr-card-bullets">
+              <li><strong>Foco:</strong> Lucro ou prejuízo (regime de competência).</li>
+              <li><strong>O que diz:</strong> &quot;Minha operação é economicamente viável?&quot;. Ela registra a venda no momento em que ela acontece. Se você vendeu R$ 1.000,00 hoje em 10x, a DRE mostra R$ 1.000,00 hoje.</li>
+            </ul>
+          </a>
+          <a id="dfc" class="corr-card corr-card--full" role="listitem" href="glossario.html#dfc">
+            <span class="corr-card-title">DFC (Demonstração dos Fluxos de Caixa)</span>
+            <ul class="corr-card-bullets">
+              <li><strong>Foco:</strong> Dinheiro no bolso (regime de caixa).</li>
+              <li><strong>O que diz:</strong> &quot;Para onde foi o meu dinheiro?&quot;. Diferente do fluxo de caixa comum, a DFC organiza as movimentações em 3 grupos: operacional (vendas), investimento (compra de computadores/prateleiras) e financiamento (empréstimos/aportes).</li>
+              <li><strong>Relação com DRE:</strong> A DFC &quot;corrige&quot; a DRE. Enquanto a DRE diz que você lucrou R$ 10.000,00, a DFC pode mostrar que seu caixa diminuiu porque esse lucro ainda está parcelado no cartão de crédito dos clientes.</li>
+            </ul>
+          </a>
+          <a id="conciliacao-contabil" class="corr-card corr-card--full" role="listitem" href="glossario.html#conciliacao-contabil">
+            <span class="corr-card-title">Conciliação contábil</span>
+            <ul class="corr-card-bullets">
+              <li><strong>Função:</strong> É o &quot;juiz final&quot;. Ela cruza os dados do financeiro com as notas fiscais, impostos e estoque. Ela garante que a DRE e o balanço patrimonial que o contador assina são juridicamente perfeitos.</li>
+            </ul>
+          </a>
+        </div>
+        <div class="corr-divider" aria-hidden="true"></div>
+
+        <h3>Resumo: hierarquia e dependência</h3>
+
+        <figure class="corr-hierarchy">
+          <p class="corr-hierarchy__caption">Organograma · dependência entre níveis</p>
+          <div class="corr-h-stack">
+            <div class="corr-h-tier corr-h-tier--top" role="group" aria-label="Nível topo — relatórios">
+              <div class="corr-h-pair">
+                <a class="corr-h-node corr-h-node--top" href="glossario.html#dre">
+                  <span class="corr-h-label">Topo</span>
+                  <span class="corr-h-title">DRE</span>
+                  <span class="corr-h-note">Resultado (competência)</span>
+                </a>
+                <a class="corr-h-node corr-h-node--top" href="glossario.html#dfc">
+                  <span class="corr-h-label">Topo</span>
+                  <span class="corr-h-title">DFC</span>
+                  <span class="corr-h-note">Fluxos formais (caixa)</span>
+                </a>
+              </div>
+            </div>
+            <div class="corr-h-vline" aria-hidden="true"></div>
+            <div class="corr-h-tier corr-h-tier--mid" role="group" aria-label="Nível meio — processo">
+              <a class="corr-h-node corr-h-node--mid" href="glossario.html#fluxo-de-caixa">
+                <span class="corr-h-label">Meio</span>
+                <span class="corr-h-title">Fluxo de caixa</span>
+                <span class="corr-h-note">Organiza os dados validados na base</span>
+              </a>
+            </div>
+            <div class="corr-h-vline" aria-hidden="true"></div>
+            <div class="corr-h-tier corr-h-tier--base" role="group" aria-label="Nível base — subtarefas">
+              <a class="corr-h-node corr-h-node--base" href="glossario.html#fechamento-de-caixa">
+                <span class="corr-h-label">Base</span>
+                <span class="corr-h-title">Fechamento de caixa</span>
+                <span class="corr-h-note">Venda ↔ pagamento</span>
+              </a>
+              <a class="corr-h-node corr-h-node--base" href="glossario.html#conciliacao-financeira">
+                <span class="corr-h-label">Base</span>
+                <span class="corr-h-title">Conciliação financeira</span>
+                <span class="corr-h-note">Site vs meio de pagamento</span>
+              </a>
+              <a class="corr-h-node corr-h-node--base" href="glossario.html#conciliacao-bancaria">
+                <span class="corr-h-label">Base</span>
+                <span class="corr-h-title">Conciliação bancária</span>
+                <span class="corr-h-note">Sistema vs banco</span>
+              </a>
+            </div>
+          </div>
+          <figcaption class="sr-only">
+            Do topo à base: DRE e DFC dependem do fluxo de caixa; o fluxo de caixa depende do fechamento de caixa, da conciliação financeira e da conciliação bancária.
+          </figcaption>
+        </figure>
+
+        <ol class="corr-ol">
+          <li>Base (subtarefas): fechamento de caixa + conciliação bancária + conciliação financeira. (Se falhar aqui, o resto desmorona.)</li>
+          <li>Meio (processo): fluxo de caixa. (Organiza os dados validados pela base.)</li>
+          <li>Topo (relatórios): DRE e DFC. (Usam os dados do meio para te dizer se você está rico ou se precisa de um empréstimo.)</li>
+        </ol>
+
+        <h3>Tabela de diferenças rápidas</h3>
+        <table class="corr-table">
+          <thead>
+            <tr>
+              <th>Atividade</th>
+              <th>O que responde?</th>
+              <th>Foco principal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Fechamento de caixa</td>
+              <td>O pedido foi pago?</td>
+              <td>Pedido individual</td>
+            </tr>
+            <tr>
+              <td>Conciliação financeira</td>
+              <td>O meio de pagamento me pagou certo?</td>
+              <td>Taxas e antecipações</td>
+            </tr>
+            <tr>
+              <td>Conciliação bancária</td>
+              <td>O saldo do banco bate?</td>
+              <td>Saldo bancário</td>
+            </tr>
+            <tr>
+              <td>DRE</td>
+              <td>Tive lucro ou prejuízo?</td>
+              <td>Competência (venda)</td>
+            </tr>
+            <tr>
+              <td>DFC</td>
+              <td>O que fez o saldo inicial se transformar no saldo final?</td>
+              <td>Caixa (dinheiro real)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

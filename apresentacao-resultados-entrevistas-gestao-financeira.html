@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resultados — Pesquisa gestão financeira &amp; resumo (Nuvem Pago)</title>
+  <style>
+    :root {
+      --bg: #f6f4f1;
+      --ink: #1a1a1a;
+      --muted: #4a4a4a;
+      --accent: #0d5c4a;
+      --accent-soft: #e8f2ef;
+      --border: #d4cfc6;
+      --slide-max: 52rem;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    header.hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 1.5rem 4rem;
+      border-bottom: 3px solid var(--accent);
+      background: linear-gradient(165deg, #fff 0%, var(--accent-soft) 100%);
+    }
+    .hero-inner { max-width: var(--slide-max); margin: 0 auto; width: 100%; }
+    h1 {
+      font-size: clamp(1.75rem, 4vw, 2.35rem);
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
+    nav.toc {
+      max-width: var(--slide-max);
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    nav.toc h2 { font-size: 1.1rem; margin-top: 0; color: var(--accent); }
+    nav.toc ul { padding-left: 1.25rem; margin: 0; }
+    nav.toc li { margin: 0.35rem 0; }
+    nav.toc a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    section.slide {
+      max-width: var(--slide-max);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+    }
+    section.slide:nth-child(even) { background: #faf9f7; }
+    h2.slide-title {
+      font-size: 1.35rem;
+      margin: 0 0 1rem;
+      color: var(--accent);
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent-soft);
+    }
+    h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--ink); }
+    p { margin: 0.65rem 0; }
+    ul { margin: 0.5rem 0 1rem; padding-left: 1.35rem; }
+    li { margin: 0.35rem 0; }
+    .tag {
+      display: inline-block;
+      font-family: system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-right: 0.35rem;
+    }
+    .synthesis {
+      font-family: system-ui, sans-serif;
+      font-size: 0.9rem;
+      background: #fff8e8;
+      border-left: 4px solid #c9a227;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+    .confidence {
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+      margin-top: 1rem;
+      padding: 0.6rem 0.85rem;
+      background: var(--accent-soft);
+      border-radius: 6px;
+    }
+    blockquote.evidence {
+      margin: 1rem 0;
+      padding: 0.85rem 1rem 0.85rem 1.1rem;
+      border-left: 4px solid var(--border);
+      background: #f0eeea;
+      font-style: italic;
+    }
+    blockquote.evidence footer {
+      margin-top: 0.5rem;
+      font-style: normal;
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-family: system-ui, sans-serif;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin: 1rem 0;
+      font-family: system-ui, sans-serif;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.55rem 0.65rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+    .small { font-size: 0.88rem; color: var(--muted); }
+    @media print {
+      body { background: #fff; }
+      section.slide { break-inside: avoid; page-break-inside: avoid; }
+      nav.toc { break-after: page; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero" id="capa">
+    <div class="hero-inner">
+      <h1>Pesquisa qualitativa — Gestão financeira &amp; dados para resumo financeiro (Nuvem Pago)</h1>
+      <p class="meta">Síntese para stakeholders · Documento: plano de pesquisa (mar. 2026) + 7 entrevistas em profundidade · Análise em português (PT-BR)</p>
+      <p class="small">Participantes anonimizados (P01–P07). Citações derivadas das transcrições; possíveis erros de transcrição automática não foram corrigidos no original.</p>
+    </div>
+  </header>
+
+  <nav class="toc" id="sumario">
+    <h2>Sumário</h2>
+    <ul>
+      <li><a href="#contexto">Contexto, objetivo e perguntas de pesquisa</a></li>
+      <li><a href="#inventario">Inventário de sessões e limitações</a></li>
+      <li><a href="#rp1">RP1 — Fluxo do dinheiro após a venda confirmada</a></li>
+      <li><a href="#rp2">RP2 — Desafios financeiros na jornada</a></li>
+      <li><a href="#rp3">RP3 — Tarefas financeiras, objetivos, frequência e ferramentas</a></li>
+      <li><a href="#rp4">RP4 — Dados por tarefa e consolidados necessários</a></li>
+      <li><a href="#rp5">RP5 — Saldo (dia vs consolidado), formatos e nomenclatura</a></li>
+      <li><a href="#transversais">Insights transversais</a></li>
+      <li><a href="#hipoteses">Premissas do plano — evidência nas transcrições</a></li>
+      <li><a href="#lacunas">Lacunas de evidência</a></li>
+      <li><a href="#recomendacoes">Recomendações (ligadas às RP)</a></li>
+      <li><a href="#sintese">Síntese RP → uma frase</a></li>
+      <li><a href="#proximos">Próximos passos</a></li>
+    </ul>
+  </nav>
+
+  <section class="slide" id="contexto">
+    <h2 class="slide-title">Contexto, objetivo e perguntas de pesquisa</h2>
+    <p><span class="tag">Plano</span> O estudo visa dar base para que lojistas consultem <strong>valores consolidados e saldos</strong> necessários às atividades de gestão financeira, com autonomia (menos dependência de suporte), alinhado ao hub financeiro e evolução do extrato/resumo.</p>
+    <p><strong>Objetivos ao final das entrevistas (plano):</strong> (1) quais dados no resumo financeiro; (2) se o resumo deve ter níveis de consulta; (3) se a consulta é no produto e/ou em relatório.</p>
+    <h3>Perguntas de pesquisa extraídas do plano</h3>
+    <p><strong>Parte 1 — Jornada do dinheiro</strong></p>
+    <ul>
+      <li>Como é o fluxo do dinheiro após a venda estar confirmada?</li>
+      <li>Quais os principais desafios financeiros nessa jornada?</li>
+    </ul>
+    <p><strong>Parte 1 — Tarefas</strong></p>
+    <ul>
+      <li>Além de conciliação, fechamento de caixa, consulta de saldos e transações, há outras atividades recorrentes? Quais?</li>
+      <li>Qual a diferença e o objetivo de cada tarefa? Com que frequência? Que ferramentas usam?</li>
+    </ul>
+    <p><strong>Parte 2 — Dados</strong></p>
+    <ul>
+      <li>Quais dados para cada tipo de tarefa?</li>
+      <li>Além de saldo disponível e futuro, que outros consolidados precisam?</li>
+      <li>Saldo disponível: faz sentido saldo do dia, consolidado do dia, ou ambos?</li>
+      <li>Como consomem os dados — no produto, estatística, CSV?</li>
+      <li>Como nomeiam cada informação?</li>
+    </ul>
+    <p class="small"><strong>Amostra:</strong> 7 transcrições (CSV), perfil upmarket / operações complexas e um caso BPO (terceirização) que ilustra necessidades de relatórios para clientes Nuvem Pago.</p>
+  </section>
+
+  <section class="slide" id="inventario">
+    <h2 class="slide-title">Inventário de sessões e limitações</h2>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Perfil (síntese)</th><th>Notas de contexto</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>P01</td>
+          <td>BPO / financeiro terceirizado (clientes Nuvem Pago)</td>
+          <td>Sessão com forte componente educativo (explica DRE, DFC, conciliação). Útil para <em>o quê</em> precisa ser conciliado, não só rotina interna de uma única loja.</td>
+        </tr>
+        <tr>
+          <td>P02</td>
+          <td>Operações + financeiro (loja Denis)</td>
+          <td>Fluxo pós-aprovado: transferência, apuração de cartão, previsão de recebíveis; fechamento diário comparando entradas, taxas, estornos.</td>
+        </tr>
+        <tr>
+          <td>P03</td>
+          <td>Operações multi-canal (Nayara / Fabrício)</td>
+          <td>Drive/planilhas semanais; multi-ERP; desejo de filtros por meio de pagamento e autonomia para taxas.</td>
+        </tr>
+        <tr>
+          <td>P04</td>
+          <td>Financeiro loja (Flor de cacto)</td>
+          <td>Conferência diária com painel de vendas + regras de antecipação e horários de liquidação; uso explícito de “saldo disponível”.</td>
+        </tr>
+        <tr>
+          <td>P05</td>
+          <td>Gestão + ERP Bling (Gabriel)</td>
+          <td>Transferência para conta operacional; lançamentos manuais de taxas no ERP; uso prévio de Tableau/planilhas até evolução do painel.</td>
+        </tr>
+        <tr>
+          <td>P06</td>
+          <td>Lojista (Márcia)</td>
+          <td>Transcrição muito fragmentada por linha no CSV; mensagens foram reconstruídas por sequência de falas. Citações usadas com essa ressalva.</td>
+        </tr>
+        <tr>
+          <td>P07</td>
+          <td>Negócio (Maria Laura)</td>
+          <td>Menos rotina operacional de conciliação; foco em chargebacks, pedidos de visão por meio de pagamento; financeiro interno baixa relatórios.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="small"><strong>Limitações gerais:</strong> amostra pequena e heterogénea; não generalizar para “todos os lojistas”. Possíveis erros de transcrição (nomes próprios, termos — ex. “Nubank shopping”, “gueto de pagamento”). Uma sessão (P01) tem formato diferente (especialista externo). P06 exige cautela na citação literal.</p>
+  </section>
+
+  <section class="slide" id="rp1">
+    <h2 class="slide-title">RP1 — Fluxo do dinheiro após a venda confirmada</h2>
+    <p><span class="tag">Conclusão</span> Após confirmação, o dinheiro <strong>permanece em trânsito</strong> até liberação (prazos diferenciados para PIX vs cartão); em seguida predomina <strong>transferência para conta operacional</strong> e uso para <strong>pagamentos, caixa e eventual aplicação</strong>, com paralelo de <strong>lançamentos e conciliações</strong> no ERP/planilhas.</p>
+    <ul>
+      <li><strong>Liberação e prazos:</strong> cartão com repasse escalonado; PIX com dinâmica distinta (mencionado na sessão moderada com P02).</li>
+      <li><strong>Contas a receber futuro:</strong> venda gera composição de recebíveis futuros para previsão (P02).</li>
+      <li><strong>Destino do saldo livre:</strong> transferência recorrente para banco de operação (P02, P05); pagamentos e, conforme caixa, aplicação (P02).</li>
+      <li><strong>Paralelo administrativo:</strong> lançamento no ERP na aprovação (P05); ajuste manual de taxas quando o ERP não as importa (P05).</li>
+    </ul>
+    <blockquote class="evidence">
+      “Depois que o dinheiro fica livre e o saldo fica livre… o Iuri já transfere direto para… a nossa conta… e aí é sempre esse padrão… vai direto para a conta bancária.”
+      <footer>— P05 (lojista)</footer>
+    </blockquote>
+    <blockquote class="evidence">
+      “A primeira coisa é a transferência para o nosso banco de operação… A gente apura os recebimentos do cartão. É o resumo de quais operações geraram esse crédito.”
+      <footer>— P02 (lojista / equipa)</footer>
+    </blockquote>
+    <blockquote class="evidence">
+      “Essa venda vai gerar um contas a receber futuro… a gente precisa de um relatório de contas a receber futuro.”
+      <footer>— P02 (lojista / equipa)</footer>
+    </blockquote>
+    <div class="confidence"><strong>Grau de confiança: médio-alto.</strong> Vários participantes descrevem sequências coerentes; P01 reforça o papel da conciliação na DFC sem contradizer o fluxo operacional.</div>
+  </section>
+
+  <section class="slide" id="rp2">
+    <h2 class="slide-title">RP2 — Principais desafios financeiros na jornada</h2>
+    <p><span class="tag">Conclusão</span> Os desafios centrais são <strong>falta de transparência e granularidade</strong> (taxas, estornos, vínculo venda a venda), <strong>dependência de processos manuais</strong> (planilhas, pedidos de relatório), <strong>atraso ou ritmo inadequado de dados</strong> (fim de mês vs necessidade diária), e <strong>multiplicidade de sistemas</strong> (ERP, drive, e-mail, painel).</p>
+    <ul>
+      <li><strong>Manual e retrabalho:</strong> separar PIX/cartão/boleto no Excel; unificar grupo de empresas “no manual” (P03).</li>
+      <li><strong>Autonomia vs fila de suporte:</strong> relatórios não chegam automaticamente; prazos que não fecham com o fechamento interno (P02, P03).</li>
+      <li><strong>Conferência difícil em alto volume:</strong> valores agregados impedem bater pedido a pedido (P04).</li>
+      <li><strong>Chargeback e visibilidade:</strong> perda de gestão na plataforma após migração (P07).</li>
+      <li><strong>Expectativa de paridade com banco:</strong> extrato “como extrato bancário” com tarifas explícitas (P06 — ver ressalva de transcrição).</li>
+    </ul>
+    <blockquote class="evidence">
+      “Hoje é tudo muito manual… se a gente tivesse dentro da plataforma um mecanismo… de PIX, de cartão separado, seria o ideal.”
+      <footer>— P03 (lojista)</footer>
+    </blockquote>
+    <blockquote class="evidence">
+      “Essa conferência dos centavos, da venda por venda, a gente não consegue fazer hoje por conta de informação mesmo… Dos relatórios.”
+      <footer>— P04 (lojista)</footer>
+    </blockquote>
+    <blockquote class="evidence">
+      “Eu criei uma planilha própria porque vocês não tinham nenhum tipo de controle… para você não perder completamente o teu controle… eu tenho que fazer o fluxo na mão.”
+      <footer>— P06 (lojista; transcrição reconstruída)</footer>
+    </blockquote>
+    <div class="confidence"><strong>Grau de confiança: alto.</strong> Padrão repetido em 5+ narrativas independentes (P02–P06).</div>
+  </section>
+
+  <section class="slide" id="rp3">
+    <h2 class="slide-title">RP3 — Tarefas financeiras (além das citadas), diferenças, objetivos, frequência e ferramentas</h2>
+    <p><span class="tag">Conclusão</span> Além de conciliação e consulta de saldos, emergem com frequência: <strong>fechamento de caixa / movimentação diária</strong>, <strong>apuração de recebíveis de cartão</strong>, <strong>previsão de contas a receber</strong>, <strong>conferência de transferências</strong>, <strong>gestão de chargebacks/contestações</strong>, <strong>lançamentos contábeis no ERP</strong> e <strong>análises de mix</strong> (meio de pagamento, parcelas). Frequências citadas: <strong>diária</strong> (vários), <strong>semanal</strong> (deparas, drive), <strong>mensal</strong> ou sob demanda (negócio).</p>
+    <ul>
+      <li><strong>Objetivos distintos:</strong> fechamento de caixa controla o dia; conciliação bancária explica diferença entre vendido e creditado (P06); contas a receber futuro alimenta fluxo de caixa (P02).</li>
+      <li><strong>Ferramentas:</strong> Excel/planilhas (P02, P03, P05, P06); painel Nuvem Pago e relatórios exportados (P04, P05, P07); drive compartilhado (P03); Tableau/planilhas internas no passado (P05).</li>
+    </ul>
+    <blockquote class="evidence">
+      “Eu faço o comparativo do que tá disponível… com o que saiu… taxas, estornos e o meu saldo final… eu faço esse relatório todos os dias.”
+      <footer>— P02 (lojista / equipa)</footer>
+    </blockquote>
+    <blockquote class="evidence">
+      “Não, é só o fechamento de caixa… se você deixar para fazer… semanal… você fica maluco com a quantidade de dados.”
+      <footer>— P06 (lojista)</footer>
+    </blockquote>
+    <blockquote class="evidence">
+      “O time do financeiro acaba fazendo mais as conciliações… eu olho mais para a parte de negócio… o que eu recebo com mais frequência é… chargeback.”
+      <footer>— P07 (negócio)</footer>
+    </blockquote>
+    <div class="confidence"><strong>Grau de confiança: médio-alto.</strong> Cobertura boa; P07 mostra divisão de papéis (menos detalhe operacional na própria entrevista).</div>
+  </section>
+
+  <section class="slide" id="rp4">
+    <h2 class="slide-title">RP4 — Dados utilizados por tarefa e consolidados além de saldo disponível/futuro</h2>
+    <p><span class="tag">Conclusão</span> Para operar, lojistas e BPOs pedem <strong>entradas e saídas discriminadas</strong> (vendas por dia, taxas, estornos, contestações, transferências), <strong>vínculo com pedidos</strong>, <strong>escalonamento de recebíveis</strong> e, no caso BPO, coerência com <strong>ERP importado da loja</strong>. Consolidados desejados incluem <strong>totais por meio de pagamento e parcela</strong>, <strong>percentuais/ticket</strong> para gestão comercial (P07) e <strong>composição do saldo disponível</strong>.</p>
+    <ul>
+      <li><strong>Conciliação / DFC (P01):</strong> comparar registros com extrato/OFX; validar repasses e taxas acordadas.</li>
+      <li><strong>Fechamento diário (P02, P04):</strong> entradas, taxas, estornos, saldo final, transferências; às vezes valor bruto de vendas para compor com líquido (P02).</li>
+      <li><strong>Multi-ERP (P03):</strong> necessidade de separar e depois unificar dados por canal.</li>
+      <li><strong>Negócio (P07):</strong> “faturamento por meio de pagamento”, % PIX/cartão/parcelas — obtido via terceiros internos.</li>
+    </ul>
+    <blockquote class="evidence">
+      “Verificar recebimentos não identificados… o principal… é para verificar se as tarifas e as taxas bancárias são cobradas incorretamente.”
+      <footer>— P01 (BPO)</footer>
+    </blockquote>
+    <blockquote class="evidence">
+      “Patramento por meio de pagamento… quantos por cento usaram PIX… cartão… de cada parcelamento.”
+      <footer>— P07 (negócio; transcrição fonética possível)</footer>
+    </blockquote>
+    <blockquote class="evidence">
+      “Todo mês a gente identifica cobranças indebidas de taxas… a gente ter autonomia… Dentro do próprio sistema.”
+      <footer>— P03 (lojista)</footer>
+    </blockquote>
+    <div class="confidence"><strong>Grau de confiança: alto.</strong> Consistência entre perfis operacionais; P01 adiciona camada contábil.</div>
+  </section>
+
+  <section class="slide" id="rp5">
+    <h2 class="slide-title">RP5 — Saldo do dia vs consolidado, formatos de consumo e nomenclatura</h2>
+    <p><span class="tag">Conclusão</span> Na prática descrita, <strong>saldo disponível</strong> é usado como âncora diária, mas precisa <strong>fechar com a soma das movimentações e vendas</strong> que o lojista espera — em vários casos <strong>dois níveis</strong> (detalhe por transação + saldo) são necessários. <strong>Consumo misto:</strong> painel no produto para operação rápida; <strong>exportação/relatório</strong> para conciliação e ERP; desejo de <strong>visão estatística</strong> para mix (P03, P07). Nomenclatura ouvida: <em>saldo disponível</em>, <em>fluxo de pagamento</em>, <em>extrato</em>, <em>relatório de vendas</em>, <em>contas a receber futuro</em>.</p>
+    <ul>
+      <li><strong>Dia vs consolidado:</strong> P04 usa transferência diária para “casar” entradas com saldo; P02 idealiza fechamento diário mas adapta a envios por Excel em blocos semanais.</li>
+      <li><strong>CSV / produto:</strong> exportações e relatórios solicitados ao time aparecem como gargalo (P02); drive semanal (P03).</li>
+    </ul>
+    <blockquote class="evidence">
+      “Eu tenho lá um saldo… esse saldo disponível… O saldo… precisa ser essas vendas.”
+      <footer>— P04 (lojista)</footer>
+    </blockquote>
+    <blockquote class="evidence">
+      “O ideal é que esse processo seja diário… Por conta dessa forma de envio de vocês por Excel… não dá para ser.”
+      <footer>— P02 (lojista / equipa)</footer>
+    </blockquote>
+    <blockquote class="evidence">
+      “Essa parte de parcelamento… quanto eu vendo no cartão… no Pix… pode ser estatístico.”
+      <footer>— P03 (lojista)</footer>
+    </blockquote>
+    <div class="confidence"><strong>Grau de confiança: médio.</strong> Poucos participantes discutem explicitamente “níveis de consulta” do resumo; inferência baseada em uso real (detalhe + saldo).</div>
+  </section>
+
+  <section class="slide" id="transversais">
+    <h2 class="slide-title">Insights transversais</h2>
+    <div class="synthesis"><strong>Síntese do research:</strong> A “jornada do dinheiro” no produto não termina no saldo disponível: o que determina esforço é <strong>explicabilidade</strong> (por venda, por taxa, por prazo) e <strong>sincronização no tempo</strong> com rotinas diárias e com ERPs externos.</div>
+    <ul>
+      <li><strong>Paridade com banco tradicional</strong> como referência mental para confiança (P04, P06).</li>
+      <li><strong>Taxas e estornos</strong> como vetor de risco financeiro e de confiança no produto (P01, P03, P05).</li>
+      <li><strong>Papel do suporte</strong> ainda estrutural para dados que deveriam ser self-service (vários).</li>
+    </ul>
+  </section>
+
+  <section class="slide" id="hipoteses">
+    <h2 class="slide-title">Premissas do plano — evidência nas transcrições</h2>
+    <p class="small">O plano não lista hipóteses numeradas; abaixo, premissas implícitas no texto do documento.</p>
+    <table>
+      <thead>
+        <tr><th>Premissa (plano)</th><th>Avaliação</th><th>Nota</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Extrato/resumo habilita autonomia e validação de saldos</td>
+          <td>Apoio forte</td>
+          <td>Pedidos explícitos de autonomia, transparência tipo extrato bancário, e uso diário de saldo (P03, P04, P06).</td>
+        </tr>
+        <tr>
+          <td>Hoje há dependência de suporte / processos externos para dados</td>
+          <td>Apoio forte</td>
+          <td>Solicitações por e-mail, drive, atrasos, planilhas paralelas (P02, P03, P05).</td>
+        </tr>
+        <tr>
+          <td>Upmarket tem rotinas financeiras mais complexas</td>
+          <td>Apoio moderado</td>
+          <td>Multi-ERP, grupos de empresas, BPO (P01, P03); amostra pequena.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="slide" id="lacunas">
+    <h2 class="slide-title">Lacunas de evidência</h2>
+    <ul>
+      <li><strong>Níveis hierárquicos do resumo</strong> (ex. resumo executivo vs operacional) pouco discutados de forma explícita.</li>
+      <li><strong>Priorização entre produto vs CSV</strong> varia por tarefa; falta matriz fechada “tarefa × formato ideal” com todos os participantes.</li>
+      <li><strong>P01 (BPO)</strong> não substitui profundidade de rotina interna de loja; complementa visão contábil.</li>
+      <li><strong>P07</strong> cobre mais chargeback e visão de negócio do que conciliação detalhada.</li>
+    </ul>
+  </section>
+
+  <section class="slide" id="recomendacoes">
+    <h2 class="slide-title">Recomendações (ligadas às RP)</h2>
+    <ul>
+      <li><strong>RP4–RP5:</strong> Priorizar dados que destrincham <strong>saldo disponível</strong> (movimentações que o compõem) e exportação alinhada a <strong>fechamento diário</strong>.</li>
+      <li><strong>RP2:</strong> Reduzir dependência de filas: relatórios agendáveis ou self-service para fluxo de pagamento e recebíveis futuros.</li>
+      <li><strong>RP3:</strong> Mapear tarefas por persona (operacional vs dono de negócio) — chargeback e mix de pagamento como módulos distintos (P07).</li>
+      <li><strong>RP1:</strong> Comunicar claramente prazos e cortes (horário, fim de semana) no produto para alinhar expectativa (P04).</li>
+      <li><strong>Integrações (transversal):</strong> Investigar envio de taxas ao ERP como alavanca de redução de trabalho manual (P05).</li>
+    </ul>
+  </section>
+
+  <section class="slide" id="sintese">
+    <h2 class="slide-title">Síntese — Pergunta de pesquisa → conclusão em uma frase</h2>
+    <table>
+      <thead>
+        <tr><th>Tema (plano)</th><th>Conclusão em uma frase</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fluxo após venda confirmada</td>
+          <td>Após aprovação, o dinheiro segue prazos de liberação, transfere-se para conta operacional e alimenta pagamentos e controles paralelos no ERP/planilha.</td>
+        </tr>
+        <tr>
+          <td>Desafios na jornada</td>
+          <td>O gargalo é a falta de granularidade e ritmo dos dados, gerando trabalho manual e dependência de terceiros.</td>
+        </tr>
+        <tr>
+          <td>Outras tarefas e ferramentas</td>
+          <td>Há um conjunto amplo (fechamento diário, recebíveis futuros, chargebacks, lançamentos) centrado em Excel/painel e exportações.</td>
+        </tr>
+        <tr>
+          <td>Dados por tarefa / consolidados</td>
+          <td>Precisam de entradas, saídas, taxas, estornos e vínculo com vendas, além de saldos e projeções de recebimento.</td>
+        </tr>
+        <tr>
+          <td>Saldo, formatos, nomes</td>
+          <td>“Saldo disponível” é âncora, mas precisa de detalhe compatível; consumo misto painel + relatório/CSV; vocabulário já inclui extrato e fluxo de pagamento.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="slide" id="proximos">
+    <h2 class="slide-title">Próximos passos sugeridos</h2>
+    <ul>
+      <li>Validar com design de produto uma <strong>matriz tarefa × dado mínimo × formato</strong> com base nestas entrevistas.</li>
+      <li>Completar lacunas com <strong>1–2 sessões</strong> focadas só em “níveis de resumo” e preferência exportação.</li>
+      <li>Revisar P06 com transcrição reprocessada (menos fragmentação) para fortalecer citações.</li>
+    </ul>
+    <p class="small">Documento gerado para apoio à decisão; não substitui gravações nem análise jurídica/contábil.</p>
+  </section>
+
+</body>
+</html>

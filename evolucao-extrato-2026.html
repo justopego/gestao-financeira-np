@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Evolução — Resumo financeiro (Extrato 2026)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-radial-inner: #051e41;
+      --bg-radial-mid: #070f2d;
+      --bg-radial-outer: #090019;
+      --primary-interactive: #0059d5;
+      --accent-blue: #60a5fa;
+      --text-card-muted: #6b83a8;
+      --header-pill-bg: rgba(0, 89, 213, 0.2);
+      --white: #fff;
+      --pain-header-bg: rgba(116, 0, 2, 0.2);
+      --pain-title: #f77a7c;
+      --pain-card-bg: rgba(107, 131, 168, 0.1);
+      --body-muted: #8aa2c6;
+      --segment-bg: rgba(246, 246, 246, 0.1);
+      --num-watermark: rgba(107, 131, 168, 0.2);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--white);
+      background: radial-gradient(
+        ellipse 120% 100% at 50% 50%,
+        var(--bg-radial-inner) 0%,
+        var(--bg-radial-mid) 50%,
+        var(--bg-radial-outer) 100%
+      );
+      background-attachment: fixed;
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px 96px;
+    }
+
+    @media (min-width: 1100px) {
+      .page { padding-left: 96px; padding-right: 96px; }
+    }
+
+    /* Header — Figma 20589:4062 */
+    .app-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      padding: 32px 0;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    @media (min-width: 1100px) {
+      .app-header { padding-left: 96px; padding-right: 96px; }
+    }
+
+    .header-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 31px;
+      padding: 8px;
+      background: var(--header-pill-bg);
+      border: 1px solid var(--primary-interactive);
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--accent-blue);
+      text-decoration: none;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .header-pill:hover {
+      background: rgba(0, 89, 213, 0.28);
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    /* Main — Figma 20589:4063: gap 56px, pt 56px */
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      padding-top: 56px;
+    }
+
+    .title-hero {
+      font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+      font-weight: 700;
+      font-size: 56px;
+      line-height: 1.4;
+      margin: 0;
+      max-width: 849px;
+      background: linear-gradient(
+        174.75deg,
+        rgb(96, 165, 250) 0%,
+        rgb(59, 130, 246) 50%,
+        rgb(0, 80, 195) 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    @media (max-width: 640px) {
+      .title-hero { font-size: clamp(2rem, 12vw, 56px); }
+    }
+
+    /* Secção dores — Figma 20591:4468 / 20589:4113 gap 24px */
+    .evolucao-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+    }
+
+    .evolucao-section__title-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 24px;
+    }
+
+    /* Secção seguinte — Figma 20594:16353 pt 72px */
+    .evolucao-section--follow .evolucao-section__title-wrap {
+      padding-top: 72px;
+    }
+
+    .evolucao-section__title {
+      margin: 0;
+      width: 100%;
+      max-width: 1081px;
+      font-family: "Inter", system-ui, sans-serif;
+      font-weight: 600;
+      font-size: 32px;
+      line-height: normal;
+      color: var(--white);
+    }
+
+    /* Segmented — Figma 20591:4474–4485 (gap 4px, pill só no selecionado) */
+    .evolucao-segmented {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px;
+      background: var(--segment-bg);
+      border-radius: 8px;
+      width: 100%;
+      padding: 0;
+    }
+
+    .evolucao-segmented button {
+      font-family: "Geist", "Inter", system-ui, sans-serif;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      background: transparent;
+      color: var(--white);
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .evolucao-segmented button[aria-selected="true"] {
+      background: var(--pain-header-bg);
+      border: 2px solid var(--pain-title);
+      color: var(--pain-title);
+      font-size: 20px;
+      line-height: 24px;
+      font-weight: 600;
+    }
+
+    .evolucao-segmented button:focus-visible {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 2px;
+    }
+
+    .evolucao-panels {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .evolucao-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .evolucao-panel[hidden] {
+      display: none !important;
+    }
+
+    /* Card — Figma: fundo + linha flex p-16 gap-32 */
+    .evolucao-card {
+      background: var(--pain-card-bg);
+      border-radius: 16px;
+      width: 100%;
+    }
+
+    .evolucao-card__row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 16px;
+    }
+
+    @media (min-width: 900px) {
+      .evolucao-card__row {
+        flex-direction: row;
+        gap: 32px;
+        align-items: flex-start;
+      }
+    }
+
+    .evolucao-card__num {
+      flex-shrink: 0;
+      width: 74px;
+      margin: 0;
+      font-family: "Geist", "Inter", sans-serif;
+      font-weight: 900;
+      font-size: 100px;
+      line-height: 1;
+      text-align: center;
+      color: var(--num-watermark);
+      align-self: center;
+    }
+
+    @media (min-width: 900px) {
+      .evolucao-card__num {
+        align-self: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .evolucao-card__num {
+        font-size: 72px;
+        width: 64px;
+      }
+    }
+
+    .evolucao-card__main {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 16px 0;
+    }
+
+    .evolucao-card__heading {
+      margin: 0;
+      font-family: "Geist", "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 1.4;
+      color: var(--pain-title);
+    }
+
+    .evolucao-card__list {
+      margin: 0;
+      padding-left: 30px;
+      font-family: "Geist", "Inter", sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.4;
+      color: var(--body-muted);
+    }
+
+    .evolucao-card__list li {
+      margin: 0;
+    }
+
+    .evolucao-card__list li + li {
+      margin-top: 1em;
+    }
+
+    /* Parágrafo único (autonomia) — Figma Geist Light 16px #8aa2c6 */
+    .evolucao-card__body {
+      margin: 0;
+      font-family: "Geist", "Inter", sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.4;
+      color: var(--body-muted);
+      max-width: 100%;
+    }
+
+    /* Faixa screenshot tabela exportável (captura fornecida 649×154) */
+    .evolucao-card__media {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      background: #fff;
+    }
+
+    .evolucao-card__media-inner {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 649 / 154;
+      overflow: hidden;
+    }
+
+    .evolucao-card__media-inner img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      pointer-events: none;
+    }
+
+    .evolucao-card__footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 32px;
+      align-items: center;
+    }
+
+    .evolucao-card__footer-links {
+      display: inline-flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 24px;
+    }
+
+    @media (max-width: 520px) {
+      .evolucao-card__footer-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    .evolucao-status {
+      font-family: "Geist", "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: var(--white);
+      margin: 0;
+    }
+
+    .evolucao-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: "Geist", "Inter", sans-serif;
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .evolucao-link:hover {
+      color: var(--accent-blue);
+      text-decoration: underline;
+    }
+
+    .evolucao-link svg {
+      flex-shrink: 0;
+      color: currentColor;
+    }
+
+    /* Mock — Figma 270×470, imagem crop */
+    .evolucao-card__mock {
+      flex-shrink: 0;
+      width: 270px;
+      max-width: 100%;
+      height: 470px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      align-self: center;
+    }
+
+    @media (min-width: 900px) {
+      .evolucao-card__mock {
+        margin: 0;
+        align-self: flex-start;
+      }
+    }
+
+    .evolucao-card__mock img {
+      position: absolute;
+      left: -36.84%;
+      top: -3.63%;
+      width: 146.98%;
+      height: 125.33%;
+      max-width: none;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    /* Dashboard MVP — Figma 20591:4511: content 270×240 (não 470) */
+    .evolucao-card__mock.evolucao-card__mock--dashboard {
+      height: 240px;
+      width: 270px;
+    }
+
+    .evolucao-card__mock.evolucao-card__mock--dashboard img {
+      left: 0;
+      top: 0.09%;
+      width: 100%;
+      height: 92.02%;
+      object-fit: cover;
+    }
+
+    /* Mocks — Figma 20594:16379 / 20594:16388 (pendentes) */
+    .evolucao-card__mock.evolucao-card__mock--pendente-saldo {
+      width: 270px;
+      height: 339px;
+    }
+
+    .evolucao-card__mock.evolucao-card__mock--pendente-saldo img {
+      left: -36.84%;
+      top: -5.03%;
+      width: 146.98%;
+      height: 173.76%;
+    }
+
+    .evolucao-card__mock.evolucao-card__mock--pendente-resumo {
+      width: 327px;
+      height: 337px;
+    }
+
+    .evolucao-card__mock.evolucao-card__mock--pendente-resumo img {
+      left: -32.26%;
+      top: -10.18%;
+      width: 139.58%;
+      height: 139.47%;
+    }
+
+    /* Pendentes — Falta de autonomia (Figma 20618:3593) */
+    .evolucao-card__list--lg {
+      font-size: 16px;
+    }
+
+    .evolucao-card__body--lg {
+      font-size: 16px;
+    }
+
+    .evolucao-card__main .evolucao-card__mock.evolucao-card__mock--pend-autonomia-export {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 3212 / 790;
+      margin: 0;
+      align-self: stretch;
+      border-radius: 8px;
+    }
+
+    .evolucao-card__main .evolucao-card__mock.evolucao-card__mock--pend-autonomia-export img {
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .evolucao-card__mock.evolucao-card__mock--pend-autonomia-extrato {
+      width: 275px;
+      height: 311px;
+    }
+
+    /* Desktop: mesma altura que evolucao-card__main (linha flex estica ao item mais alto) */
+    @media (min-width: 900px) {
+      .evolucao-card__mock.evolucao-card__mock--pend-autonomia-extrato {
+        align-self: stretch;
+        height: auto;
+        min-height: 0;
+      }
+    }
+
+    .evolucao-card__mock.evolucao-card__mock--pend-autonomia-extrato img {
+      left: -40.63%;
+      top: 0;
+      bottom: 0;
+      width: 140.63%;
+      height: auto;
+      max-width: none;
+      object-fit: cover;
+      object-position: center bottom;
+    }
+
+    .evolucao-card__mock.evolucao-card__mock--pend-autonomia-resumo {
+      width: 302px;
+      height: 275px;
+    }
+
+    .evolucao-card__mock.evolucao-card__mock--pend-autonomia-resumo img {
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Lightbox — ampliar mocks ao clicar */
+    .evolucao-card__mock,
+    .evolucao-card__media-inner {
+      cursor: zoom-in;
+    }
+
+    .evolucao-card__mock:focus-visible,
+    .evolucao-card__media-inner:focus-visible {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 4px;
+    }
+
+    .evolucao-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .evolucao-lightbox[hidden] {
+      display: none !important;
+    }
+
+    .evolucao-lightbox__backdrop {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: rgba(5, 10, 25, 0.94);
+      cursor: zoom-out;
+    }
+
+    .evolucao-lightbox__close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      margin: 0;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.45);
+      color: var(--white);
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .evolucao-lightbox__close:hover {
+      background: rgba(0, 89, 213, 0.35);
+      border-color: var(--primary-interactive);
+    }
+
+    .evolucao-lightbox__close:focus-visible {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 2px;
+    }
+
+    /* Área com scroll: imagem até 150% do tamanho “encaixado” na janela */
+    .evolucao-lightbox__scroll {
+      position: relative;
+      z-index: 1;
+      flex: 1 1 auto;
+      width: 100%;
+      min-height: 0;
+      max-height: 100%;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 16px 24px;
+      box-sizing: border-box;
+    }
+
+    .evolucao-lightbox__img {
+      width: auto;
+      height: auto;
+      max-width: calc(1.5 * (100vw - 48px));
+      max-height: calc(1.5 * (100vh - 48px));
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+      pointer-events: none;
+    }
+
+    @media (max-width: 720px) {
+      .app-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .header-actions { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a class="header-pill header-pill--voltar" href="gestao-financeira-nuvempago-2026.html" aria-label="Voltar ao resumo financeiro">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="16" height="16">
+        <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Voltar
+    </a>
+    <div class="header-actions">
+      <a class="header-pill" href="gestao-financeira-nuvempago-2026.html">Início</a>
+      <a class="header-pill" href="conclusao.html">Conclusão</a>
+      <a class="header-pill" href="sobre-a-pesquisa.html">Sobre a pesquisa</a>
+    </div>
+  </header>
+
+  <div class="page">
+    <main class="main" id="main">
+      <h1 class="title-hero">Evolução</h1>
+
+      <section class="evolucao-section" aria-labelledby="evolucao-dores-heading">
+        <div class="evolucao-section__title-wrap">
+          <h2 id="evolucao-dores-heading" class="evolucao-section__title">Dores que estamos resolvendo</h2>
+        </div>
+
+        <div class="evolucao-segmented" role="tablist" aria-label="Categorias de dores">
+          <button type="button" role="tab" id="tab-transparencia" aria-selected="true" aria-controls="panel-transparencia" data-tab="transparencia">
+            Falta de transparência
+          </button>
+          <button type="button" role="tab" id="tab-autonomia" aria-selected="false" aria-controls="panel-autonomia" data-tab="autonomia">
+            Falta de autonomia
+          </button>
+        </div>
+
+        <div class="evolucao-panels">
+          <div class="evolucao-panel" id="panel-transparencia" role="tabpanel" aria-labelledby="tab-transparencia">
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">1</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">
+                    Extrato que não oferece informação suficiente para identificar a movimentação (ex: Id da venda, Id do link, beneficiário da transferencia.
+                  </p>
+                  <ul class="evolucao-card__list">
+                    <li>
+                      Entregamos uma novo extrato, onde a visão deixa de ser por paybles como no extrato antigo e passa ser transação. Dessa forma, as informações serão apresentadas por Id e tipo da transação, deixando claro a qual venda ou link se refere cada movimentação.
+                    </li>
+                    <li>
+                      Incluímos casos de uso que não tratávamos no extrato antes, como todos os casos de TERs conectados a troca de titularidade, como reembolsos, Cobertura contestação, Ordem judicial, Parcela de crédito entre outros.
+                    </li>
+                  </ul>
+                  <div class="evolucao-card__footer">
+                    <p class="evolucao-status">Feito ✅</p>
+                    <a
+                      class="evolucao-link"
+                      href="https://www.figma.com/design/eOHjVfUDBQhzyy0y6kkB4V/Extrato-2026---MVP--Payments-NP-?node-id=5803-230603&amp;t=OAwkTUI7sNbeYdjy-1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Figma MVP
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                    <a
+                      class="evolucao-link"
+                      href="https://www.figma.com/design/eOHjVfUDBQhzyy0y6kkB4V/Extrato-2026---MVP--Payments-NP-"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Figma Motor de débito e crédito
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="evolucao-card__mock">
+                  <img src="media/evolucao/mock-extrato.png" alt="Mock do novo extrato no telemóvel" width="1202" height="1801" loading="lazy" decoding="async" />
+                </div>
+              </div>
+            </article>
+
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">2</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">
+                    Falta de dados sobre contestação das vendas, para fazer fechamento de caixa, conciliação e a DRE
+                  </p>
+                  <ul class="evolucao-card__list">
+                    <li>
+                      Incluímos os chargebacks no extrato<br /><br />
+                      Entregamos a Fase 1 da experiência de contestação em Orders, onde passamos a alertar a chegada do chargeback, a te o status de chargeback na venda e direcionar ao envio da defesa por email.
+                    </li>
+                    <li>
+                      Estamos incluindo os substatus da contestação em Orders e o envio de defesa direto no produto tanto para Pagarme quanto para Getnet, reduzindo a chance de perda de disputa e facilitando no entendimento sobre o que está acontecendo com a venda.
+                    </li>
+                    <li>
+                      Time de orders vai passar a informar no exportável de oders os status , datas e as entradas e saídas do valor da venda para viabilizar a conciliação financeira
+                    </li>
+                  </ul>
+                  <div class="evolucao-card__footer">
+                    <p class="evolucao-status">Fase 1 e 2 ✅</p>
+                    <p class="evolucao-status">Fase 3 e 4 - WIP</p>
+                    <div class="evolucao-card__footer-links">
+                      <a
+                        class="evolucao-link"
+                        href="https://www.figma.com/design/8FboE37cdTwPueB7UH4hge/Extrato-2026----Contesta%C3%A7%C3%A3o--Payments-NP-?node-id=5803-230603&amp;m=dev"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Figma do extrato
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </a>
+                      <a
+                        class="evolucao-link"
+                        href="https://www.figma.com/design/2HDal8sbCckwOhtqCX8bNl/Contesta%C3%A7%C3%A3o--Payments-NP-?node-id=0-1&amp;t=GVRR6wNVHg5UkKhM-1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Figma da contestação
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="evolucao-card__mock">
+                  <img src="media/evolucao/mock-contestacao.png" alt="Mock de vendas e contestação no telemóvel" width="1203" height="1756" loading="lazy" decoding="async" />
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="evolucao-panel" id="panel-autonomia" role="tabpanel" aria-labelledby="tab-autonomia" hidden>
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">3</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">
+                    Extrato que não oferece informação suficiente para identificar a movimentação (ex: Id da venda, Id do link, beneficiário da transferencia.
+                  </p>
+                  <p class="evolucao-card__body">
+                    Adicionamos a opção de exportar o extrato direto da tela de saldo disponível e lançamentos futuros.
+                  </p>
+                  <div class="evolucao-card__media">
+                    <div class="evolucao-card__media-inner" role="button" tabindex="0" aria-label="Ampliar captura de exportar extrato">
+                      <img
+                        src="media/evolucao/autonomia-export-wide.png"
+                        alt=""
+                        width="649"
+                        height="154"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  </div>
+                  <div class="evolucao-card__footer">
+                    <p class="evolucao-status">Feito ✅</p>
+                    <a
+                      class="evolucao-link"
+                      href="https://www.figma.com/design/P3CvepdvsAiNczRIkXB5Hm/Extrato-2026---Resumo-financeiro--Payments-NP-?node-id=20591-4468&amp;m=dev"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Figma
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="evolucao-card__mock">
+                  <img
+                    src="media/evolucao/autonomia-mock-phones.png"
+                    alt="Mock no telemóvel: exportar extrato a partir do saldo disponível"
+                    width="800"
+                    height="1200"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </article>
+
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">4</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">
+                    Falta de dashboards nativos para ver as informações em tempo real.
+                  </p>
+                  <p class="evolucao-card__body">
+                    O time de Reports lançou um MVP do painel estatístico com dados de pagamentos, com informações como: Total de faturamento por forma de pagamento, por meio de pagamento, por número de parcela entre outros.
+                  </p>
+                  <div class="evolucao-card__footer">
+                    <p class="evolucao-status">MVP Feito ✅</p>
+                  </div>
+                </div>
+                <div class="evolucao-card__mock evolucao-card__mock--dashboard">
+                  <img
+                    src="media/evolucao/autonomia-dashboard-mvp.png"
+                    alt="Mock do painel estatístico com dados de pagamentos"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="evolucao-section evolucao-section--follow" aria-labelledby="evolucao-pendentes-heading">
+        <div class="evolucao-section__title-wrap">
+          <h2 id="evolucao-pendentes-heading" class="evolucao-section__title">O que ainda precisamos resolver</h2>
+        </div>
+
+        <div class="evolucao-segmented" role="tablist" aria-label="Pendências por categoria">
+          <button type="button" role="tab" id="tab-pend-transparencia" aria-selected="true" aria-controls="panel-pend-transparencia" data-tab="pend-transparencia">
+            Falta de transparência
+          </button>
+          <button type="button" role="tab" id="tab-pend-autonomia" aria-selected="false" aria-controls="panel-pend-autonomia" data-tab="pend-autonomia">
+            Falta de autonomia
+          </button>
+        </div>
+
+        <div class="evolucao-panels">
+          <div class="evolucao-panel" id="panel-pend-transparencia" role="tabpanel" aria-labelledby="tab-pend-transparencia">
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">1</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">Incluir informação de saldo no extrato</p>
+                  <p class="evolucao-card__body">
+                    A transparência sobre o saldo do dia, tira a dependência do envio de relatórios mensais ou semanais para ter acesso a essa informação que é essencial para o fechamento do caixa, que costuma ser uma tarefa diária. Essa visualização (saldo inicial, movimentações e saldo final) traz transparência, permitindo que o lojista entenda exatamente quais transações compõem o seu saldo atual. Esse dado também se tornará base para conciliação bancária, quando o Nuvem Pago passar a ser definitivamente como a conta bancária.
+                  </p>
+                  <div class="evolucao-card__footer">
+                    <a
+                      class="evolucao-link"
+                      href="https://www.figma.com/design/P3CvepdvsAiNczRIkXB5Hm/Extrato-2026---Resumo-financeiro--Payments-NP-?node-id=14565-29598&amp;t=fqEfqtACdPYV91FJ-1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Link do estudo no Figma
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="evolucao-card__mock evolucao-card__mock--pendente-saldo">
+                  <img
+                    src="media/evolucao/pendente-saldo-extrato.png"
+                    alt="Mock no telemóvel: saldo e movimentações no Nuvem Pago"
+                    width="1202"
+                    height="1801"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </article>
+
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">2</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">Resumo financeiro por período</p>
+                  <p class="evolucao-card__body">
+                    Hoje passamos a dar visibilidade para mais detalhes sobre as transações, mas há pouca transparência sobre os consolidados de valores, que ajudam a conferir se os totais faturados batem com os totais processados pelo Nuvem Pago. Exibir esses dados no produto permite que o financeiro ganhe agilidade, tirando a dependência de relatórios enviados pelo suporte e eliminando o trabalho de fazer cálculos para chegar a esses valores.
+                  </p>
+                  <div class="evolucao-card__footer">
+                    <a
+                      class="evolucao-link"
+                      href="https://www.figma.com/design/P3CvepdvsAiNczRIkXB5Hm/Extrato-2026---Resumo-financeiro--Payments-NP-?node-id=14565-29598&amp;t=fqEfqtACdPYV91FJ-1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Link do estudo no Figma
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="evolucao-card__mock evolucao-card__mock--pendente-resumo">
+                  <img
+                    src="media/evolucao/pendente-resumo-periodo.png"
+                    alt="Mock no telemóvel: resumo financeiro por período"
+                    width="1478"
+                    height="1522"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="evolucao-panel" id="panel-pend-autonomia" role="tabpanel" aria-labelledby="tab-pend-autonomia" hidden>
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">3</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">
+                    Evoluir o Exportável de saldo disponível e lançamentos futuros com base nos feedbacks dos lojistas
+                  </p>
+                  <ul class="evolucao-card__list">
+                    <li>
+                      Adicionar o nome do cliente/beneficiário, pois em algumas ERPs não se tem o ID da venda, então é uma segunda forma do lojista identificar no relatório a movimentação.
+                    </li>
+                    <li>
+                      Adicionar a diferenciação de estorno total e parcial para conseguir bater a movimentação na conta com a gestão da venda via order ou via ERP.
+                    </li>
+                    <li>
+                      Quebrar o total de custos em MDR e juros no exportável do Nuvem Pago. Temos esse dado em orders, mas está no meio de uma série de outros dados, e como em orders não tem link de pagamento, o lojista acaba usando mais o relatório do Nuvem Pago que consta os links. Então, para não pegar informações fragmentadas em relatórios distintos, o ideal no momento é adicionar esse dado no relatório do Nuvem Pago.
+                    </li>
+                    <li>
+                      Adicionar a bandeira. Hoje existe esse dado em orders, mas orders não contém todas as movimentações, então o ideal é ter no relatório do Nuvem Pago, para o lojista não depender do relatório de orders ou do suporte para ter a informação da bandeira usada no pagamento via link.
+                    </li>
+                    <li>
+                      Em versões futuras, permitir que o lojista possa personalizar o relatório através da Lumi (nossa IA), e/ou que a gente sugira quais informações o relatório deve conter de acordo com o objetivo, a tarefa ou a pergunta que o lojista precisa responder.
+                    </li>
+                  </ul>
+                  <div class="evolucao-card__footer">
+                    <a
+                      class="evolucao-link"
+                      href="https://docs.google.com/spreadsheets/d/14G5lPNMhfUpdweaLb32IpVWYbi8A_bbTto1Xv5SoxJs/edit?usp=sharing"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Link do template
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="evolucao-card__mock evolucao-card__mock--pend-autonomia-export" role="button" tabindex="0" aria-label="Ampliar: planilha exportável com colunas Nome, Bandeira, MDR e juros">
+                    <img
+                      src="media/evolucao/pend-autonomia-exportavel.png"
+                      alt="Planilha exportável: datas, tipo de movimentação, nome, forma de pagamento, bandeira, MDR, juros e valor líquido"
+                      width="3212"
+                      height="790"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">4</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">Evoluir o extrato atual</p>
+                  <ul class="evolucao-card__list evolucao-card__list--lg">
+                    <li>
+                      Permitir filtragem por período, tipo de transação e forma de pagamento, para o encontro de movimentações específicas que precisam ser analisadas no dia a dia da gestão financeira e na gestão da venda.
+                    </li>
+                    <li>
+                      UX: permitir que o lojista abra o detalhe da transação em uma nova aba sem ter que sair da tela do extrato toda vez que clica numa linha de transação.
+                    </li>
+                    <li>
+                      Em vez de mostrar só o valor líquido da transferência, exibir o valor bruto (valor da transferência + taxa); caso contrário, a taxa de transferência fica como diferença entre o saldo real e a somatória das linhas de movimentação quando há transferência no meio.
+                    </li>
+                    <li>
+                      Adicionar os casos de uso pendentes, como pagamento no fluxo e liquidação externa, para permitir que as lojas que possuem esses casos de uso tenham acesso ao extrato e aos relatórios sem depender do suporte.
+                    </li>
+                  </ul>
+                </div>
+                <div class="evolucao-card__mock evolucao-card__mock--pend-autonomia-extrato" role="button" tabindex="0" aria-label="Ampliar: mock do extrato com abas Saldo disponível e Lançamentos futuros">
+                  <img
+                    src="media/evolucao/pend-autonomia-extrato.png"
+                    alt="Mock do extrato no telemóvel: saldo, abas Saldo disponível e Lançamentos futuros, lista por data"
+                    width="800"
+                    height="1200"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </article>
+
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">5</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">Exportar e enviar o Resumo financeiro</p>
+                  <p class="evolucao-card__body evolucao-card__body--lg">
+                    Além de apresentar o resumo financeiro para consulta no Nuvem Pago, o ideal é também permitir o download do resumo financeiro, para que o lojista consiga manipular, filtrar, organizar e enviar esses dados para as ferramentas necessárias para fazer suas tarefas financeiras a seu modo.
+                  </p>
+                  <div class="evolucao-card__footer">
+                    <a
+                      class="evolucao-link"
+                      href="https://docs.google.com/spreadsheets/d/1UgBOkZ1bfB-Ame97Nkf1Mes-yQ8qlRzkTU_jUVYHnNQ/edit?usp=sharing"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Link do template
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="evolucao-card__mock evolucao-card__mock--pend-autonomia-resumo" role="button" tabindex="0" aria-label="Ampliar: resumo financeiro para download com blocos lado a lado">
+                  <img
+                    src="media/evolucao/pend-autonomia-resumo-export.png"
+                    alt="Mock do resumo financeiro exportável: total atual, Disponível p/ saque e Lançamentos futuros lado a lado"
+                    width="604"
+                    height="550"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </article>
+
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">6</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">Enviar todos os dados necessários via API</p>
+                  <p class="evolucao-card__body evolucao-card__body--lg">
+                    Através da API, atenderemos os lojistas mais estruturados, que precisam dos dados das transações, mas também dos dados consolidados de formas mais automatizadas para dar baixa em suas ERPs e se conectar a sistemas de conciliadoras especializadas, sem necessariamente dar acesso ao admin da loja à conciliadora e ter que enviar relatórios diariamente de forma manual.
+                  </p>
+                  <p class="evolucao-card__body evolucao-card__body--lg">
+                    Hoje já existe uma API da Nuvemshop, mas por problema de integração, os custos de taxa e valor líquido da venda não são registrados, fazendo com que quem cuida do financeiro tenha que buscar outros meios de chegar a esse número e inserí-lo no sistema da ERP e na conciliadora. Além dessas infos é necessário investigar quais outras informações devem ser acrescentadas para automatizar a baixa no “Contas a pagar” da ERP e também para simplificar as tarefas diárias de fechamento de caixa, conciliação financeira e conciliação bancária.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div
+    id="evolucao-lightbox"
+    class="evolucao-lightbox"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-label="Imagem ampliada"
+  >
+    <button type="button" class="evolucao-lightbox__backdrop" id="evolucao-lightbox-backdrop" aria-label="Fechar imagem ampliada"></button>
+    <button type="button" class="evolucao-lightbox__close" id="evolucao-lightbox-close" aria-label="Fechar">&times;</button>
+    <div class="evolucao-lightbox__scroll">
+      <img class="evolucao-lightbox__img" id="evolucao-lightbox-img" alt="" decoding="async" />
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      document.querySelectorAll('.evolucao-section').forEach(function (section) {
+        var tabs = section.querySelectorAll('.evolucao-segmented [role="tab"]');
+        var panels = section.querySelectorAll('.evolucao-panels [role="tabpanel"]');
+        if (!tabs.length || !panels.length) return;
+        tabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            var targetId = tab.getAttribute('aria-controls');
+            tabs.forEach(function (t) {
+              t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+            });
+            panels.forEach(function (p) {
+              if (p.id === targetId) {
+                p.removeAttribute('hidden');
+              } else {
+                p.setAttribute('hidden', '');
+              }
+            });
+          });
+        });
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var main = document.getElementById('main');
+      var lb = document.getElementById('evolucao-lightbox');
+      var lbImg = document.getElementById('evolucao-lightbox-img');
+      var lbClose = document.getElementById('evolucao-lightbox-close');
+      var lbBackdrop = document.getElementById('evolucao-lightbox-backdrop');
+      var lastFocus = null;
+
+      if (!main || !lb || !lbImg || !lbClose || !lbBackdrop) return;
+
+      document.querySelectorAll('.evolucao-card__mock').forEach(function (el) {
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'button');
+        if (!el.getAttribute('aria-label')) {
+          var im = el.querySelector('img');
+          el.setAttribute('aria-label', im && im.alt ? 'Ampliar: ' + im.alt : 'Ampliar imagem');
+        }
+      });
+
+      function openLightbox(src, altText) {
+        if (!src) return;
+        lastFocus = document.activeElement;
+        lbImg.src = src;
+        lbImg.alt = altText || 'Imagem ampliada';
+        lb.removeAttribute('hidden');
+        document.body.style.overflow = 'hidden';
+        lbClose.focus();
+      }
+
+      function closeLightbox() {
+        lb.setAttribute('hidden', '');
+        lbImg.removeAttribute('src');
+        lbImg.alt = '';
+        document.body.style.overflow = '';
+        if (lastFocus && typeof lastFocus.focus === 'function') {
+          lastFocus.focus();
+        }
+      }
+
+      function targetFromEvent(el) {
+        if (!el || !el.closest) return null;
+        var mock = el.closest('.evolucao-card__mock');
+        if (mock) return mock.querySelector('img');
+        var mediaInner = el.closest('.evolucao-card__media-inner');
+        if (mediaInner) return mediaInner.querySelector('img');
+        return null;
+      }
+
+      main.addEventListener('click', function (e) {
+        var img = targetFromEvent(e.target);
+        if (!img || !img.getAttribute('src')) return;
+        e.preventDefault();
+        openLightbox(img.currentSrc || img.src, img.alt || 'Captura de ecrã');
+      });
+
+      main.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        var t = e.target;
+        if (!t.closest || (!t.closest('.evolucao-card__mock') && !t.closest('.evolucao-card__media-inner'))) return;
+        var img = targetFromEvent(t);
+        if (!img || !img.getAttribute('src')) return;
+        e.preventDefault();
+        openLightbox(img.currentSrc || img.src, img.alt || 'Captura de ecrã');
+      });
+
+      lbClose.addEventListener('click', closeLightbox);
+      lbBackdrop.addEventListener('click', closeLightbox);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !lb.hasAttribute('hidden')) {
+          closeLightbox();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

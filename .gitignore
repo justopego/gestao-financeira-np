@@ -1,0 +1,46 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Python
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+pip-log.txt
+pip-debug.txt
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Variáveis e segredos (nunca commitar)
+.env
+.env.*
+!.env.example
+
+# Editores / IDE (ajusta se quiseres versionar definições da equipa)
+.idea/
+*.swp
+*.swo
+*~
+
+# Registos
+*.log
+npm-debug.log*
+
+# Exportações Dovetail locais (pasta costuma ser grande; apaga esta linha se quiseres versionar)
+dovetail-export/
+
+# Espelho “Gestão financeira/” na raiz — duplica os mesmos HTML da raiz + Excel;
+# remove as duas linhas abaixo se quiseres incluir essa pasta no repositório
+Gestão financeira/
+
+# Anexos locais opcionais (descomenta se não forem para o remoto)
+# anexos/

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ana — BPO — financeira de clientes Nuvem Pago</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #000B19;
+      --bg-glass: rgba(255, 255, 255, 0.04);
+      --border-glass: rgba(255, 255, 255, 0.08);
+      --blue-300: #60A5FA;
+      --blue-400: #3B82F6;
+      --blue-500: #0050C3;
+      --gradient: linear-gradient(135deg, #60A5FA, #3B82F6, #0050C3);
+      --text-1: #FFFFFF;
+      --text-2: #8FA8C8;
+      --text-3: #6B83A8;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text-1);
+      min-height: 100%;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0, 80, 195, 0.18), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 80% 20%, rgba(0, 41, 143, 0.14), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(4, 23, 115, 0.12), transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 0 1rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to bottom, rgba(0, 11, 25, 0.95) 60%, transparent);
+      flex-wrap: wrap;
+    }
+    .nav-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .top-bar a {
+      font-size: 0.75rem;
+      color: var(--blue-300);
+      text-decoration: none;
+      border: 1px solid var(--border-glass);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: var(--bg-glass);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .top-bar a:hover, .top-bar a:focus {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(96, 165, 250, 0.35);
+      outline: none;
+    }
+    .top-bar a[aria-current="page"] {
+      border-color: rgba(96, 165, 250, 0.5);
+      background: rgba(0, 80, 195, 0.22);
+    }
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+    .kicker {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2.35rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    h1 .gradient {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 32px;
+    }
+    .lead {
+      font-size: 0.95rem;
+      color: var(--text-2);
+      line-height: 1.55;
+      max-width: 42rem;
+      margin-bottom: 0.5rem;
+    }
+    .src {
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      margin: 0.35rem 0;
+      line-height: 1.45;
+    }
+    .src code {
+      font-size: 0.78em;
+      word-break: break-all;
+    }
+    main section.block {
+      margin-top: 1.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-glass);
+    }
+    main > section.block:first-of-type {
+      border-top: none;
+      padding-top: 0.35rem;
+      margin-top: 1rem;
+    }
+    body.page-glossary header h1 {
+      margin-bottom: 1.5rem;
+    }
+    body.page-glossary main > section.block:first-of-type {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 3rem;
+    }
+    .correlation-block > h2 {
+      margin-bottom: 4.25rem;
+    }
+    .correlation-block h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-1);
+      margin: 1.35rem 0 0.65rem;
+      letter-spacing: -0.02em;
+    }
+    .correlation-block h3:first-of-type { margin-top: 0; }
+    .correlation-block h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--blue-300);
+      margin: 1rem 0 0.4rem;
+    }
+    .correlation-block p.corr-body {
+      color: var(--text-2);
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0 0 0.75rem;
+      max-width: 48rem;
+    }
+    .correlation-block ul.corr-list {
+      margin: 0 0 1rem;
+      padding-left: 1.2rem;
+      color: var(--text-2);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      max-width: 48rem;
+    }
+    .correlation-block ul.corr-list li { margin: 0.4rem 0; }
+    .correlation-block .corr-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+      gap: 0.85rem;
+      margin: 0 0 1rem;
+      padding: 0;
+      list-style: none;
+      max-width: none;
+    }
+    .correlation-block a.corr-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      min-height: 7rem;
+      padding: 1rem 1.15rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      border-left: 3px solid var(--blue-500);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s, border-color 0.2s var(--ease);
+    }
+    .correlation-block a.corr-card:hover,
+    .correlation-block a.corr-card:focus {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(96, 165, 250, 0.38);
+      outline: none;
+    }
+    .correlation-block a.corr-card--full {
+      grid-column: 1 / -1;
+    }
+    .correlation-block a.corr-card[id] {
+      scroll-margin-top: 5.5rem;
+    }
+    .correlation-block .corr-card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--blue-300);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+    .correlation-block .corr-card-text {
+      font-family: "SF Compact Display", sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text-2);
+      margin: 0;
+    }
+    .correlation-block .corr-card ul.corr-card-bullets {
+      margin: 0.5rem 0 0;
+      padding-left: 1.1rem;
+      color: var(--text-2);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      list-style: disc;
+    }
+    .correlation-block .corr-card ul.corr-card-bullets li { margin: 0.35rem 0; }
+    .correlation-block ol.corr-ol {
+      margin: 0 0 1rem;
+      padding-left: 1.2rem;
+      color: var(--text-2);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      max-width: 48rem;
+    }
+    .correlation-block ol.corr-ol li { margin: 0.45rem 0; }
+    .correlation-block .corr-divider {
+      height: 1px;
+      background: var(--border-glass);
+      margin: 3.75rem 0;
+      max-width: 48rem;
+    }
+    .correlation-block table.corr-table {
+      width: 100%;
+      max-width: 48rem;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 0.75rem;
+    }
+    .correlation-block table.corr-table th,
+    .correlation-block table.corr-table td {
+      border: 1px solid var(--border-glass);
+      padding: 0.55rem 0.65rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .correlation-block table.corr-table th {
+      background: rgba(255,255,255,0.05);
+      color: var(--text-1);
+      font-weight: 600;
+    }
+    .correlation-block table.corr-table td { color: var(--text-2); }
+    main h2 {
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+      color: var(--text-1);
+    }
+    main h2 .num {
+      color: var(--blue-400);
+      font-weight: 700;
+      margin-right: 0.35rem;
+    }
+    ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      color: var(--text-2);
+      max-width: 48rem;
+    }
+    li { margin: 0.45rem 0; line-height: 1.55; font-family: "SF Compact Display", sans-serif; }
+    .task-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(10.75rem, 1fr));
+      gap: 0.85rem;
+      margin: 0.35rem 0 0;
+      padding: 0;
+      max-width: none;
+    }
+    a.task-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 4.25rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      border-left: 3px solid var(--blue-500);
+      text-decoration: none;
+      color: var(--text-1);
+      font-weight: 600;
+      font-size: 0.88rem;
+      line-height: 1.35;
+      text-align: center;
+      transition: background 0.2s, border-color 0.2s var(--ease);
+    }
+    a.task-card:hover, a.task-card:focus {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(96, 165, 250, 0.38);
+      outline: none;
+    }
+    a.task-card .task-card-label {
+      letter-spacing: -0.02em;
+    }
+    a.task-card .task-card-label.acronym {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .card {
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      border-left: 3px solid var(--blue-500);
+    }
+    .card p { color: var(--text-2); font-size: 0.9rem; line-height: 1.55; }
+    .source-dovetail .src a {
+      color: var(--blue-300);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+    .source-dovetail .src a:hover, .source-dovetail .src a:focus {
+      color: var(--blue-400);
+      outline: none;
+    }
+    .source-dovetail .src + .src { margin-top: 0.5rem; }
+    code {
+      font-family: ui-monospace, monospace;
+      font-size: 0.82em;
+      background: rgba(255,255,255,0.06);
+      padding: 0.12em 0.4em;
+      border-radius: 6px;
+      color: var(--blue-300);
+    }
+    .progress-foot {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--blue-500), var(--blue-300));
+      opacity: 0.85;
+      z-index: 100;
+      pointer-events: none;
+      box-shadow: 0 0 12px rgba(0, 80, 195, 0.45);
+    }
+    .index-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.25rem 0 0;
+      max-width: none;
+    }
+    .index-list li {
+      margin: 0;
+      border-bottom: 1px solid var(--border-glass);
+    }
+    .index-list a {
+      display: block;
+      padding: 0.85rem 0;
+      color: var(--text-1);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s, padding-left 0.2s var(--ease);
+    }
+    .index-list a:hover {
+      color: var(--blue-300);
+      padding-left: 0.35rem;
+    }
+    .index-list li span.sub {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--text-3);
+      margin-top: 0.2rem;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="progress-foot" aria-hidden="true"></div>
+  <div class="wrap">
+    <header>
+      <div class="top-bar">
+        <div class="nav-group">
+          <a href="index.html">← Índice</a>
+        </div>
+        <a href="glossario.html">Glossário</a>
+      </div>
+      <p class="kicker">Gestão financeira</p>
+      <h1><span class="gradient">Ana</span> — BPO — financeira de clientes Nuvem Pago</h1>
+    </header>
+    <main>
+    <section class="block">
+      <h2>1. Tarefas relacionadas à gestão financeira</h2>
+      <div class="task-cards" role="list">
+        <a class="task-card" role="listitem" href="glossario.html#conciliacao-financeira"><span class="task-card-label">Conciliação financeira</span></a>
+        <a class="task-card" role="listitem" href="glossario.html#conciliacao-bancaria"><span class="task-card-label">Conciliação bancária</span></a>
+        <a class="task-card" role="listitem" href="glossario.html#conciliacao-contabil"><span class="task-card-label">Conciliação contábil</span></a>
+        <a class="task-card" role="listitem" href="glossario.html#dre"><span class="task-card-label acronym">DRE</span></a>
+        <a class="task-card" role="listitem" href="glossario.html#dfc"><span class="task-card-label acronym">DFC</span></a>
+      </div>
+    </section>
+    <section class="block">
+      <h2>2. Passo a passo (fluxo) mencionado na conversa</h2>
+      <ul>
+        <li>Mensalmente: montar a DRE de competência.</li>
+        <li>Na DFC: conciliar todos os recebimentos — a conciliação financeira mostra se valores batem com vendas e se há cobrança indevida.</li>
+        <li>Conciliar pedidos Nuvem com importação no ERP; dar baixa em pedidos quando necessário para a conciliação fechar.</li>
+        <li>Cadastrar taxas combinadas no sistema; comparar extrato de recebimento da Nuvem Pago com o cadastrado — se diferir, investigar se a taxa foi errada ou o sistema não aplicou a configuração.</li>
+        <li>Diariamente (rotina citada): acessar o banco do cliente com data de ontem, tratar PIX e demais movimentos, classificar e lançar no sistema para conciliação.</li>
+        <li>Exemplo comparativo citado: PayPal oferecia relatório diário com líquido e taxas; usar como referência de boa prática.</li>
+      </ul>
+    </section>
+    <section class="block">
+      <h2>3. Dificuldades encontradas</h2>
+      <ul>
+        <li>Dificuldade em obter informações suficientes diretamente na Nuvem Pago; dependência de relatórios enviados pelo gerente (Paulo).</li>
+        <li>Cliente sem conciliação adequada não percebe aumento de taxas ou cobrança incorreta.</li>
+        <li>ERP que não conciliava recebimentos automaticamente gerou descontrole e clientes pedindo estorno.</li>
+        <li>Parcelas/baixas exigem entrar no ERP (ex.: Tiny) e trabalho manual; necessidade de planilha Excel/OFX em alguns fluxos.</li>
+        <li>Quando taxas estão erradas no cadastro, conciliação “automática” do ERP pode mascarar o problema até gerar estorno manual.</li>
+      </ul>
+    </section>
+    <section class="block">
+      <h2>4. Dados utilizados</h2>
+      <ul>
+        <li>Relatórios de recebimento / extratos Nuvem Pago.</li>
+        <li>Pedidos na Nuvem e registros importados no ERP.</li>
+        <li>Taxas acordadas cadastradas vs taxas efetivamente descontadas.</li>
+        <li>Extrato bancário do cliente (movimentação diária, inclusive PIX).</li>
+        <li>Relatórios de parcelas com baixas.</li>
+      </ul>
+    </section>
+    <section class="block">
+      <h2>5. Frequência</h2>
+      <ul>
+        <li>DRE: mês a mês.</li>
+        <li>Conciliação bancária no banco do cliente: todos os dias (citado explicitamente).</li>
+        <li>Demais conciliações: conforme ciclo do cliente e fechamento; menção a clientes com conciliação bancária diária.</li>
+      </ul>
+    </section>
+    <section class="block">
+      <h2>6. Ferramentas e canais</h2>
+      <ul>
+        <li>Nuvem Pago / relatórios fornecidos pelo gerente da conta.</li>
+        <li>ERP dos clientes (ex.: Tiny mencionado).</li>
+        <li>Sistemas de contabilidade/gestão onde cadastra taxas e lança movimentos.</li>
+        <li>Excel / planilhas; OFX citado como formato.</li>
+        <li>Banco do cliente (acesso para conciliação).</li>
+        <li>PayPal citado como referência de relatório diário (não necessariamente ferramenta atual).</li>
+      </ul>
+    </section>
+      <section class="block source-dovetail">
+        <h2>Fonte</h2>
+        <p class="src">Fonte: <a href="https://helpful-wolverine-3h5n.dovetail.com/data/1q6irf90zrivOAATfVu7tx" target="_blank" rel="noopener noreferrer">Dovetail — vídeo e transcrição da entrevista</a></p>
+        <p class="src">Vídeos: <a href="https://drive.google.com/drive/folders/18aNTuXVOq37rAxQnoOeDpE5LBXDA-6wY?usp=drive_link" target="_blank" rel="noopener noreferrer">Google Drive — pasta das entrevistas (gravações)</a></p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

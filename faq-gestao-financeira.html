@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ — Gestão financeira (síntese das entrevistas)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Paleta e atmosfera alinhadas a:
+       https://karemcarvalho-hue.github.io/apresentacao-ia-design/como-usar-ia/ (Nimbus Night · cosmic glass) */
+    :root {
+      --bg: #000B19;
+      --bg-alt: #010B23;
+      --bg-deep: #000610;
+      --bg-elevated: #04083D;
+      --bg-glass: rgba(255, 255, 255, 0.04);
+      --bg-glass-hover: rgba(255, 255, 255, 0.07);
+      --border-glass: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(255, 255, 255, 0.04);
+      --blue-300: #60A5FA;
+      --blue-400: #3B82F6;
+      --blue-500: #0050C3;
+      --blue-600: #00298F;
+      --blue-glow: rgba(0, 80, 195, 0.22);
+      --gradient: linear-gradient(135deg, #60A5FA, #3B82F6, #0050C3);
+      --text-1: #FFFFFF;
+      --text-2: #8FA8C8;
+      --text-3: #6B83A8;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --r-sm: 10px;
+      --r-md: 16px;
+      --r-lg: 24px;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--text-1);
+      overflow-x: hidden;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0, 80, 195, 0.18), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 80% 20%, rgba(0, 41, 143, 0.14), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(4, 23, 115, 0.12), transparent 50%),
+        radial-gradient(ellipse 40% 40% at 70% 70%, rgba(8, 5, 88, 0.1), transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .stars-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .atmosphere {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .atmosphere__orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      animation: atmo-breathe 12s ease-in-out infinite;
+    }
+
+    .atmosphere__orb--1 {
+      width: min(800px, 120vw);
+      height: min(800px, 120vw);
+      top: -15%;
+      left: 30%;
+      background: rgba(0, 80, 195, 0.18);
+      opacity: 0.4;
+      --atmo-opacity: 0.4;
+    }
+
+    .atmosphere__orb--2 {
+      width: min(600px, 100vw);
+      height: min(600px, 100vw);
+      bottom: -10%;
+      right: 10%;
+      background: rgba(0, 41, 143, 0.12);
+      animation-delay: -4s;
+      opacity: 0.3;
+      --atmo-opacity: 0.3;
+    }
+
+    .atmosphere__orb--3 {
+      width: min(500px, 90vw);
+      height: min(500px, 90vw);
+      top: 50%;
+      left: -10%;
+      background: rgba(4, 23, 115, 0.1);
+      animation-delay: -8s;
+      opacity: 0.25;
+      --atmo-opacity: 0.25;
+    }
+
+    @keyframes atmo-breathe {
+      0%, 100% {
+        transform: scale(1) translate(0, 0);
+        opacity: var(--atmo-opacity, 0.3);
+      }
+      33% {
+        transform: scale(1.08) translate(10px, -8px);
+        opacity: calc(var(--atmo-opacity, 0.3) * 1.15);
+      }
+      66% {
+        transform: scale(0.95) translate(-8px, 6px);
+        opacity: calc(var(--atmo-opacity, 0.3) * 0.9);
+      }
+    }
+
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .progress__fill {
+      height: 100%;
+      width: 0%;
+      background: var(--gradient);
+      border-radius: 0 1px 1px 0;
+      box-shadow: 0 0 16px rgba(0, 80, 195, 0.7);
+      transition: width 0.12s linear;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 46rem;
+      margin: 0 auto;
+      padding: 2.75rem 1.35rem 4rem;
+    }
+
+    .wrap::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.75;
+    }
+
+    .wrap > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      margin-bottom: 2.25rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border-glass);
+    }
+
+    .kicker {
+      display: inline-block;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: clamp(1.75rem, 4.5vw, 2.65rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin: 0 0 0.5rem;
+      color: var(--text-1);
+    }
+
+    h1 .gradient {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      color: var(--text-2);
+      font-weight: 400;
+      max-width: 36rem;
+      line-height: 1.55;
+    }
+
+    .meta {
+      font-size: 0.875rem;
+      color: var(--text-3);
+      margin: 1.25rem 0 0;
+    }
+
+    .meta strong {
+      color: var(--text-2);
+      font-weight: 600;
+    }
+
+    .note {
+      margin-top: 1.15rem;
+      padding: 1rem 1.1rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--r-md);
+      font-size: 0.875rem;
+      color: var(--text-2);
+      border: 1px solid var(--border-glass);
+      border-left: 3px solid var(--blue-500);
+    }
+
+    h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 2.75rem 0 1rem;
+      color: var(--blue-400);
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-glass), transparent);
+    }
+
+    details.faq-item {
+      background: var(--bg-glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--r-md);
+      margin-bottom: 0.6rem;
+      overflow: hidden;
+      transition: border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+    }
+
+    details.faq-item:hover {
+      border-color: rgba(0, 89, 213, 0.25);
+      background: var(--bg-glass-hover);
+    }
+
+    details.faq-item[open] {
+      border-color: rgba(0, 89, 213, 0.35);
+      box-shadow: 0 0 0 1px rgba(0, 80, 195, 0.08), 0 12px 40px rgba(0, 10, 30, 0.35);
+    }
+
+    summary {
+      font-weight: 600;
+      font-size: 0.98rem;
+      padding: 1rem 1.1rem;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      user-select: none;
+      color: var(--text-1);
+      transition: color 0.2s;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::before {
+      content: "+";
+      flex-shrink: 0;
+      width: 1.65rem;
+      height: 1.65rem;
+      line-height: 1.55rem;
+      text-align: center;
+      border-radius: var(--r-sm);
+      background: rgba(0, 89, 213, 0.12);
+      border: 1px solid rgba(0, 89, 213, 0.22);
+      color: var(--blue-400);
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background 0.2s, transform 0.25s var(--ease-out);
+    }
+
+    details.faq-item[open] summary::before {
+      content: "−";
+      background: rgba(0, 89, 213, 0.2);
+      box-shadow: 0 0 14px rgba(0, 80, 195, 0.25);
+    }
+
+    details.faq-item[open] summary {
+      color: var(--text-1);
+    }
+
+    .faq-body {
+      padding: 0 1.1rem 1.25rem 3.5rem;
+      color: var(--text-2);
+    }
+
+    .faq-body p {
+      margin: 0 0 0.75rem;
+    }
+
+    .faq-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-body strong {
+      color: var(--text-1);
+      font-weight: 600;
+    }
+
+    ol.steps {
+      margin: 0.5rem 0 0;
+      padding-left: 1.15rem;
+    }
+
+    ol.steps li {
+      margin-bottom: 0.9rem;
+    }
+
+    ol.steps li::marker {
+      color: var(--blue-400);
+      font-weight: 600;
+    }
+
+    ol.steps li strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--blue-300);
+      font-weight: 600;
+    }
+
+    ul {
+      margin: 0.4rem 0 0;
+      padding-left: 1.15rem;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    ul li::marker {
+      color: var(--blue-500);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      margin: 0.75rem 0 0;
+      overflow-x: auto;
+      display: block;
+    }
+
+    @media (min-width: 40rem) {
+      table {
+        display: table;
+      }
+    }
+
+    thead {
+      background: rgba(0, 89, 213, 0.12);
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.6rem 0.7rem;
+      border: 1px solid var(--border-glass);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--blue-300);
+    }
+
+    tbody tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    code {
+      font-size: 0.84em;
+      font-family: ui-monospace, "Cascadia Code", monospace;
+      background: rgba(4, 8, 61, 0.85);
+      color: var(--blue-300);
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-glass);
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-glass);
+      font-size: 0.8125rem;
+      color: var(--text-3);
+      line-height: 1.55;
+    }
+
+    footer a {
+      color: var(--blue-400);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.35);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--blue-300);
+      border-bottom-color: var(--blue-300);
+    }
+  </style>
+</head>
+<body>
+  <canvas class="stars-canvas" id="starsCanvas" aria-hidden="true"></canvas>
+  <div class="atmosphere" aria-hidden="true">
+    <div class="atmosphere__orb atmosphere__orb--1"></div>
+    <div class="atmosphere__orb atmosphere__orb--2"></div>
+    <div class="atmosphere__orb atmosphere__orb--3"></div>
+  </div>
+  <div class="progress" aria-hidden="true">
+    <div class="progress__fill" id="scrollProgress"></div>
+  </div>
+
+  <div class="wrap">
+    <header>
+      <p class="kicker">Pesquisa · Dovetail</p>
+      <h1>Gestão financeira — <span class="gradient">FAQ</span></h1>
+      <p class="lead">Perguntas e respostas com base nas entrevistas em Dados: jornada do dinheiro, tarefas recorrentes e necessidades de dados.</p>
+      <p class="meta">
+        <strong>Fonte:</strong> síntese das entrevistas em Dados (projeto Gestão financeira, Dovetail).
+      </p>
+      <p class="note">
+        <strong>Nota metodológica:</strong> consolidação qualitativa; volumes e frequências refletem o que foi dito nas sessões, não estatística de base.
+      </p>
+    </header>
+
+    <h2>Parte 1 — Jornada do dinheiro</h2>
+
+    <details class="faq-item" open>
+      <summary>Como é o fluxo do dinheiro após a venda estar confirmada?</summary>
+      <div class="faq-body">
+        <ol class="steps">
+          <li>
+            <strong>Pagamento aprovado → espera de liquidação</strong>
+            O valor não está imediatamente utilizável (exceto PIX em alguns casos, citado na conversa com Wishin): há período até ficar disponível para saque ou transferência.
+          </li>
+          <li>
+            <strong>Disponibilidade → movimentação bancária</strong>
+            Padrão recorrente: transferência do saldo Nuvem Pago para conta bancária de operação (Wishin, Lustres Gênesis). Em alguns modelos a conta de destino já é a da fábrica ou fornecedor (Lustres Gênesis).
+          </li>
+          <li>
+            <strong>Na conta → uso operacional</strong>
+            Pagamentos de contas, fornecedores e fluxo de caixa; em cenários com excesso de caixa, aplicações (mencionado na Wishin — depende do fluxo da empresa).
+          </li>
+          <li>
+            <strong>Controle e conciliação em paralelo</strong>
+            Enquanto isso, lojas e BPOs conferem vendas do dia, parcelas futuras, taxas, estornos e batem com saldo, extratos ou ERP — muitas vezes diariamente (Wishin, Flor de Cacto) ou com ritmo definido pelo tamanho do negócio (Mais Mu: visão mais gerencial; Thales: conferência de taxa aproximadamente mensal hoje).
+          </li>
+          <li>
+            <strong>Registro contábil / gestão</strong>
+            Pedidos no e-commerce versus ERP (Bling, Tiny, etc.): valor bruto da venda; taxas lançadas manualmente quando a integração não traz taxas (Lustres Gênesis). BPO descreve encadeamento DRE (competência), DFC/caixa e conciliação bancária com OFX.
+          </li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Quais são os principais desafios financeiros nessa jornada?</summary>
+      <div class="faq-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Tema</th>
+              <th>O que aparece nas entrevistas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Visibilidade do saldo</strong></td>
+              <td>Não saber quais vendas ou parcelas compõem o “saldo disponível”; histórico de saques e transferências difícil de achar para conciliar com banco.</td>
+            </tr>
+            <tr>
+              <td><strong>Recebimento no fluxo (parcelado)</strong></td>
+              <td>Projetar caixa além de poucos meses; relatórios que param em determinado mês enquanto ainda há parcelas a receber (Mulher Elástica).</td>
+            </tr>
+            <tr>
+              <td><strong>Competência vs caixa</strong></td>
+              <td>Para DRE é preciso taxa e faturamento por competência; para conciliação, o que caiu na conta — são lógicas diferentes; relatório “só de caixa” não substitui o de competência (Ana BPO).</td>
+            </tr>
+            <tr>
+              <td><strong>Trabalho manual</strong></td>
+              <td>Planilhas, filtros, várias planilhas para PIX, cartão e boleto; consolidação de várias empresas, canais e ERPs (Mulher Elástica).</td>
+            </tr>
+            <tr>
+              <td><strong>Horários e cortes</strong></td>
+              <td>Vendas após certo horário “mudam de dia” no recebimento; final de semana; antecipação D+2 com liberação noturna ou na madrugada — complica conferência diária (Flor de Cacto).</td>
+            </tr>
+            <tr>
+              <td><strong>Taxas</strong></td>
+              <td>Medo de aumento de taxa sem aviso; necessidade de comparar taxa contratada versus descontada; conciliação de taxa trabalhosa (Mulher Elástica, Thales, Ana BPO).</td>
+            </tr>
+            <tr>
+              <td><strong>Chargebacks e disputas</strong></td>
+              <td>Perda de visibilidade após migração (e-mail/forms vs painel); acompanhamento de status e resultado (Mais Mu).</td>
+            </tr>
+            <tr>
+              <td><strong>Integração ERP</strong></td>
+              <td>Nuvem envia pedido sem taxas; lançamento duplicado se importar errado; baixa parcela a parcela no Tiny ou Bling sem API automática (Gabriel, Ana BPO).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <h2>Parte 1 — Tarefas financeiras recorrentes</h2>
+
+    <details class="faq-item">
+      <summary>Além de conciliação, fechamento de caixa, consulta de saldos e transações, há outras atividades financeiras recorrentes?</summary>
+      <div class="faq-body">
+        <p>Sim, citadas explicitamente:</p>
+        <ul>
+          <li><strong>Gestão de chargebacks e contestações</strong> (Mais Mu — área de negócio e financeiro em partes distintas).</li>
+          <li><strong>Aprovação e gestão de estornos</strong> quando o SAC encaminha (Mais Mu).</li>
+          <li><strong>Demonstração de resultados (DRE)</strong> e <strong>fluxo de caixa (DFC)</strong> — regime de competência e de caixa (Ana BPO).</li>
+          <li><strong>Conciliação bancária</strong> (extrato OFX versus contas a pagar e receber) (Ana BPO).</li>
+          <li><strong>“Fechamento” diário:</strong> entradas do dia menos taxas e estornos igual ao saldo final do dia (Wishin).</li>
+          <li><strong>Conferência de sequência de pedidos</strong> no painel (integridade do dia) e regras PIX versus cartão D+2 (Flor de Cacto).</li>
+          <li><strong>Projeção de contas a receber / “a receber”</strong> por escalonamento de parcelas (Wishin — necessidade de relatório de CR futuro).</li>
+          <li><strong>Verificação de taxas cobradas</strong> versus contratadas (Mulher Elástica, Thales, Ana BPO).</li>
+          <li><strong>Conciliação fiscal:</strong> notas emitidas versus vendas no meio de pagamento (valor bruto) (Thales).</li>
+          <li><strong>Acompanhamento de devoluções</strong> (métricas e notas de devolução) (Thales).</li>
+          <li><strong>Análise gerencial:</strong> meios de pagamento, parcelamento, taxa de aprovação e antifraude, eventual whitelist (Mais Mu).</li>
+          <li><strong>Margem de contribuição, CMV, descontos, frete, tráfego</strong> como leitura de saúde (Ana BPO ao orientar clientes).</li>
+          <li><strong>Lançamento manual de taxas no ERP</strong> como contas a pagar (Gabriel).</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Qual a diferença entre essas tarefas, qual o objetivo de cada uma e com que frequência são feitas?</summary>
+      <div class="faq-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Tarefa</th>
+              <th>Diferença</th>
+              <th>Objetivo</th>
+              <th>Frequência citada</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Conciliação de vendas × ERP</strong></td>
+              <td>Cruza pedido a pedido com sistema; não é só olhar saldo.</td>
+              <td>Garantir que tudo que vendeu entrou no ERP e foi ou será recebido.</td>
+              <td>Diária (clientes exigentes / BPO); muitos lojistas não fazem (Ana BPO).</td>
+            </tr>
+            <tr>
+              <td><strong>Conciliação bancária (OFX)</strong></td>
+              <td>Cruza banco com sistema, não só meio de pagamento.</td>
+              <td>Achar duplicidade, falta de baixa, PIX “do dono”, erro de agendamento.</td>
+              <td>Diária (ontem) — Ana BPO.</td>
+            </tr>
+            <tr>
+              <td><strong>Fechamento diário de saldo (meio de pagamento)</strong></td>
+              <td>Foco no saldo da carteira e movimentos do dia.</td>
+              <td>Saber se o que entrou e saiu bate com o saldo final do dia.</td>
+              <td>Diária — Wishin.</td>
+            </tr>
+            <tr>
+              <td><strong>Conferência painel de vendas (dia)</strong></td>
+              <td>Foco em volume e sequência de pedidos do dia.</td>
+              <td>Validar integridade das vendas antes de cruzar com recebimentos.</td>
+              <td>Diária — Flor de Cacto.</td>
+            </tr>
+            <tr>
+              <td><strong>Conciliação de taxas</strong></td>
+              <td>Foco em descontos do meio de pagamento, não em NF.</td>
+              <td>Confirmar se o líquido e as taxas batem com contrato.</td>
+              <td>Mensal (Thales hoje); desejo de semanal ou diário; Mulher Elástica: cobranças indevidas todo mês.</td>
+            </tr>
+            <tr>
+              <td><strong>DRE / fechamento gerencial</strong></td>
+              <td>Competência e margem, não só caixa.</td>
+              <td>Lucro, descontos “escondidos”, frete, CMV.</td>
+              <td>Mensal — Ana BPO.</td>
+            </tr>
+            <tr>
+              <td><strong>DFC / fluxo de caixa</strong></td>
+              <td>Caixa real e projeção.</td>
+              <td>Pagar contas, antecipar, estoque, dívidas.</td>
+              <td>Diário, mensal e anual — Ana BPO; projeção limitada sem dados futuros detalhados.</td>
+            </tr>
+            <tr>
+              <td><strong>Chargeback / estorno</strong></td>
+              <td>Pós-venda e disputa.</td>
+              <td>Recuperar valor ou registrar perda; cumprir prazos.</td>
+              <td>Eventual / quando notificado — Mais Mu.</td>
+            </tr>
+            <tr>
+              <td><strong>Conciliação NF × vendas</strong></td>
+              <td>Fiscal versus meio de pagamento (bruto).</td>
+              <td>Imposto correto; devoluções com nota.</td>
+              <td>Fechamento de mês — Thales.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Usam alguma ferramenta para fazer essas tarefas?</summary>
+      <div class="faq-body">
+        <ul>
+          <li><strong>Nuvemshop / Nuvem Pago:</strong> painel de vendas, saldo disponível, lançamentos futuros, exportação de relatório de vendas, estatísticas (por exemplo receita por meio de pagamento).</li>
+          <li><strong>Excel / Google Sheets / Drive</strong> compartilhado com atualização semanal (Mulher Elástica).</li>
+          <li><strong>Tableau</strong> e planilhas internas (Gabriel — histórico).</li>
+          <li><strong>ERP:</strong> Bling, Tiny; importação OFX do banco; cadastro de taxas no meio de pagamento (Ana BPO).</li>
+          <li><strong>E-mail / forms</strong> para contestação (Mais Mu — dor versus experiência anterior).</li>
+          <li><strong>Planilhas partilhadas pelo time</strong> para chargeback (Mais Mu).</li>
+        </ul>
+      </div>
+    </details>
+
+    <h2>Parte 2 — Dados</h2>
+
+    <details class="faq-item">
+      <summary>Quais dados são usados para cada tipo de tarefa?</summary>
+      <div class="faq-body">
+        <p><strong>Conciliação diária (meio de pagamento)</strong> — Vendas do dia (número, sequência, meio), entradas, taxas, estornos, saldo inicial e final, saques e transferências (Wishin, Flor de Cacto; Ana BPO pede isso explicitamente em relatório).</p>
+        <p><strong>Conciliação ERP</strong> — Pedidos importados, parcelas com datas, baixa de parcela liberada; taxa esperada versus taxa no extrato (Ana BPO, Gabriel).</p>
+        <p><strong>Conciliação bancária</strong> — OFX do banco; contas a pagar e receber no ERP (Ana BPO).</p>
+        <p><strong>DRE</strong> — Descontos (cupom e desconto na peça), frete (pago pelo cliente versus absorvido), devoluções por competência, tarifas por competência (não só as do mês no caixa), CMV ou custo, comissões de plataforma se houver (Ana BPO).</p>
+        <p><strong>DFC / projeção</strong> — Quanto será liberado por dia ou mês; parcela a parcela até o fim do parcelamento; saldo futuro total não basta sem decomposição temporal (Ana BPO, Mulher Elástica, Wishin).</p>
+        <p><strong>Gestão de chargeback e estorno</strong> — Status da disputa, valor devolvido, taxa devolvida, motivo; lista exportável (Mais Mu).</p>
+        <p><strong>Análise de meios de pagamento</strong> — Percentual PIX, cartão, parcelas, bandeiras; comparação de taxas para negociação com adquirentes (Mais Mu, Mulher Elástica).</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Além do saldo disponível e futuro, quais outros consolidados fazem falta?</summary>
+      <div class="faq-body">
+        <p>Citado de forma transversal:</p>
+        <ul>
+          <li><strong>Futuro detalhado</strong> por mês, dia e parcela (não só total “a receber”).</li>
+          <li><strong>Total por dia</strong> de “a receber” ou vendas (versus lista só por pedido — Mulher Elástica).</li>
+          <li><strong>Taxas por regime de competência</strong> (o que as vendas do mês geraram de taxa) <em>e</em> taxas no caixa (o que saiu no mês).</li>
+          <li><strong>Vínculo explícito:</strong> qual venda ou parcela entrou em cada saldo ou saque.</li>
+          <li><strong>Saldo inicial e saldo final do dia</strong> na carteira (Ana BPO).</li>
+          <li><strong>Descontos na peça</strong> e cupons; <strong>frete</strong> líquido para a loja; <strong>CMV</strong> na exportação; <strong>devoluções</strong> por competência e por caixa.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Saldo disponível: para a loja faz mais sentido ver o saldo do dia, o consolidado do dia, ou os dois?</summary>
+      <div class="faq-body">
+        <p><strong>Operação diária (conferência)</strong> exige entender o que compõe o saldo hoje (entradas e saídas do dia mais saldo final) — Wishin, Flor de Cacto.</p>
+        <p><strong>Planejamento de caixa</strong> precisa de somatórios por dia e linha do tempo de parcelas — Mulher Elástica, Ana BPO, Wishin (contas a receber futuras).</p>
+        <p><strong>Conclusão para produto:</strong> os dois atendem necessidades diferentes — detalhe por movimento (auditoria e conciliação) e agregados por dia (leitura rápida e fluxo), mais visão futura parcelada.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Como consomem esses dados? No produto, em forma de estatística, em CSV?</summary>
+      <div class="faq-body">
+        <ul>
+          <li><strong>No produto:</strong> painel de vendas, filtros, saldo disponível e futuro, estatísticas (por exemplo vendas e clientes — Mais Mu).</li>
+          <li><strong>Export / relatório:</strong> CSV ou Excel — relatório de vendas diário (Mais Mu); export desejado para extrato (Mulher Elástica); Ana BPO pede Excel e OFX.</li>
+          <li><strong>Fora do produto:</strong> Drive semanal, Tableau, planilha de fluxo unificada com vários ERPs (Mulher Elástica).</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Como os lojistas chamam cada um desses dados?</summary>
+      <div class="faq-body">
+        <ul>
+          <li>Saldo disponível / disponível para saque</li>
+          <li>Lançamentos futuros / recebimentos futuros / a receber / contas a receber futuro</li>
+          <li>Extrato (de movimentações)</li>
+          <li>Relatório de vendas / lista de pedidos</li>
+          <li>Conciliação / fechamento (do dia ou do mês)</li>
+          <li>Regime de competência versus caixa (vocabulário BPO e contábil)</li>
+          <li>Taxa contratada versus taxa descontada</li>
+          <li>Valor bruto / valor líquido / parcela X de Y</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Referência — IDs das entrevistas no Dovetail (dados)</summary>
+      <div class="faq-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Entrevista</th>
+              <th>ID (Dados)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Ana BPO Financeiro</td><td><code>1q6irf90zrivOAATfVu7tx</code></td></tr>
+            <tr><td>Denis — Wishin</td><td><code>anIGioNw4MjsrFzJAGngN</code></td></tr>
+            <tr><td>Dayse — Flor de Cacto</td><td><code>6rXQo1KwXYz0iuYwzKi8hw</code></td></tr>
+            <tr><td>Gabriel — Lustres Gênesis</td><td><code>7jUMRf6M2U4mq6vek04VAl</code></td></tr>
+            <tr><td>Thales — Loja Reforma</td><td><code>1iq4PmBvTXQvvJzA7uqxHB</code></td></tr>
+            <tr><td>Maria Laura — Mais Mu</td><td><code>3Gav10MPA948accI2Kwioy</code></td></tr>
+            <tr><td>Nayara/Fabrício — Mulher Elástica</td><td><code>5kwSgJxj5PjYFmS7jjp2Bb</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <footer>
+      <p>Conteúdo alinhado ao ficheiro <code>Insights-Gestao-financeira-sintese-entrevistas.md</code>.</p>
+      <p style="margin-top: 0.75rem;">
+        Estilo visual inspirado na apresentação
+        <a href="https://karemcarvalho-hue.github.io/apresentacao-ia-design/como-usar-ia/" rel="noopener noreferrer" target="_blank">Como usar IA no processo de Design — Na Prática</a>
+        (Karem Carvalho): paleta Nimbus Night, atmosfera e vidro.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var canvas = document.getElementById("starsCanvas");
+      if (!canvas) return;
+      var ctx = canvas.getContext("2d");
+      var particles = [];
+      var n = 100;
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function spawn() {
+        particles = [];
+        for (var i = 0; i < n; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 1.2 + 0.3,
+            opacity: Math.random() * 0.25 + 0.1,
+            speed: Math.random() * 0.15 + 0.05,
+            drift: (Math.random() - 0.5) * 0.03,
+            twinkleSpeed: Math.random() * 0.005 + 0.002,
+            twinklePhase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      function draw(ts) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          p.y -= p.speed;
+          p.x += p.drift;
+          var tw = Math.sin(ts * p.twinkleSpeed + p.twinklePhase);
+          var op = p.opacity + tw * 0.08;
+          if (op < 0.05) op = 0.05;
+          if (p.y < -5) {
+            p.y = canvas.height + 5;
+            p.x = Math.random() * canvas.width;
+          }
+          if (p.x < -5) p.x = canvas.width + 5;
+          if (p.x > canvas.width + 5) p.x = -5;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(180, 210, 255, " + op + ")";
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      spawn();
+      requestAnimationFrame(draw);
+      window.addEventListener("resize", function () {
+        resize();
+        spawn();
+      });
+
+      var bar = document.getElementById("scrollProgress");
+      if (bar) {
+        function onScroll() {
+          var doc = document.documentElement;
+          var h = doc.scrollHeight - doc.clientHeight;
+          var p = h > 0 ? (doc.scrollTop / h) * 100 : 0;
+          bar.style.width = p + "%";
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      }
+    })();
+  </script>
+</body>
+</html>
