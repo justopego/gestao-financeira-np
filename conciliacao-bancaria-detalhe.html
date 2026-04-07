@@ -674,32 +674,24 @@
         <div class="journey" role="list">
           <article class="journey-card" role="listitem">
             <p class="journey-card__step">Passo 1</p>
-            <p class="journey-card__title">Liquidações no Nuvem Pago</p>
-            <p class="journey-card__desc">Transferências, saques e liquidações registrados no produto como base esperada.</p>
+            <p class="journey-card__title">Coleta — extrato bancário (OFX)</p>
+            <p class="journey-card__desc">Importar o extrato no formato citado nas entrevistas; é a base “linha a linha” para confrontar movimentações reais da conta com o que está registrado no sistema.</p>
           </article>
-          <svg class="journey-arrow" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M1 6h12M10 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <svg class="journey-arrow" viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M0 4h20m0 0l-4-3m4 3l-4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
           <article class="journey-card" role="listitem">
             <p class="journey-card__step">Passo 2</p>
-            <p class="journey-card__title">Extrato bancário</p>
-            <p class="journey-card__desc">Arquivo OFX e movimentações efetivas na conta corrente da empresa.</p>
+            <p class="journey-card__title">Cruzamento no ERP</p>
+            <p class="journey-card__desc">Bater o OFX com contas a pagar e a receber (e demais lançamentos financeiros), equivalente a cruzar registros financeiros com o “extrato” do banco, como na síntese de conciliação bancária.</p>
           </article>
-          <svg class="journey-arrow" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M1 6h12M10 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <svg class="journey-arrow" viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M0 4h20m0 0l-4-3m4 3l-4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
           <article class="journey-card" role="listitem">
             <p class="journey-card__step">Passo 3</p>
-            <p class="journey-card__title">Cruzamento</p>
-            <p class="journey-card__desc">Conferir valores depositados e transferências com ERP ou meio de pagamento.</p>
-          </article>
-          <svg class="journey-arrow" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M1 6h12M10 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <article class="journey-card" role="listitem">
-            <p class="journey-card__step">Passo 4</p>
-            <p class="journey-card__title">Saldo e divergências</p>
-            <p class="journey-card__desc">Confirmar saldo bancário e identificar falhas, atrasos ou recebimentos avulsos.</p>
+            <p class="journey-card__title">Validação e exceções</p>
+            <p class="journey-card__desc">Garantir que o que saiu/entrou no banco reflete pagamentos e recebimentos esperados; identificar duplicidade, furos, baixas em falta e casos atípicos (ex.: PIX do titular, erro de agendamento).</p>
           </article>
         </div>
       </div>

@@ -687,32 +687,24 @@
         <div class="journey" role="list">
           <article class="journey-card" role="listitem">
             <p class="journey-card__step">Passo 1</p>
-            <p class="journey-card__title">Pedido realizado</p>
-            <p class="journey-card__desc">Venda no site, link, PDV ou outro canal gera o pedido a conferir.</p>
+            <p class="journey-card__title">Coletar dados</p>
+            <p class="journey-card__desc">O responsável financeiro levanta tudo o que entrou no dia (vendas por Pix e cartão), geralmente através do relatório de vendas ou por meio do ERP que recebe os dados da venda via API.</p>
           </article>
-          <svg class="journey-arrow" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M1 6h12M10 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <svg class="journey-arrow" viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M0 4h20m0 0l-4-3m4 3l-4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
           <article class="journey-card" role="listitem">
             <p class="journey-card__step">Passo 2</p>
-            <p class="journey-card__title">ERP e nota fiscal</p>
-            <p class="journey-card__desc">Pedido faturado no ERP e documentação fiscal alinhada à operação.</p>
+            <p class="journey-card__title">Cruzamento de dados</p>
+            <p class="journey-card__desc">Calculam o total de entradas e saídas via Pix e cartão, muitas vezes separadamente por conta do prazo de liquidação, gerando assim o total faturado. Na sequência, descontam o total de saídas por estorno, taxas, contestação, etc. Em parte das jornadas, o responsável analisa linha a linha para ver se a venda foi liquidada de fato; para quem usa ERP, o responsável dá baixa às entradas e saídas liquidadas.</p>
           </article>
-          <svg class="journey-arrow" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M1 6h12M10 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <svg class="journey-arrow" viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M0 4h20m0 0l-4-3m4 3l-4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
           <article class="journey-card" role="listitem">
             <p class="journey-card__step">Passo 3</p>
-            <p class="journey-card__title">Pagamento no Nuvem Pago</p>
-            <p class="journey-card__desc">Registro de pagamento e liquidação no meio de pagamento.</p>
-          </article>
-          <svg class="journey-arrow" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M1 6h12M10 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <article class="journey-card" role="listitem">
-            <p class="journey-card__step">Passo 4</p>
-            <p class="journey-card__title">Conferência</p>
-            <p class="journey-card__desc">Validar se o pedido foi pago e refletido corretamente em todos os sistemas.</p>
+            <p class="journey-card__title">Validação do saldo do dia</p>
+            <p class="journey-card__desc">O resultado dessa apuração matemática é cruzado diretamente com o saldo disponível que aparece no painel do Nuvem Pago, para garantir que o que o lojista calculou bate com o saldo do Nuvem Pago. Depois, todo o saldo é transferido. Zerar o saldo facilita saber a partir de quais vendas liquidadas o saldo atual se refere, uma vez que não mostramos o saldo do dia.</p>
           </article>
         </div>
       </div>

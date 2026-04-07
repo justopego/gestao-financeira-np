@@ -368,6 +368,11 @@
       margin-top: 1em;
     }
 
+    .destaque-item__text strong {
+      font-weight: 600;
+      color: rgba(138, 162, 198, 1);
+    }
+
     @media (max-width: 520px) {
       .destaque-item {
         flex-direction: column;
@@ -524,6 +529,10 @@
       margin-bottom: 0;
     }
 
+    #pain-panel-autonomia .evidence-card {
+      margin-bottom: 0;
+    }
+
     #pain-panel-erp-api .evidence-grid > .evidence-card:first-child {
       margin-bottom: 0;
     }
@@ -637,6 +646,28 @@
             </p>
             <p class="destaque-item__text">
               Ex: Financeiro desconhecia variação no comportamento de liquidando entre Pix, cartão liquidado e não liquidado, além das regras de devolução de custos em caso de chargeback, e por fim, também não sabia que transferências custam R$&nbsp;0,99. Isso tudo fazia com que os saldos e liquidações estimados não batessem com as informações enviadas por relatório.
+            </p>
+          </div>
+        </article>
+
+        <article class="destaque-item">
+          <span class="destaque-item__num" aria-hidden="true">5</span>
+          <div class="destaque-item__body">
+            <strong class="destaque-item__headline">Tarefas relacionadas a Orders Vs Nuvem Pago</strong>
+            <p class="destaque-item__text">
+              <strong>Fechamento de caixa:</strong> depende do volume de dados de orders (via API ou relatório de vendas) e do Nuvem Pago para conferir o que foi liquidado.
+            </p>
+            <p class="destaque-item__text">
+              <strong>Conciliação financeira:</strong> depende de orders e do Nuvem Pago para comparar o que foi faturado e o que foi pago, verificar se todas as vendas foram pagas e se as taxas batem com o contratado com o Nuvem Pago.
+            </p>
+            <p class="destaque-item__text">
+              <strong>Conciliação bancária:</strong> depende do Nuvem Pago e da conta bancária externa do lojista para validar se o que foi transferido foi recebido na conta de destino.
+            </p>
+            <p class="destaque-item__text">
+              <strong>DRE:</strong> está mais ligada ao core para entender o histórico da venda e os custos (frete, descontos, taxas etc.), com análise mais aprofundada da lucratividade real do produto e da loja; tende a depender mais do relatório de orders, que concentra informações dos produtos, o histórico de mudança de status e os custos e descontos de cada venda.
+            </p>
+            <p class="destaque-item__text">
+              <strong>DFC:</strong> depende da conta bancária externa e dos relatórios do Nuvem Pago para ver saldos e a visão completa de lançamentos futuros, com foco em provisionamento e em garantir que a loja tenha fôlego financeiro a médio e longo prazo.
             </p>
           </div>
         </article>
@@ -765,6 +796,21 @@
                     </video>
                   </div>
                 </div>
+                <div class="evidence-card">
+                  <p class="evidence-card__text">
+                    Falta de dashboards nativos para ver as informações em tempo real.
+                  </p>
+                  <div class="evidence-media">
+                    <video
+                      controls
+                      playsinline
+                      preload="metadata"
+                      aria-label="Evidência em vídeo: falta de dashboards nativos e informação em tempo real no produto"
+                    >
+                      <source src="media/principais-dores/falta-de-autonomia-dashboards-nativos.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -797,7 +843,7 @@
                 Os lojistas e responsáveis pelo financeiro não conseguem visualizar, extrair ou consolidar seus dados diários de recebimentos, taxas e fluxo de caixa de forma independente ou dentro do próprio painel da plataforma. Como os relatórios nativos são incompletos ou inexistentes, os usuários tornam-se reféns de planilhas e dependem do suporte ou dos gerentes de conta, mas esses envios costumam ocorrer somente semanalmente ou mensalmente, enquanto a base da análise financeira (fechamento de caixa, conciliação financeira e bancária) é feita diariamente. Isso transforma a rotina de gestão em um processo moroso e dificulta a tomada rápida de decisão.
               </p>
               <div class="evidence-grid">
-                <div class="evidence-card">
+                <div class="evidence-card evidence-card--span-full">
                   <p class="evidence-card__text">
                     Dependência do suporte para ter acesso aos relatórios cruciais para fazer as tarefas de gestão financeira.
                   </p>
@@ -809,21 +855,6 @@
                       aria-label="Evidência em vídeo: dependência do suporte para aceder aos relatórios de gestão financeira"
                     >
                       <source src="media/principais-dores/falta-de-autonomia-suporte-relatorios.mp4" type="video/mp4" />
-                    </video>
-                  </div>
-                </div>
-                <div class="evidence-card">
-                  <p class="evidence-card__text">
-                    Falta de dashboards nativos para ver as informações em tempo real.
-                  </p>
-                  <div class="evidence-media">
-                    <video
-                      controls
-                      playsinline
-                      preload="metadata"
-                      aria-label="Evidência em vídeo: falta de dashboards nativos e informação em tempo real no produto"
-                    >
-                      <source src="media/principais-dores/falta-de-autonomia-dashboards-nativos.mp4" type="video/mp4" />
                     </video>
                   </div>
                 </div>
@@ -843,7 +874,7 @@
                 <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2" />
                 <path d="M8 4.5v4M8 11h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
               </svg>
-              <h2 id="pain-erp-api-title">Falta de dados na API de integração com a ERP</h2>
+              <h2 id="pain-erp-api-title">Perda de tempo por falha de integração da nossa API com a ERP do lojista</h2>
               <svg class="pain-header__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>

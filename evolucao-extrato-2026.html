@@ -282,6 +282,16 @@
       color: var(--pain-title);
     }
 
+    /* Linha entre título do problema e parágrafo descritivo (pendências) */
+    .evolucao-card__subheading {
+      margin: 0;
+      font-family: "Geist", "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      line-height: 1.4;
+      color: var(--body-muted);
+    }
+
     .evolucao-card__list {
       margin: 0;
       padding-left: 30px;
@@ -669,7 +679,7 @@
                 <p class="evolucao-card__num" aria-hidden="true">1</p>
                 <div class="evolucao-card__main">
                   <p class="evolucao-card__heading">
-                    Extrato que não oferece informação suficiente para identificar a movimentação (ex: Id da venda, Id do link, beneficiário da transferencia.
+                    Extrato que não oferece informação suficiente para identificar a movimentação (ex.: ID da venda, ID do link, beneficiário da transferência). Dependência do suporte para ter acesso aos relatórios cruciais para fazer as tarefas de gestão financeira.
                   </p>
                   <ul class="evolucao-card__list">
                     <li>
@@ -768,15 +778,42 @@
                 </div>
               </div>
             </article>
-          </div>
 
-          <div class="evolucao-panel" id="panel-autonomia" role="tabpanel" aria-labelledby="tab-autonomia" hidden>
             <article class="evolucao-card">
               <div class="evolucao-card__row">
                 <p class="evolucao-card__num" aria-hidden="true">3</p>
                 <div class="evolucao-card__main">
                   <p class="evolucao-card__heading">
-                    Extrato que não oferece informação suficiente para identificar a movimentação (ex: Id da venda, Id do link, beneficiário da transferencia.
+                    Falta de dashboards nativos para ver as informações em tempo real.
+                  </p>
+                  <p class="evolucao-card__body">
+                    O time de Reports lançou um MVP do painel estatístico com dados de pagamentos, com informações como: Total de faturamento por forma de pagamento, por meio de pagamento, por número de parcela entre outros.
+                  </p>
+                  <div class="evolucao-card__footer">
+                    <p class="evolucao-status">MVP Feito ✅</p>
+                  </div>
+                </div>
+                <div class="evolucao-card__mock evolucao-card__mock--dashboard">
+                  <img
+                    src="media/evolucao/autonomia-dashboard-mvp.png"
+                    alt="Mock do painel estatístico com dados de pagamentos"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="evolucao-panel" id="panel-autonomia" role="tabpanel" aria-labelledby="tab-autonomia" hidden>
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">4</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">
+                    Extrato que não oferece informação suficiente para identificar a movimentação (ex.: ID da venda, ID do link, beneficiário da transferência). Dependência do suporte para ter acesso aos relatórios cruciais para fazer as tarefas de gestão financeira.
                   </p>
                   <p class="evolucao-card__body">
                     Adicionamos a opção de exportar o extrato direto da tela de saldo disponível e lançamentos futuros.
@@ -821,33 +858,6 @@
                 </div>
               </div>
             </article>
-
-            <article class="evolucao-card">
-              <div class="evolucao-card__row">
-                <p class="evolucao-card__num" aria-hidden="true">4</p>
-                <div class="evolucao-card__main">
-                  <p class="evolucao-card__heading">
-                    Falta de dashboards nativos para ver as informações em tempo real.
-                  </p>
-                  <p class="evolucao-card__body">
-                    O time de Reports lançou um MVP do painel estatístico com dados de pagamentos, com informações como: Total de faturamento por forma de pagamento, por meio de pagamento, por número de parcela entre outros.
-                  </p>
-                  <div class="evolucao-card__footer">
-                    <p class="evolucao-status">MVP Feito ✅</p>
-                  </div>
-                </div>
-                <div class="evolucao-card__mock evolucao-card__mock--dashboard">
-                  <img
-                    src="media/evolucao/autonomia-dashboard-mvp.png"
-                    alt="Mock do painel estatístico com dados de pagamentos"
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              </div>
-            </article>
           </div>
         </div>
       </section>
@@ -864,6 +874,9 @@
           <button type="button" role="tab" id="tab-pend-autonomia" aria-selected="false" aria-controls="panel-pend-autonomia" data-tab="pend-autonomia">
             Falta de autonomia
           </button>
+          <button type="button" role="tab" id="tab-pend-integracao-erp" aria-selected="false" aria-controls="panel-pend-integracao-erp" data-tab="pend-integracao-erp">
+            Problemas de integração com ERP
+          </button>
         </div>
 
         <div class="evolucao-panels">
@@ -872,9 +885,16 @@
               <div class="evolucao-card__row">
                 <p class="evolucao-card__num" aria-hidden="true">1</p>
                 <div class="evolucao-card__main">
-                  <p class="evolucao-card__heading">Incluir informação de saldo no extrato</p>
+                  <p class="evolucao-card__heading">
+                    Falta de acesso à visão de saldo inicial e final da conta para fazer fechamento de caixa.
+                  </p>
+                  <p class="evolucao-card__subheading">Incluir resumo financeiro diário no extrato.</p>
                   <p class="evolucao-card__body">
-                    A transparência sobre o saldo do dia, tira a dependência do envio de relatórios mensais ou semanais para ter acesso a essa informação que é essencial para o fechamento do caixa, que costuma ser uma tarefa diária. Essa visualização (saldo inicial, movimentações e saldo final) traz transparência, permitindo que o lojista entenda exatamente quais transações compõem o seu saldo atual. Esse dado também se tornará base para conciliação bancária, quando o Nuvem Pago passar a ser definitivamente como a conta bancária.
+                    Incluir informação de saldo no extrato. A transparência sobre o saldo do dia reduz a dependência do envio de relatórios mensais ou semanais para ter acesso à informação essencial ao fechamento de caixa, em geral uma tarefa diária. A visualização (saldo inicial, movimentações e saldo final) permite que o lojista entenda quais transações compõem o saldo atual. Esse dado também será base para a conciliação bancária, quando o Nuvem Pago passar a ser tratado definitivamente como a conta bancária.
+                  </p>
+                  <p class="evolucao-card__subheading">Adicionar PNF.</p>
+                  <p class="evolucao-card__body">
+                    Adicionar os casos de uso de PNF com a projeção completa de lançamentos futuros.
                   </p>
                   <div class="evolucao-card__footer">
                     <a
@@ -908,9 +928,12 @@
               <div class="evolucao-card__row">
                 <p class="evolucao-card__num" aria-hidden="true">2</p>
                 <div class="evolucao-card__main">
-                  <p class="evolucao-card__heading">Resumo financeiro por período</p>
+                  <p class="evolucao-card__heading">
+                    Falta de acesso à visão de saldo inicial e final da conta para fazer fechamento de caixa.
+                  </p>
+                  <p class="evolucao-card__subheading">Resumo financeiro por período.</p>
                   <p class="evolucao-card__body">
-                    Hoje passamos a dar visibilidade para mais detalhes sobre as transações, mas há pouca transparência sobre os consolidados de valores, que ajudam a conferir se os totais faturados batem com os totais processados pelo Nuvem Pago. Exibir esses dados no produto permite que o financeiro ganhe agilidade, tirando a dependência de relatórios enviados pelo suporte e eliminando o trabalho de fazer cálculos para chegar a esses valores.
+                    Extrato que não oferece informação suficiente para identificar a movimentação (ex.: ID da venda, ID do link, beneficiário da transferência). Hoje passamos a dar visibilidade para mais detalhes sobre as transações, mas há pouca transparência sobre os consolidados de valores, que ajudam a conferir se os totais faturados batem com os totais processados pelo Nuvem Pago. Exibir esses dados no produto permite que o financeiro ganhe agilidade, tirando a dependência de relatórios enviados pelo suporte e eliminando o trabalho de fazer cálculos para chegar a esses valores.
                   </p>
                   <div class="evolucao-card__footer">
                     <a
@@ -939,15 +962,57 @@
                 </div>
               </div>
             </article>
-          </div>
 
-          <div class="evolucao-panel" id="panel-pend-autonomia" role="tabpanel" aria-labelledby="tab-pend-autonomia" hidden>
             <article class="evolucao-card">
               <div class="evolucao-card__row">
                 <p class="evolucao-card__num" aria-hidden="true">3</p>
                 <div class="evolucao-card__main">
                   <p class="evolucao-card__heading">
-                    Evoluir o Exportável de saldo disponível e lançamentos futuros com base nos feedbacks dos lojistas
+                    Falta de dashboards nativos para ver as informações em tempo real.
+                  </p>
+                  <p class="evolucao-card__subheading">Evoluir as estatísticas de pagamento</p>
+                  <p class="evolucao-card__body">
+                    Evoluir os dados estatísticos relacionados a pagamento que foram mapeados por produto.
+                  </p>
+                  <div class="evolucao-card__footer">
+                    <a
+                      class="evolucao-link"
+                      href="https://docs.google.com/document/d/16MQ9dYbSP3E4pL9X6sLL4pIl-LtA1ZvPhL7dJroNzP0/edit?tab=t.0#heading=h.ds3sjzygkoxa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Link do mapeamento de dados
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <div class="evolucao-card__mock evolucao-card__mock--dashboard">
+                  <img
+                    src="media/evolucao/autonomia-dashboard-mvp.png"
+                    alt="Mock do painel estatístico com dados de pagamentos"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="evolucao-panel" id="panel-pend-autonomia" role="tabpanel" aria-labelledby="tab-pend-autonomia" hidden>
+            <article class="evolucao-card">
+              <div class="evolucao-card__row">
+                <p class="evolucao-card__num" aria-hidden="true">4</p>
+                <div class="evolucao-card__main">
+                  <p class="evolucao-card__heading">
+                    Dependência do suporte para ter acesso aos relatórios cruciais para fazer as tarefas de gestão financeira.
+                  </p>
+                  <p class="evolucao-card__subheading">
+                    Evoluir o Exportável de saldo disponível e lançamentos futuros com base nos feedbacks dos lojistas.
                   </p>
                   <ul class="evolucao-card__list">
                     <li>
@@ -961,6 +1026,12 @@
                     </li>
                     <li>
                       Adicionar a bandeira. Hoje existe esse dado em orders, mas orders não contém todas as movimentações, então o ideal é ter no relatório do Nuvem Pago, para o lojista não depender do relatório de orders ou do suporte para ter a informação da bandeira usada no pagamento via link.
+                    </li>
+                    <li>
+                      Permitir filtrar o relatório por período, melhorando o desempenho do arquivo e alinhando o exportável ao perfil da maioria dos entrevistados, que o utilizam nas rotinas diárias de fechamento e conciliação.
+                    </li>
+                    <li>
+                      Não enviamos a projeção de recebíveis completa necessária para entender o regime de caixa para a DFC.
                     </li>
                     <li>
                       Em versões futuras, permitir que o lojista possa personalizar o relatório através da Lumi (nossa IA), e/ou que a gente sugira quais informações o relatório deve conter de acordo com o objetivo, a tarefa ou a pergunta que o lojista precisa responder.
@@ -996,9 +1067,12 @@
 
             <article class="evolucao-card">
               <div class="evolucao-card__row">
-                <p class="evolucao-card__num" aria-hidden="true">4</p>
+                <p class="evolucao-card__num" aria-hidden="true">5</p>
                 <div class="evolucao-card__main">
-                  <p class="evolucao-card__heading">Evoluir o extrato atual</p>
+                  <p class="evolucao-card__heading">
+                    Dependência do suporte para ter acesso aos relatórios cruciais para fazer as tarefas de gestão financeira.
+                  </p>
+                  <p class="evolucao-card__subheading">Evoluir o extrato atual</p>
                   <ul class="evolucao-card__list evolucao-card__list--lg">
                     <li>
                       Permitir filtragem por período, tipo de transação e forma de pagamento, para o encontro de movimentações específicas que precisam ser analisadas no dia a dia da gestão financeira e na gestão da venda.
@@ -1029,9 +1103,12 @@
 
             <article class="evolucao-card">
               <div class="evolucao-card__row">
-                <p class="evolucao-card__num" aria-hidden="true">5</p>
+                <p class="evolucao-card__num" aria-hidden="true">6</p>
                 <div class="evolucao-card__main">
-                  <p class="evolucao-card__heading">Exportar e enviar o Resumo financeiro</p>
+                  <p class="evolucao-card__heading">
+                    Dependência do suporte para ter acesso aos relatórios cruciais para fazer as tarefas de gestão financeira.
+                  </p>
+                  <p class="evolucao-card__subheading">Exportar e enviar o Resumo financeiro</p>
                   <p class="evolucao-card__body evolucao-card__body--lg">
                     Além de apresentar o resumo financeiro para consulta no Nuvem Pago, o ideal é também permitir o download do resumo financeiro, para que o lojista consiga manipular, filtrar, organizar e enviar esses dados para as ferramentas necessárias para fazer suas tarefas financeiras a seu modo.
                   </p>
@@ -1062,12 +1139,17 @@
                 </div>
               </div>
             </article>
+          </div>
 
+          <div class="evolucao-panel" id="panel-pend-integracao-erp" role="tabpanel" aria-labelledby="tab-pend-integracao-erp" hidden>
             <article class="evolucao-card">
               <div class="evolucao-card__row">
-                <p class="evolucao-card__num" aria-hidden="true">6</p>
+                <p class="evolucao-card__num" aria-hidden="true">7</p>
                 <div class="evolucao-card__main">
-                  <p class="evolucao-card__heading">Enviar todos os dados necessários via API</p>
+                  <p class="evolucao-card__heading">
+                    Perda de tempo por falha de integração da nossa API com a ERP do lojista.
+                  </p>
+                  <p class="evolucao-card__subheading">Enviar todos os dados necessários via API</p>
                   <p class="evolucao-card__body evolucao-card__body--lg">
                     Através da API, atenderemos os lojistas mais estruturados, que precisam dos dados das transações, mas também dos dados consolidados de formas mais automatizadas para dar baixa em suas ERPs e se conectar a sistemas de conciliadoras especializadas, sem necessariamente dar acesso ao admin da loja à conciliadora e ter que enviar relatórios diariamente de forma manual.
                   </p>
