@@ -11,7 +11,7 @@ Documento de referência para replicar o padrão das páginas **detalhe da taref
 | `fechamento-de-caixa-detalhe.html` | Estrutura semelhante à financeira |
 | `dre-detalhe.html` | Secção «Passo a passo» em tabela; «Dados necessários» em dois grupos de pills |
 
-Ligação a partir do resumo: `gestao-financeira-nuvempago-2026.html` → lista `.detail-item` com `href` para cada `*-detalhe.html`.
+Ligação a partir do resumo: `index.html` → lista `.detail-item` com `href` para cada `*-detalhe.html`.
 
 ---
 
@@ -21,7 +21,7 @@ Ordem fixa recomendada:
 
 ```
 header.app-header
-  a.header-pill [Voltar → gestao-financeira-nuvempago-2026.html]
+  a.header-pill [Voltar → index.html]
   p.header-context  "Detalhe da tarefa"
   div.header-actions
     a.header-pill  âncoras internas (#principais-dores, #conclusao) e/ou outras páginas
@@ -72,7 +72,7 @@ script(s) no final do body
 
 ## 2. Cabeçalho (`header.app-header`)
 
-- **Voltar:** `a.header-pill` com `href="gestao-financeira-nuvempago-2026.html"` e `aria-label="Voltar ao resumo"`.
+- **Voltar:** `a.header-pill` com `href="index.html"` e `aria-label="Voltar ao resumo"`.
 - **Contexto:** `p.header-context` — texto curto centrado (ex.: «Detalhe da tarefa»).
 - **Ações:** `div.header-actions` com `a.header-pill` para saltos `#principais-dores`, `#conclusao` ou links cruzados entre tarefas (opcional).
 
@@ -155,12 +155,12 @@ Fontes: **Inter** + **Plus Jakarta Sans** (título hero), via Google Fonts no `<
 ## 10. Checklist — nova tela `nome-tarefa-detalhe.html`
 
 - [ ] `<title>` e `h1.title-hero` coerentes
-- [ ] Link «Voltar» para `gestao-financeira-nuvempago-2026.html`
+- [ ] Link «Voltar» para `index.html`
 - [ ] Âncoras `#principais-dores` e `#conclusao` existem no DOM
 - [ ] Tabela resumo com uma linha mínima por tarefa
 - [ ] `id="dados-necessarios-section"` se houver bloco homónimo
 - [ ] Acordeão: `aria-*` consistentes; primeiro painel aberto ou fechado conforme desenho
-- [ ] Atualizar `gestao-financeira-nuvempago-2026.html` (ou índice) com `href` para o novo ficheiro
+- [ ] Atualizar `index.html` (ou índice) com `href` para o novo ficheiro
 - [ ] Testar tabs/pills se existirem (modo «Todos» e cada tab)
 
 ---

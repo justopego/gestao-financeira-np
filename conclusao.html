@@ -533,7 +533,7 @@
       margin-bottom: 0;
     }
 
-    #pain-panel-erp-api .evidence-grid > .evidence-card:first-child {
+    #pain-panel-erp-api .evidence-grid > .evidence-card {
       margin-bottom: 0;
     }
 
@@ -587,14 +587,14 @@
 </head>
 <body>
   <header class="app-header">
-    <a class="header-pill header-pill--voltar" href="gestao-financeira-nuvempago-2026.html" aria-label="Voltar à página anterior">
+    <a class="header-pill header-pill--voltar" href="index.html" aria-label="Voltar à página anterior">
       <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="16" height="16">
         <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
       Voltar
     </a>
     <div class="header-actions">
-      <a class="header-pill" href="gestao-financeira-nuvempago-2026.html">Início</a>
+      <a class="header-pill" href="index.html">Início</a>
       <a class="header-pill" href="evolucao-extrato-2026.html">Evolução</a>
       <a class="header-pill" href="sobre-a-pesquisa.html">Sobre a pesquisa</a>
     </div>
@@ -721,7 +721,7 @@
                         preload="metadata"
                         aria-label="Evidência em vídeo: extrato sem informação suficiente para identificar a movimentação"
                       >
-                        <source src="media/principais-dores/extrato-info-insuficiente-movimentacao.mp4" type="video/mp4" />
+                        <source src="media/principais-dores/extrato-info-insuficiente-movimentacao.webm" type="video/webm" />
                       </video>
                     </div>
                     <div class="evidence-media">
@@ -731,7 +731,7 @@
                         preload="metadata"
                         aria-label="Evidência em vídeo: relatório sem informação suficiente para identificar a movimentação"
                       >
-                        <source src="media/principais-dores/relatorio-info-insuficiente-movimentacao.mp4" type="video/mp4" />
+                        <source src="media/principais-dores/relatorio-info-insuficiente-movimentacao.webm" type="video/webm" />
                       </video>
                     </div>
                   </div>
@@ -747,7 +747,7 @@
                       preload="metadata"
                       aria-label="Evidência em vídeo: saldo inicial e final da conta para fechamento de caixa"
                     >
-                      <source src="media/principais-dores/saldo-inicial-final-fechamento-caixa.mp4" type="video/mp4" />
+                      <source src="media/principais-dores/saldo-inicial-final-fechamento-caixa.webm" type="video/webm" />
                     </video>
                   </div>
                 </div>
@@ -762,7 +762,7 @@
                       preload="metadata"
                       aria-label="Evidência em vídeo: falta de gestão de chargeback e contestação"
                     >
-                      <source src="media/principais-dores/falta-gestao-chargeback.mp4" type="video/mp4" />
+                      <source src="media/principais-dores/falta-gestao-chargeback.webm" type="video/webm" />
                     </video>
                   </div>
                 </div>
@@ -777,7 +777,7 @@
                       preload="metadata"
                       aria-label="Evidência em vídeo: falta de visão por competência para construir a DRE"
                     >
-                      <source src="media/principais-dores/falta-visao-competencia-dre.mp4" type="video/mp4" />
+                      <source src="media/principais-dores/falta-visao-competencia-dre.webm" type="video/webm" />
                     </video>
                   </div>
                 </div>
@@ -792,7 +792,7 @@
                       preload="metadata"
                       aria-label="Evidência em vídeo: falta de projeção completa dos lançamentos futuros e regime de caixa (DFC)"
                     >
-                      <source src="media/principais-dores/falta-projecao-lancamentos-futuros.mp4" type="video/mp4" />
+                      <source src="media/principais-dores/falta-projecao-lancamentos-futuros.webm" type="video/webm" />
                     </video>
                   </div>
                 </div>
@@ -807,7 +807,7 @@
                       preload="metadata"
                       aria-label="Evidência em vídeo: falta de dashboards nativos e informação em tempo real no produto"
                     >
-                      <source src="media/principais-dores/falta-de-autonomia-dashboards-nativos.mp4" type="video/mp4" />
+                      <source src="media/principais-dores/falta-de-autonomia-dashboards-nativos.webm" type="video/webm" />
                     </video>
                   </div>
                 </div>
@@ -854,7 +854,7 @@
                       preload="metadata"
                       aria-label="Evidência em vídeo: dependência do suporte para aceder aos relatórios de gestão financeira"
                     >
-                      <source src="media/principais-dores/falta-de-autonomia-suporte-relatorios.mp4" type="video/mp4" />
+                      <source src="media/principais-dores/falta-de-autonomia-suporte-relatorios.webm" type="video/webm" />
                     </video>
                   </div>
                 </div>
@@ -890,34 +890,22 @@
                 Falta de envio automático dos dados estruturados de recebíveis e das taxas cobradas pelo Nuvem Pago. Sem isso, os lojistas são obrigados a registrar as tarifas manualmente como “contas a pagar” e liquidar manualmente, gerando trabalho desnecessário e risco de lançamentos duplicados.
               </p>
               <div class="evidence-grid">
-                <div class="evidence-card evidence-card--span-full">
+                <div class="evidence-card">
                   <p class="evidence-card__text">
                     API não envia a taxa, gerando retrabalho para o lojista.
                   </p>
-                  <div class="evidence-media-row">
-                    <div class="evidence-media">
-                      <video
-                        controls
-                        playsinline
-                        preload="metadata"
-                        aria-label="Evidência em vídeo: integração API–ERP e envio de taxas"
-                      >
-                        <source src="media/principais-dores/api-erp-taxas.mp4" type="video/mp4" />
-                      </video>
-                    </div>
-                    <div class="evidence-media">
-                      <video
-                        controls
-                        playsinline
-                        preload="metadata"
-                        aria-label="Evidência em vídeo: gestão financeira Les Cloches — gravação sobre integração"
-                      >
-                        <source src="media/principais-dores/api-erp-les-cloches-recording.mp4" type="video/mp4" />
-                      </video>
-                    </div>
+                  <div class="evidence-media">
+                    <video
+                      controls
+                      playsinline
+                      preload="metadata"
+                      aria-label="Evidência em vídeo: integração API–ERP e envio de taxas"
+                    >
+                      <source src="media/principais-dores/api-erp-taxas.webm" type="video/webm" />
+                    </video>
                   </div>
                 </div>
-                <div class="evidence-card evidence-card--span-full">
+                <div class="evidence-card">
                   <p class="evidence-card__text">
                     Perda de tempo dando baixa manual dentro do ERP por falta de uma integração via API adequada.
                   </p>
@@ -928,7 +916,7 @@
                       preload="metadata"
                       aria-label="Evidência em vídeo: baixa manual na integração API–ERP"
                     >
-                      <source src="media/principais-dores/api-erp-baixa-manual.mp4" type="video/mp4" />
+                      <source src="media/principais-dores/api-erp-baixa-manual.webm" type="video/webm" />
                     </video>
                   </div>
                 </div>
