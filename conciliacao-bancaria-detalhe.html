@@ -562,7 +562,7 @@
     </a>
     <p class="header-context">Detalhe da tarefa</p>
     <div class="header-actions">
-      <a class="header-pill" href="conclusao.html">Conclusão</a>
+      <a class="header-pill" href="conclusao.html">Resultado</a>
       <a class="header-pill" href="evolucao-extrato-2026.html">Evolução</a>
       <a class="header-pill" href="sobre-a-pesquisa.html">Sobre a pesquisa</a>
     </div>
@@ -600,6 +600,33 @@
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <div class="section-block" id="jornada-macro">
+        <h2 class="section-title">Jornada macro</h2>
+        <div class="journey" role="list">
+          <article class="journey-card" role="listitem">
+            <p class="journey-card__step">Passo 1</p>
+            <p class="journey-card__title">Coleta — extrato bancário (OFX)</p>
+            <p class="journey-card__desc">Importar o extrato no formato citado nas entrevistas; é a base “linha a linha” para confrontar movimentações reais da conta com o que está registrado no sistema.</p>
+          </article>
+          <svg class="journey-arrow" viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M0 4h20m0 0l-4-3m4 3l-4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <article class="journey-card" role="listitem">
+            <p class="journey-card__step">Passo 2</p>
+            <p class="journey-card__title">Cruzamento no ERP</p>
+            <p class="journey-card__desc">Bater o OFX com contas a pagar e a receber (e demais lançamentos financeiros), equivalente a cruzar registros financeiros com o “extrato” do banco, como na síntese de conciliação bancária.</p>
+          </article>
+          <svg class="journey-arrow" viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M0 4h20m0 0l-4-3m4 3l-4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <article class="journey-card" role="listitem">
+            <p class="journey-card__step">Passo 3</p>
+            <p class="journey-card__title">Validação e exceções</p>
+            <p class="journey-card__desc">Garantir que o que saiu/entrou no banco reflete pagamentos e recebimentos esperados; identificar duplicidade, furos, baixas em falta e casos atípicos (ex.: PIX do titular, erro de agendamento).</p>
+          </article>
         </div>
       </div>
 
@@ -667,33 +694,6 @@
               <span id="pill-linha-dados-mov-conta" class="pill pill--neutral js-dados-pill" data-tabs="conta-externa">Dados de movimentações feitas direto na conta bancária.</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="section-block" id="jornada-macro">
-        <h2 class="section-title">Jornada macro</h2>
-        <div class="journey" role="list">
-          <article class="journey-card" role="listitem">
-            <p class="journey-card__step">Passo 1</p>
-            <p class="journey-card__title">Coleta — extrato bancário (OFX)</p>
-            <p class="journey-card__desc">Importar o extrato no formato citado nas entrevistas; é a base “linha a linha” para confrontar movimentações reais da conta com o que está registrado no sistema.</p>
-          </article>
-          <svg class="journey-arrow" viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M0 4h20m0 0l-4-3m4 3l-4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <article class="journey-card" role="listitem">
-            <p class="journey-card__step">Passo 2</p>
-            <p class="journey-card__title">Cruzamento no ERP</p>
-            <p class="journey-card__desc">Bater o OFX com contas a pagar e a receber (e demais lançamentos financeiros), equivalente a cruzar registros financeiros com o “extrato” do banco, como na síntese de conciliação bancária.</p>
-          </article>
-          <svg class="journey-arrow" viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M0 4h20m0 0l-4-3m4 3l-4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <article class="journey-card" role="listitem">
-            <p class="journey-card__step">Passo 3</p>
-            <p class="journey-card__title">Validação e exceções</p>
-            <p class="journey-card__desc">Garantir que o que saiu/entrou no banco reflete pagamentos e recebimentos esperados; identificar duplicidade, furos, baixas em falta e casos atípicos (ex.: PIX do titular, erro de agendamento).</p>
-          </article>
         </div>
       </div>
     </main>
