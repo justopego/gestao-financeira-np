@@ -688,6 +688,9 @@
                     <li>
                       Incluímos casos de uso que não tratávamos no extrato antes, como todos os casos de TERs conectados a troca de titularidade, como reembolsos, Cobertura contestação, Ordem judicial, Parcela de crédito entre outros.
                     </li>
+                    <li>
+                      <strong>Casos de uso ainda pendentes:</strong> liquidação externa e PNF.
+                    </li>
                   </ul>
                   <div class="evolucao-card__footer">
                     <p class="evolucao-status">Feito ✅</p>
@@ -892,10 +895,6 @@
                   <p class="evolucao-card__body">
                     Incluir informação de saldo no extrato. A transparência sobre o saldo do dia reduz a dependência do envio de relatórios mensais ou semanais para ter acesso à informação essencial ao fechamento de caixa, em geral uma tarefa diária. A visualização (saldo inicial, movimentações e saldo final) permite que o lojista entenda quais transações compõem o saldo atual. Esse dado também será base para a conciliação bancária, quando o Nuvem Pago passar a ser tratado definitivamente como a conta bancária.
                   </p>
-                  <p class="evolucao-card__subheading">Adicionar PNF.</p>
-                  <p class="evolucao-card__body">
-                    Adicionar os casos de uso de PNF com a projeção completa de lançamentos futuros.
-                  </p>
                   <div class="evolucao-card__footer">
                     <a
                       class="evolucao-link"
@@ -931,9 +930,12 @@
                   <p class="evolucao-card__heading">
                     Falta de acesso à visão de saldo inicial e final da conta para fazer fechamento de caixa.
                   </p>
-                  <p class="evolucao-card__subheading">Resumo financeiro por período.</p>
+                  <p class="evolucao-card__subheading">Visão de consolidados que fizeram chegar no resultado de saldo final.</p>
                   <p class="evolucao-card__body">
-                    Extrato que não oferece informação suficiente para identificar a movimentação (ex.: ID da venda, ID do link, beneficiário da transferência). Hoje passamos a dar visibilidade para mais detalhes sobre as transações, mas há pouca transparência sobre os consolidados de valores, que ajudam a conferir se os totais faturados batem com os totais processados pelo Nuvem Pago. Exibir esses dados no produto permite que o financeiro ganhe agilidade, tirando a dependência de relatórios enviados pelo suporte e eliminando o trabalho de fazer cálculos para chegar a esses valores.
+                    Além do resumo financeiro diário que mostra o saldo do dia, precisamos de um consolidado mais completo por período, com uma visão geral de total recebido e provisionado e dos totais por categoria que chegaram a esses saldos atuais e provisionados.
+                  </p>
+                  <p class="evolucao-card__body">
+                    Exibir esses dados no produto permite que o financeiro ganhe agilidade, tirando a dependência de relatórios enviados pelo suporte e eliminando o trabalho de fazer cálculos para chegar a esses valores para fazer fechamento de caixa e conciliação financeira.
                   </p>
                   <div class="evolucao-card__footer">
                     <a
@@ -972,7 +974,7 @@
                   </p>
                   <p class="evolucao-card__subheading">Evoluir as estatísticas de pagamento</p>
                   <p class="evolucao-card__body">
-                    Evoluir os dados estatísticos relacionados a pagamento que foram mapeados por produto.
+                    Evoluir os dados estatísticos relacionados a pagamento para atender o perfil de lojas maiores, que são prioridades na Nuvemshop hoje, como por exemplo a Dux, que está em processo de integração, e vai exigir muito mais informação do que fornecemos no MVP de estatística.
                   </p>
                   <div class="evolucao-card__footer">
                     <a
@@ -982,6 +984,18 @@
                       rel="noopener noreferrer"
                     >
                       Link do mapeamento de dados
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                    <a
+                      class="evolucao-link"
+                      href="https://docs.google.com/spreadsheets/d/1wsRXSHb1TOlFIJqe8P_0L3jK6Bblw_zLtGZV6VQ60I8/edit?usp=sharing"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Estatística Dux
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M6 3h7v7M13 3l-6 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M9 10H3V4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
@@ -1031,10 +1045,10 @@
                       Permitir filtrar o relatório por período, melhorando o desempenho do arquivo e alinhando o exportável ao perfil da maioria dos entrevistados, que o utilizam nas rotinas diárias de fechamento e conciliação.
                     </li>
                     <li>
-                      Não enviamos a projeção de recebíveis completa necessária para entender o regime de caixa para a DFC.
+                      Incluir os casos de PNF e passar a exibir a projeção completa de recebíveis futuros para viabilizar o regime de caixa para a DFC.
                     </li>
                     <li>
-                      Em versões futuras, permitir que o lojista possa personalizar o relatório através da Lumi (nossa IA), e/ou que a gente sugira quais informações o relatório deve conter de acordo com o objetivo, a tarefa ou a pergunta que o lojista precisa responder.
+                      Em versões futuras, permitir que o lojista possa personalizar o relatório através da Lumi (nossa IA), e/ou que a gente sugira quais informações o relatório deve conter de acordo com o objetivo, a tarefa ou a pergunta que o lojista precisa responder, independentemente de estar em orders, Nuvem Pago, estatística, etc.
                     </li>
                   </ul>
                   <div class="evolucao-card__footer">
