@@ -547,6 +547,16 @@
       min-width: 0;
     }
 
+    .evidence-card__text-note {
+      display: block;
+      margin-top: 0.45em;
+      font-style: italic;
+      font-size: calc(1em - 2pt);
+      line-height: 1.35;
+      font-weight: 300;
+      color: var(--pain-card-text);
+    }
+
     .evidence-media {
       flex-shrink: 0;
       width: 100%;
@@ -666,6 +676,28 @@
         <article class="destaque-item">
           <span class="destaque-item__num" aria-hidden="true">6</span>
           <div class="destaque-item__body">
+            <strong class="destaque-item__headline">Papel de Orders vs papel do Nuvem Pago no que tange ao pagamento</strong>
+            <p class="destaque-item__text">
+              <strong>Orders</strong> mostra qual o valor inicial da venda, qual o valor final líquido da venda e como se chegou a esse valor líquido. Isso consiste em:
+            </p>
+            <p class="destaque-item__text">
+              <em>Ex.: a venda seria R$&nbsp;100,00 considerando só os produtos selecionados; no caminho entrou um frete, foram descontadas taxas e o resultado líquido dessa venda foi R$&nbsp;80,00. Se depois houver estorno, contestação, entre outras coisas, esse resultado da venda vai variando.</em>
+            </p>
+            <p class="destaque-item__text">
+              <strong>Nuvem Pago</strong> mostra o bruto pago e qual foi o líquido repassado para a conta do lojista, que não é necessariamente igual ao resultado líquido da venda em orders.
+            </p>
+            <p class="destaque-item__text">
+              <em>Ex.: a venda bruta seria R$&nbsp;100,00, mas o resultado líquido da venda no Nuvem Pago foi de R$&nbsp;90,00 e não R$&nbsp;80,00, como no exemplo de orders.</em>
+            </p>
+            <p class="destaque-item__text">
+              <em>O Nuvem Pago preocupa-se com o que foi pago e o que foi repassado: o repasse corresponde ao valor total da venda junto com o valor do frete, descontando só as taxas. Em orders, o frete entra como uma saída que afeta o resultado líquido final.</em>
+            </p>
+          </div>
+        </article>
+
+        <article class="destaque-item">
+          <span class="destaque-item__num" aria-hidden="true">7</span>
+          <div class="destaque-item__body">
             <strong class="destaque-item__headline">Tarefas relacionadas a Orders Vs Nuvem Pago</strong>
             <p class="destaque-item__text">
               <strong>Fechamento de caixa:</strong> depende do volume de dados de orders (via API ou relatório de vendas) e do Nuvem Pago para conferir o que foi liquidado.
@@ -677,7 +709,7 @@
               <strong>Conciliação bancária:</strong> depende do Nuvem Pago e da conta bancária externa do lojista para validar se o que foi transferido foi recebido na conta de destino.
             </p>
             <p class="destaque-item__text">
-              <strong>DRE:</strong> está mais ligada ao core para entender o histórico da venda e os custos (frete, descontos, taxas etc.), com análise mais aprofundada da lucratividade real do produto e da loja; tende a depender mais do relatório de orders, que concentra informações dos produtos, o histórico de mudança de status e os custos e descontos de cada venda.
+              <strong>DRE:</strong> está mais ligada a orders. Por ser uma tarefa ligada a entender o lucro ou o prejuízo da venda e dos produtos, torna-se necessário ter mais dados detalhados sobre quanto custou a venda, todos os descontos dados (frete, cupom, entre outros descontos ocultos, estornos, contestações), lista de SKUs vendidos e, aí, entender se a venda gerou lucro ou prejuízo, ou se o valor de algum produto precisa ser corrigido. Os dados de produto e a mudança de status por competência ficam e devem ficar concentrados em orders. O Nuvem Pago deve concentrar-se no que foi pago, em quanto foi repassado e nos detalhes que explicam como chegamos ao valor repassado.
             </p>
             <p class="destaque-item__text">
               <strong>DFC:</strong> depende da conta bancária externa e dos relatórios do Nuvem Pago para ver saldos e a visão completa de lançamentos futuros, com foco em provisionamento e em garantir que a loja tenha fôlego financeiro a médio e longo prazo.
@@ -782,6 +814,7 @@
                 <div class="evidence-card">
                   <p class="evidence-card__text">
                     Falta de visão por competência para viabilizar a construção da DRE.
+                    <span class="evidence-card__text-note">(registra receitas e despesas no período em que ocorrem (fato gerador), independentemente de quando serão pagas ou recebidas.)</span>
                   </p>
                   <div class="evidence-media">
                     <video

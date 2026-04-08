@@ -647,27 +647,27 @@
           <div id="dados-consolidados-block">
             <h3 class="subsection-title">Consolidados e leitura gerencial</h3>
             <div class="pill-row">
-              <span class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Faturamento bruto total (mensal)</span>
-              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Listagem de SKUs vendidos</span>
+              <span class="pill pill--success js-dados-pill" data-tabs="produto exp-orders api">Faturamento bruto total (mensal)</span>
+              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders api">Listagem de SKUs vendidos</span>
               <span class="pill pill--neutral js-dados-pill" data-tabs="externos">Custos fixos e variáveis do mês</span>
               <span class="pill pill--neutral js-dados-pill" data-tabs="externos">Receita bruta</span>
               <span class="pill pill--neutral js-dados-pill" data-tabs="externos">Despesas variáveis</span>
               <span class="pill pill--neutral js-dados-pill" data-tabs="externos">Margem de contribuição</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="externos">EBITDA</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="externos">EBITDA (Lucros antes de Juros, Impostos, Depreciação e Amortização)</span>
             </div>
           </div>
           <div>
             <h3 class="subsection-title">Linhas por competência (Receitas e despesas registradas no mês em que o &quot;fato&quot; ocorreu)</h3>
             <div class="pill-row">
               <span class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Data que a movimentação foi realizada</span>
-              <span class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Data de mudança de status (recebido, estornado, contestado)</span>
-              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Produtos vendidos</span>
-              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Frete líquido</span>
-              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Desconto</span>
-              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Cupom</span>
+              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders api">Data de mudança de status (recebido, estornado, contestado)</span>
+              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders api">Produtos vendidos</span>
+              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders api">Frete líquido</span>
+              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders api">Desconto</span>
+              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders api">Cupom</span>
               <span class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Taxas</span>
               <span class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Juros</span>
-              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Frete bruto</span>
+              <span class="pill pill--success js-dados-pill" data-tabs="exp-orders api">Frete bruto</span>
               <span class="pill pill--neutral js-dados-pill" data-tabs="externos">CMV (Custo da mercadoria)</span>
               <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-orders exp-np api">Categoria (venda recebida, estornada, contestada)</span>
             </div>
@@ -741,7 +741,7 @@
           }
         });
         if (consolidadosBlock) {
-          if (mode === "exp-orders") {
+          if (mode === "produto") {
             consolidadosBlock.setAttribute("hidden", "");
             consolidadosBlock.classList.add("dados-consolidados-block--hidden");
             consolidadosBlock.setAttribute("aria-hidden", "true");

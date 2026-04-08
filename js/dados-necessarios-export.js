@@ -21,7 +21,7 @@
   function pillInformamosConciliacaoFinanceiraPerLocale(pill, localeKey) {
     var id = pill.id || "";
     if (id === "pill-nome-cliente") {
-      return localeKey === "exp-orders" ? "Sim" : "Não";
+      return "Não";
     }
     if (id === "pill-juros" || id === "pill-mdr") {
       return localeKey === "produto" || localeKey === "exp-orders" ? "Sim" : "Não";

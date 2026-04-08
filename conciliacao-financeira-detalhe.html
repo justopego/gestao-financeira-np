@@ -599,7 +599,7 @@
             É uma <strong>auditoria</strong> que cruza o que o site vendeu com o que o meio de pagamento registra como pago ou a receber. O objetivo principal é <strong>identificar</strong> se o meio de pagamento repassou corretamente as taxas das vendas e, em paralelo, ajudar a encontrar a <strong>causa raiz</strong> de inconsistências entre a plataforma de venda, o ERP e o meio de pagamento.
           </p>
           <p class="section-body" style="margin-top: 16px">
-            Para realizar a conciliação financeira com precisão, lojistas e gestores financeiros precisam de <strong>detalhamento minucioso</strong> das transações — em geral conferido <strong>pedido a pedido</strong> ou <strong>linha a linha</strong>.
+            Para realizar a conciliação financeira com precisão, lojistas e gestores financeiros precisam de <strong>detalhamento minucioso</strong> das transações, em geral conferido <strong>pedido a pedido</strong> ou <strong>linha a linha</strong>.
           </p>
         </div>
 
@@ -665,15 +665,15 @@
             <h3 class="subsection-title">Consolidados</h3>
             <div class="pill-row">
               <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api exp-orders">Total recebido</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="api exp-orders">Total faturado (pago pelo cliente)</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto api exp-orders">Total faturado (pago pelo cliente)</span>
               <span class="pill pill--success js-dados-pill" data-tabs="produto exp-np api">Total disponível para saque</span>
               <span class="pill pill--success js-dados-pill" data-tabs="produto exp-np api">Total a receber (Lançamentos futuros)</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Saldo final</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Saldo inicial</span>
               <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de entrada (líquido)</span>
               <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de saída (líquido)</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de transferências</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="produto api exp-orders">Total por movimentação (venda, link, estorno, etc.)</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de taxas</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de MDR</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de Juros</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api exp-orders">Total por movimentação (venda, link, estorno, etc.)</span>
             </div>
           </div>
 
@@ -682,16 +682,16 @@
             <div class="pill-row">
               <span id="pill-tipo-movimentacao" class="pill pill--success js-dados-pill" data-tabs="produto exp-np api">Tipo de movimentação (Entrada/Saída)</span>
               <span id="pill-id-movimentacao" class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">ID da movimentação</span>
-              <span id="pill-descricao-movimentacao" class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Descrição da movimentação</span>
-              <span id="pill-nome-cliente" class="pill pill--neutral js-dados-pill" data-tabs="produto exp-orders exp-np api">Nome do cliente</span>
+              <span id="pill-categoria-venda" class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Categoria (venda recebida, estornada, contestada)</span>
+              <span id="pill-nome-cliente" class="pill pill--neutral js-dados-pill" data-tabs="produto exp-orders exp-np api" hidden aria-hidden="true">Nome do cliente</span>
               <span id="pill-data-movimentacao-realizada" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Data que a movimentação foi realizada</span>
-              <span id="pill-data-mudanca-status" class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Data de mudança de status (recebido, estornado, contestado)</span>
+              <span id="pill-data-mudanca-status" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Data de mudança de status (recebido, estornado, contestado)</span>
               <span id="pill-data-liquidacao" class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Data de liquidação</span>
               <span id="pill-valor-bruto" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Valor bruto</span>
               <span id="pill-valor-liquido" class="pill pill--success js-dados-pill" data-tabs="produto exp-orders exp-np api">Valor líquido</span>
-              <span id="pill-frete" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Frete</span>
-              <span id="pill-desconto" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Desconto</span>
-              <span id="pill-cupom" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Cupom</span>
+              <span id="pill-frete" class="pill pill--neutral js-dados-pill" data-tabs="exp-orders api">Frete</span>
+              <span id="pill-desconto" class="pill pill--neutral js-dados-pill" data-tabs="exp-orders api">Desconto</span>
+              <span id="pill-cupom" class="pill pill--neutral js-dados-pill" data-tabs="exp-orders api">Cupom</span>
               <span id="pill-mdr" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">MDR</span>
               <span id="pill-juros" class="pill pill--success js-dados-pill" data-tabs="exp-orders exp-np api">Juros</span>
             </div>
@@ -755,7 +755,6 @@
       var pillNomeCliente = document.getElementById("pill-nome-cliente");
       var blocoDetalheVenda = dadosSection.querySelector("#bloco-detalhe-venda");
       var EXP_ORDERS_DETALHE_VENDA_IDS = {
-        "pill-nome-cliente": true,
         "pill-data-movimentacao-realizada": true,
         "pill-data-mudanca-status": true,
         "pill-data-liquidacao": true,
@@ -767,7 +766,7 @@
         "pill-mdr": true,
         "pill-juros": true,
         "pill-id-movimentacao": true,
-        "pill-descricao-movimentacao": true
+        "pill-categoria-venda": true
       };
 
       function setPillSuccess(el, success) {
@@ -789,9 +788,6 @@
         pillsNeutralOnApiOrExpNp.forEach(function (el) {
           setPillSuccess(el, !jurosMdrNeutral);
         });
-        if (pillNomeCliente) {
-          setPillSuccess(pillNomeCliente, mode === "todos" || mode === "exp-orders");
-        }
       }
 
       function applyDadosFilters(mode) {
@@ -808,15 +804,9 @@
           }
         });
         if (consolidadosBlock) {
-          if (mode === "exp-orders") {
-            consolidadosBlock.setAttribute("hidden", "");
-            consolidadosBlock.classList.add("dados-consolidados-block--hidden");
-            consolidadosBlock.setAttribute("aria-hidden", "true");
-          } else {
-            consolidadosBlock.removeAttribute("hidden");
-            consolidadosBlock.classList.remove("dados-consolidados-block--hidden");
-            consolidadosBlock.setAttribute("aria-hidden", "false");
-          }
+          consolidadosBlock.removeAttribute("hidden");
+          consolidadosBlock.classList.remove("dados-consolidados-block--hidden");
+          consolidadosBlock.setAttribute("aria-hidden", "false");
         }
         if (mode === "exp-orders" && blocoDetalheVenda) {
           blocoDetalheVenda.querySelectorAll(".js-dados-pill").forEach(function (p) {
@@ -841,6 +831,10 @@
           });
         }
         syncPillsNeutralOnApi(mode);
+        if (pillNomeCliente) {
+          pillNomeCliente.setAttribute("hidden", "");
+          pillNomeCliente.setAttribute("aria-hidden", "true");
+        }
       }
 
       function setActiveTab(activeBtn) {

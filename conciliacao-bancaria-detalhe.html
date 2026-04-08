@@ -579,7 +579,7 @@
         <div>
           <h2 class="section-title"><span class="light">O </span>que é?</h2>
           <p class="section-body" style="margin-top: 16px">
-            A conciliação bancária consiste especificamente em cruzar o extrato do banco (arquivo OFX) com o sistema de gestão (ERP) ou meio de pagamento, para garantir que o dinheiro das transferências (saques) e liquidações realmente caiu na conta da empresa, além de identificar falhas de pagamento ou recebimentos avulsos.
+            A conciliação bancária é o cruzamento de dados entre o extrato do banco (entradas e saídas) e o controle financeiro interno da empresa (como planilhas ou sistemas de gestão) para garantir que os saldos coincidam, prevenindo erros e fraudes.
           </p>
         </div>
 
@@ -646,24 +646,25 @@
               <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api exp-orders">Total recebido</span>
               <span class="pill pill--success js-dados-pill" data-tabs="produto exp-np api">Total disponível para saque</span>
               <span class="pill pill--success js-dados-pill" data-tabs="produto exp-np api">Total a receber (Lançamentos futuros)</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api conta-externa">Saldo final</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api conta-externa">Saldo inicial</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de entrada (líquido)</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de saída (líquido)</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de transferências</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de entrada</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de saída</span>
+              <span id="pill-consolidado-saldo-final" class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api conta-externa">Saldo final</span>
+              <span id="pill-consolidado-saldo-inicial" class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api conta-externa">Saldo inicial</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total transferido</span>
+              <span class="pill pill--neutral js-dados-pill" data-tabs="produto exp-np api">Total de taxa de transferência</span>
             </div>
           </div>
 
           <div id="bloco-linha-transacao">
             <h3 class="subsection-title">Linha de transação:</h3>
             <div class="pill-row">
-              <span class="pill pill--neutral js-dados-pill" data-tabs="conta-externa exp-np produto">Número do documento (NSU ou Invoice)</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="conta-externa exp-np api produto">Valor bruto transferido</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="conta-externa exp-np api produto">Valor da taxa de transferência</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="conta-externa exp-np api produto">Valor líquido depositado na conta externa</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="conta-externa exp-np api produto">Data em que a transferência foi realizada</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="conta-externa">Data que a transferência caiu na conta</span>
-              <span class="pill pill--neutral js-dados-pill" data-tabs="conta-externa">Dados de movimentações feitas direto na conta bancária.</span>
+              <span id="pill-linha-nsu-documento" class="pill pill--neutral js-dados-pill" data-tabs="conta-externa exp-np produto">Número do documento (NSU ou Invoice)</span>
+              <span id="pill-linha-valor-bruto-transferido" class="pill pill--success js-dados-pill" data-tabs="conta-externa exp-np api produto">Valor bruto transferido</span>
+              <span id="pill-linha-valor-taxa-transferencia" class="pill pill--success js-dados-pill" data-tabs="conta-externa exp-np api produto">Valor da taxa de transferência</span>
+              <span id="pill-linha-valor-liquido-conta-externa" class="pill pill--success js-dados-pill" data-tabs="conta-externa exp-np api produto">Valor líquido depositado na conta externa</span>
+              <span id="pill-linha-data-transferencia-realizada" class="pill pill--success js-dados-pill" data-tabs="conta-externa exp-np api produto">Data em que a transferência foi realizada</span>
+              <span id="pill-linha-data-caiu-conta" class="pill pill--neutral js-dados-pill" data-tabs="conta-externa">Data que a transferência caiu na conta</span>
+              <span id="pill-linha-dados-mov-conta" class="pill pill--neutral js-dados-pill" data-tabs="conta-externa">Dados de movimentações feitas direto na conta bancária.</span>
             </div>
           </div>
         </div>
@@ -747,6 +748,67 @@
             linhaTransacaoBlock.setAttribute("hidden", "");
             linhaTransacaoBlock.setAttribute("aria-hidden", "true");
           }
+        }
+        var pillBruto = dadosSection.querySelector("#pill-linha-valor-bruto-transferido");
+        var pillTaxa = dadosSection.querySelector("#pill-linha-valor-taxa-transferencia");
+        var pillLiquido = dadosSection.querySelector("#pill-linha-valor-liquido-conta-externa");
+        var pillDataTransf = dadosSection.querySelector("#pill-linha-data-transferencia-realizada");
+        function setLinhaTransferPillNeutral(el, neutral) {
+          if (!el) return;
+          if (neutral) {
+            el.classList.remove("pill--success");
+            el.classList.add("pill--neutral");
+          } else {
+            el.classList.remove("pill--neutral");
+            el.classList.add("pill--success");
+          }
+        }
+        if (mode === "api") {
+          setLinhaTransferPillNeutral(pillBruto, true);
+          setLinhaTransferPillNeutral(pillTaxa, true);
+          setLinhaTransferPillNeutral(pillLiquido, true);
+          setLinhaTransferPillNeutral(pillDataTransf, true);
+        } else if (mode === "produto") {
+          setLinhaTransferPillNeutral(pillBruto, true);
+          setLinhaTransferPillNeutral(pillTaxa, true);
+          setLinhaTransferPillNeutral(pillLiquido, false);
+          setLinhaTransferPillNeutral(pillDataTransf, false);
+        } else {
+          setLinhaTransferPillNeutral(pillBruto, false);
+          setLinhaTransferPillNeutral(pillTaxa, false);
+          setLinhaTransferPillNeutral(pillLiquido, false);
+          setLinhaTransferPillNeutral(pillDataTransf, false);
+        }
+        var pillNSU = dadosSection.querySelector("#pill-linha-nsu-documento");
+        var pillDataCaiu = dadosSection.querySelector("#pill-linha-data-caiu-conta");
+        var pillDadosMov = dadosSection.querySelector("#pill-linha-dados-mov-conta");
+        var pillSaldoFinal = dadosSection.querySelector("#pill-consolidado-saldo-final");
+        var pillSaldoInicial = dadosSection.querySelector("#pill-consolidado-saldo-inicial");
+        function setPillNeutralOrSuccess(el, wantSuccess) {
+          if (!el) return;
+          if (wantSuccess) {
+            el.classList.remove("pill--neutral");
+            el.classList.add("pill--success");
+          } else {
+            el.classList.remove("pill--success");
+            el.classList.add("pill--neutral");
+          }
+        }
+        if (mode === "conta-externa") {
+          if (pillBruto) pillBruto.setAttribute("hidden", "");
+          if (pillTaxa) pillTaxa.setAttribute("hidden", "");
+          if (pillDataTransf) pillDataTransf.setAttribute("hidden", "");
+          setPillNeutralOrSuccess(pillNSU, true);
+          setPillNeutralOrSuccess(pillDataCaiu, true);
+          setPillNeutralOrSuccess(pillDadosMov, true);
+          setPillNeutralOrSuccess(pillSaldoFinal, true);
+          setPillNeutralOrSuccess(pillSaldoInicial, true);
+        } else {
+          setPillNeutralOrSuccess(pillNSU, false);
+          setPillNeutralOrSuccess(pillDataCaiu, false);
+          setPillNeutralOrSuccess(pillDadosMov, false);
+          setPillNeutralOrSuccess(pillSaldoFinal, false);
+          setPillNeutralOrSuccess(pillSaldoInicial, false);
         }
       }
 
