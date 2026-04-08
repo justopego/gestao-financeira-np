@@ -184,6 +184,17 @@
       opacity: 0.9;
     }
 
+    .planning-cta__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .planning-cta__actions .planning-cta__link {
+      align-self: auto;
+    }
+
     .info-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -400,19 +411,33 @@
       <section class="planning-cta" aria-labelledby="planning-heading">
         <p id="planning-heading" class="planning-cta__label">Planejamento completo</p>
         <p class="planning-cta__text">
-          Aceda ao documento de planejamento para contexto, perguntas de pesquisa na íntegra, roteiro das entrevistas e notas de recrutamento.
+          Aceda ao documento de planejamento para contexto, perguntas de pesquisa na íntegra, roteiro das entrevistas e notas de recrutamento. Na pasta partilhada no Google Drive estão reunidos dados, documentos e materiais complementares da pesquisa.
         </p>
-        <a
-          class="planning-cta__link"
-          href="https://docs.google.com/document/d/1bXmjtk8kArKLskAnVcmiCrLGrSta_Nq-nkK1L6Uglv4/edit?tab=t.0"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M14 3h7v7M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Abrir planejamento no Google Docs
-        </a>
+        <div class="planning-cta__actions" role="group" aria-label="Documento de planejamento e pasta de materiais no Google Drive">
+          <a
+            class="planning-cta__link"
+            href="https://docs.google.com/document/d/1bXmjtk8kArKLskAnVcmiCrLGrSta_Nq-nkK1L6Uglv4/edit?tab=t.0"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M14 3h7v7M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Abrir planejamento no Google Docs
+          </a>
+          <a
+            class="planning-cta__link"
+            href="https://drive.google.com/drive/folders/1IOBbHhxOQ3UCH9rNgc8OMhETHVWMzDH8?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 7a2 2 0 012-2h5.5l2 3H19a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M3 7h8.5l2 3H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Abrir pasta no Google Drive
+          </a>
+        </div>
       </section>
 
       <article class="info-card info-card--after-cta">
