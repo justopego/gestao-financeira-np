@@ -495,6 +495,28 @@
         margin-left: auto;
         align-self: flex-start;
       }
+
+      .evidence-card--footer-label .evidence-card__body .evidence-media-row {
+        margin-left: auto;
+        align-self: flex-start;
+      }
+    }
+
+    .evidence-card__body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+      width: 100%;
+      align-items: stretch;
+    }
+
+    @media (min-width: 640px) {
+      .evidence-card__body {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 32px;
+      }
     }
 
     .evidence-card {
@@ -523,6 +545,17 @@
       .evidence-card:not(:has(.evidence-media)) {
         min-height: 0;
       }
+
+      .evidence-card.evidence-card--footer-label {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .evidence-card.evidence-card--footer-label .evidence-card__dor-label {
+        margin-top: auto;
+        padding-top: 12px;
+        width: 100%;
+      }
     }
 
     #pain-panel-transparencia .evidence-card {
@@ -535,6 +568,29 @@
 
     #pain-panel-erp-api .evidence-grid > .evidence-card {
       margin-bottom: 0;
+    }
+
+    .evidence-card__dor-label {
+      align-self: flex-start;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      font-size: 11px;
+      line-height: 1.2;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--pain-title);
+    }
+
+    @media (max-width: 639px) {
+      .evidence-card--footer-label .evidence-card__dor-label {
+        margin-top: 8px;
+        padding-top: 8px;
+      }
+    }
+
+    .evidence-card__dor-label strong {
+      font-weight: 700;
     }
 
     .evidence-card__text {
@@ -710,7 +766,7 @@
               <strong>Conciliação bancária:</strong> depende do Nuvem Pago e da conta bancária externa do lojista para validar se o que foi transferido foi recebido na conta de destino.
             </p>
             <p class="destaque-item__text">
-              <strong>DRE:</strong> está mais ligada a orders. Por ser uma tarefa ligada a entender o lucro ou o prejuízo da venda e dos produtos, torna-se necessário ter mais dados detalhados sobre quanto custou a venda, todos os descontos dados (frete, cupom, entre outros descontos ocultos, estornos, contestações), lista de SKUs vendidos e, aí, entender se a venda gerou lucro ou prejuízo, ou se o valor de algum produto precisa ser corrigido. Os dados de produto e a mudança de status por competência ficam e devem ficar concentrados em orders. O Nuvem Pago deve concentrar-se no que foi pago, em quanto foi repassado e nos detalhes que explicam como chegamos ao valor repassado.
+              <strong>DRE:</strong> está mais ligada a <strong>Orders</strong>. Por ser uma tarefa ligada a entender o lucro ou o prejuízo da venda e dos produtos, torna-se necessário ter mais dados detalhados sobre quanto custou a venda, todos os descontos dados (frete, cupom, entre outros descontos ocultos, estornos, contestações), lista de SKUs vendidos e, aí, entender se a venda gerou lucro ou prejuízo, ou se o valor de algum produto precisa ser corrigido. Os dados de produto e a mudança de status por competência ficam e devem ficar concentrados em <strong>Orders</strong>.
             </p>
             <p class="destaque-item__text">
               <strong>DFC:</strong> depende da conta bancária externa e dos relatórios do Nuvem Pago para ver saldos e a visão completa de lançamentos futuros, com foco em provisionamento e em garantir que a loja tenha fôlego financeiro a médio e longo prazo.
@@ -755,32 +811,35 @@
               </p>
 
               <div class="evidence-grid">
-                <div class="evidence-card evidence-card--span-full">
-                  <p class="evidence-card__text">
-                    Extrato que não oferece informação suficiente para identificar a movimentação (ex.: ID da venda, ID do link, beneficiário da transferência).
-                  </p>
-                  <div class="evidence-media-row">
-                    <div class="evidence-media">
-                      <video
-                        controls
-                        playsinline
-                        preload="metadata"
-                        aria-label="Evidência em vídeo: extrato sem informação suficiente para identificar a movimentação"
-                      >
-                        <source src="media/principais-dores/extrato-info-insuficiente-movimentacao.webm" type="video/webm" />
-                      </video>
-                    </div>
-                    <div class="evidence-media">
-                      <video
-                        controls
-                        playsinline
-                        preload="metadata"
-                        aria-label="Evidência em vídeo: relatório sem informação suficiente para identificar a movimentação"
-                      >
-                        <source src="media/principais-dores/relatorio-info-insuficiente-movimentacao.webm" type="video/webm" />
-                      </video>
+                <div class="evidence-card evidence-card--span-full evidence-card--footer-label">
+                  <div class="evidence-card__body">
+                    <p class="evidence-card__text">
+                      Extrato que não oferece informação suficiente para identificar a movimentação (ex.: ID da venda, ID do link, beneficiário da transferência).
+                    </p>
+                    <div class="evidence-media-row">
+                      <div class="evidence-media">
+                        <video
+                          controls
+                          playsinline
+                          preload="metadata"
+                          aria-label="Evidência em vídeo: extrato sem informação suficiente para identificar a movimentação"
+                        >
+                          <source src="media/principais-dores/extrato-info-insuficiente-movimentacao.webm" type="video/webm" />
+                        </video>
+                      </div>
+                      <div class="evidence-media">
+                        <video
+                          controls
+                          playsinline
+                          preload="metadata"
+                          aria-label="Evidência em vídeo: relatório sem informação suficiente para identificar a movimentação"
+                        >
+                          <source src="media/principais-dores/relatorio-info-insuficiente-movimentacao.webm" type="video/webm" />
+                        </video>
+                      </div>
                     </div>
                   </div>
+                  <p class="evidence-card__dor-label"><strong>Dor G</strong></p>
                 </div>
                 <div class="evidence-card">
                   <p class="evidence-card__text">
@@ -797,50 +856,59 @@
                     </video>
                   </div>
                 </div>
-                <div class="evidence-card">
-                  <p class="evidence-card__text">
-                    Falta de dados sobre contestação das vendas, para fazer fechamento de caixa, conciliação e a DRE
-                  </p>
-                  <div class="evidence-media">
-                    <video
-                      controls
-                      playsinline
-                      preload="metadata"
-                      aria-label="Evidência em vídeo: falta de gestão de chargeback e contestação"
-                    >
-                      <source src="media/principais-dores/falta-gestao-chargeback.webm" type="video/webm" />
-                    </video>
+                <div class="evidence-card evidence-card--footer-label">
+                  <div class="evidence-card__body">
+                    <p class="evidence-card__text">
+                      Falta de dados sobre contestação das vendas, para fazer fechamento de caixa, conciliação e a DRE
+                    </p>
+                    <div class="evidence-media">
+                      <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        aria-label="Evidência em vídeo: falta de gestão de chargeback e contestação"
+                      >
+                        <source src="media/principais-dores/falta-gestao-chargeback.webm" type="video/webm" />
+                      </video>
+                    </div>
                   </div>
+                  <p class="evidence-card__dor-label"><strong>Dor M</strong></p>
                 </div>
-                <div class="evidence-card">
-                  <p class="evidence-card__text">
-                    Não enviamos a projeção de recebíveis completa necessária para entender o regime de caixa para a DFC.
-                  </p>
-                  <div class="evidence-media">
-                    <video
-                      controls
-                      playsinline
-                      preload="metadata"
-                      aria-label="Evidência em vídeo: falta de projeção completa dos lançamentos futuros e regime de caixa (DFC)"
-                    >
-                      <source src="media/principais-dores/falta-projecao-lancamentos-futuros.webm" type="video/webm" />
-                    </video>
+                <div class="evidence-card evidence-card--footer-label">
+                  <div class="evidence-card__body">
+                    <p class="evidence-card__text">
+                      Não enviamos a projeção de recebíveis completa necessária para entender o regime de caixa para a DFC.
+                    </p>
+                    <div class="evidence-media">
+                      <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        aria-label="Evidência em vídeo: falta de projeção completa dos lançamentos futuros e regime de caixa (DFC)"
+                      >
+                        <source src="media/principais-dores/falta-projecao-lancamentos-futuros.webm" type="video/webm" />
+                      </video>
+                    </div>
                   </div>
+                  <p class="evidence-card__dor-label"><strong>Dor M</strong></p>
                 </div>
-                <div class="evidence-card">
-                  <p class="evidence-card__text">
-                    Falta de dashboards nativos para ver as informações em tempo real.
-                  </p>
-                  <div class="evidence-media">
-                    <video
-                      controls
-                      playsinline
-                      preload="metadata"
-                      aria-label="Evidência em vídeo: falta de dashboards nativos e informação em tempo real no produto"
-                    >
-                      <source src="media/principais-dores/falta-de-autonomia-dashboards-nativos.webm" type="video/webm" />
-                    </video>
+                <div class="evidence-card evidence-card--footer-label">
+                  <div class="evidence-card__body">
+                    <p class="evidence-card__text">
+                      Falta de dashboards nativos para ver as informações em tempo real.
+                    </p>
+                    <div class="evidence-media">
+                      <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        aria-label="Evidência em vídeo: falta de dashboards nativos e informação em tempo real no produto"
+                      >
+                        <source src="media/principais-dores/falta-de-autonomia-dashboards-nativos.webm" type="video/webm" />
+                      </video>
+                    </div>
                   </div>
+                  <p class="evidence-card__dor-label"><strong>Dor M</strong></p>
                 </div>
               </div>
             </div>
@@ -874,20 +942,23 @@
                 Os lojistas e responsáveis pelo financeiro não conseguem visualizar, extrair ou consolidar seus dados diários de recebimentos, taxas e fluxo de caixa de forma independente ou dentro do próprio painel da plataforma. Como os relatórios nativos são incompletos ou inexistentes, os usuários tornam-se reféns de planilhas e dependem do suporte ou dos gerentes de conta, mas esses envios costumam ocorrer somente semanalmente ou mensalmente, enquanto a base da análise financeira (fechamento de caixa, conciliação financeira e bancária) é feita diariamente. Isso transforma a rotina de gestão em um processo moroso e dificulta a tomada rápida de decisão.
               </p>
               <div class="evidence-grid">
-                <div class="evidence-card evidence-card--span-full">
-                  <p class="evidence-card__text">
-                    Dependência do suporte para ter acesso aos relatórios cruciais para fazer as tarefas de gestão financeira.
-                  </p>
-                  <div class="evidence-media">
-                    <video
-                      controls
-                      playsinline
-                      preload="metadata"
-                      aria-label="Evidência em vídeo: dependência do suporte para aceder aos relatórios de gestão financeira"
-                    >
-                      <source src="media/principais-dores/falta-de-autonomia-suporte-relatorios.webm" type="video/webm" />
-                    </video>
+                <div class="evidence-card evidence-card--span-full evidence-card--footer-label">
+                  <div class="evidence-card__body">
+                    <p class="evidence-card__text">
+                      Dependência do suporte para ter acesso aos relatórios cruciais para fazer as tarefas de gestão financeira.
+                    </p>
+                    <div class="evidence-media">
+                      <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        aria-label="Evidência em vídeo: dependência do suporte para aceder aos relatórios de gestão financeira"
+                      >
+                        <source src="media/principais-dores/falta-de-autonomia-suporte-relatorios.webm" type="video/webm" />
+                      </video>
+                    </div>
                   </div>
+                  <p class="evidence-card__dor-label"><strong>Dor G</strong></p>
                 </div>
               </div>
             </div>
@@ -921,35 +992,41 @@
                 Falta de envio automático dos dados estruturados de recebíveis e das taxas cobradas pelo Nuvem Pago. Sem isso, os lojistas são obrigados a registrar as tarifas manualmente como “contas a pagar” e liquidar manualmente, gerando trabalho desnecessário e risco de lançamentos duplicados.
               </p>
               <div class="evidence-grid">
-                <div class="evidence-card">
-                  <p class="evidence-card__text">
-                    API não envia a taxa, gerando retrabalho para o lojista.
-                  </p>
-                  <div class="evidence-media">
-                    <video
-                      controls
-                      playsinline
-                      preload="metadata"
-                      aria-label="Evidência em vídeo: integração API–ERP e envio de taxas"
-                    >
-                      <source src="media/principais-dores/api-erp-taxas.webm" type="video/webm" />
-                    </video>
+                <div class="evidence-card evidence-card--footer-label">
+                  <div class="evidence-card__body">
+                    <p class="evidence-card__text">
+                      API não envia a taxa, gerando retrabalho para o lojista.
+                    </p>
+                    <div class="evidence-media">
+                      <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        aria-label="Evidência em vídeo: integração API–ERP e envio de taxas"
+                      >
+                        <source src="media/principais-dores/api-erp-taxas.webm" type="video/webm" />
+                      </video>
+                    </div>
                   </div>
+                  <p class="evidence-card__dor-label"><strong>Dor P</strong></p>
                 </div>
-                <div class="evidence-card">
-                  <p class="evidence-card__text">
-                    Perda de tempo dando baixa manual dentro do ERP por falta de uma integração via API adequada.
-                  </p>
-                  <div class="evidence-media">
-                    <video
-                      controls
-                      playsinline
-                      preload="metadata"
-                      aria-label="Evidência em vídeo: baixa manual na integração API–ERP"
-                    >
-                      <source src="media/principais-dores/api-erp-baixa-manual.webm" type="video/webm" />
-                    </video>
+                <div class="evidence-card evidence-card--footer-label">
+                  <div class="evidence-card__body">
+                    <p class="evidence-card__text">
+                      Perda de tempo dando baixa manual dentro do ERP por falta de uma integração via API adequada.
+                    </p>
+                    <div class="evidence-media">
+                      <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        aria-label="Evidência em vídeo: baixa manual na integração API–ERP"
+                      >
+                        <source src="media/principais-dores/api-erp-baixa-manual.webm" type="video/webm" />
+                      </video>
+                    </div>
                   </div>
+                  <p class="evidence-card__dor-label"><strong>Dor P</strong></p>
                 </div>
               </div>
             </div>
