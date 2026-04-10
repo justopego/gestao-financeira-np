@@ -255,6 +255,46 @@
       gap: 24px;
     }
 
+    .root-callout {
+      border: 1px solid var(--primary-interactive);
+      border-radius: 16px;
+      padding: 24px 28px;
+      background: var(--card-bg-diagram);
+      max-width: 1090px;
+    }
+
+    .root-callout__title {
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 1.35;
+      margin: 0 0 16px;
+      color: var(--primary-surface-highlight);
+    }
+
+    .root-callout__text {
+      margin: 0 0 14px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .root-callout__text:last-of-type {
+      margin-bottom: 18px;
+    }
+
+    .root-callout__link {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    .root-callout__link:hover {
+      text-decoration: underline;
+    }
+
     .data-table {
       width: 100%;
       border-collapse: collapse;
@@ -642,6 +682,19 @@
           </ul>
         </div>
       </div>
+
+      <section class="section-block" id="orders-nuvempago" aria-labelledby="orders-np-heading" style="margin-top: 48px">
+        <div class="root-callout">
+          <h2 id="orders-np-heading" class="root-callout__title">Papel de Orders vs papel do Nuvem Pago no que tange ao pagamento</h2>
+          <p class="root-callout__text">
+            <strong>Orders:</strong> o foco é o <strong>resultado da venda</strong> (resultado líquido final), considerando todos os componentes que compõem esse valor em todo o ciclo de vida dessa venda. Em <strong>Orders</strong>, consultam-se todos os detalhes do custo de frete, descontos, cupons, desconto por chargeback, estorno etc., até chegar ao líquido final, que será usado para entender se a venda deu lucro ou prejuízo.
+          </p>
+          <p class="root-callout__text">
+            <strong>Nuvem Pago:</strong> o foco é o <strong>resultado do saldo</strong>, com base no que foi pago e no que foi repassado para o lojista em cada transação, seja de entrada ou de saída, além de ser responsável por tratar e comunicar dados que ajudam a monitorar a saúde financeira da loja.
+          </p>
+          <a class="root-callout__link" href="conclusao.html">Conclusões completas da pesquisa (exemplos e tabelas) →</a>
+        </div>
+      </section>
 
       <p class="section-kicker">Principais tarefas citadas nas entrevistas</p>
 
